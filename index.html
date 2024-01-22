@@ -7,6 +7,10 @@
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
     <script rel="javascript" type="text/javascript" src="js/data.js"></script>
     <script defer rel="javascript" type="text/javascript" src="js/javascript.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 </head>
 <body>
     <h1>Anomaly Classification Sysem Generator</h1>
@@ -119,7 +123,7 @@
                 <option value="4">Ekhi</option>
                 <option value="5">Amida</option>
                 <option value="0">None</option>
-                <option value="-1">Custom</option>
+                <!--<option value="-1">Custom</option>-->
             </select>
 
             <div id="inputDisruptionClassCustomCont" class="disabled">
@@ -135,7 +139,7 @@
                 <option value="4">Danger</option>
                 <option value="5">Critical</option>
                 <option value="0">None</option>
-                <option value="-1">Custom</option>
+                <!--<option value="-1">Custom</option>-->
             </select>
 
             <div id="inputRiskClassCustomCont" class="disabled">
@@ -179,27 +183,63 @@
 
             <div id="acsBottom" class="width100 grid">
                 <div id="acsObjDisRisk" class="grid">
-                    <div id="acsObject">
-                        <div id="acsObjectTextCont" class="flex">
+                    <div id="acsObject" class="">
+                        <div id="acsObjectTextCont" class="flex fleft">
                             <p id="acsObjectPrimaryText"><span id="acsObjectPrimaryTextSubtitle" class="">CONAINMENT CLASS:</span>
                                 <br><span id="acsObjectPrimaryTextTitle" class="fw600 em2">EUCLID</span></p>
                             <p id="acsObjectSecondaryText" class="disabled"><span  id="acsObjectSecondaryTextSubtitle" >SECONDARY CLASS:</span>
                                 <br><span id="acsObjectSecondaryTextTitle" class="fw600">NONE</span></p>
                         </div>
-                        <div id="acsObjectImageCont"></div>
+                        <div id="acsObjectImageCont" class="acsImageCont">
+                            <div id="acsObjectImageBGWrapper" class="acsImageBGWrapper">
+                                <div id="acsObjectImageWrapper" class="acsImageWrapper fullcircle">
+                                    <img id="acsObjectImg" class="acsImg" src="images/containment-classes/safe-icon.svg">
+                                </div>
+                                
+                                <div id="acsSecondaryObjectImageWrapper" class="acsSecondImgWrapper disabled">
+                                    <div id="acsSecondaryObjectImageBG" class="bgblack acsSecondImgBG">
+                                        <img id="acsSecondaryObjectImg" class="acsImg acsSecondImg" src="images/containment-classes/safe-icon.svg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div id="acsDisRisk">
+                    <div id="acsDisRisk" class="grid borderright">
                         <div id="acsDis" class="acsDisRisks">
-                            <div id="acsDisTextCont">
+                            <div id="acsDisTextCont" class="acsDisRisksTextCont fleft">
                                 <p id="acsDisText"><span class="em075">DISRUPTION CLASS:</span><br><span id="acsDisrupionTextTitle" class="fw600">DARK</span></p>
                             </div>
-                            <div id="acsDisImageCont"></div>
+                            <div id="acsDisImageCont" class="acsImageCont">
+                                <div id="acsDisImageBGWrapper" class="acsImageBGWrapper bgblack">
+                                    <div id="acsDisImageWrapper" class="acsImageWrapper fullcircle acsDisRiskImageWrapper">
+                                        <img id="acsDisImg" class="acsImg" src="images/containment-classes/safe-icon.svg">
+                                    </div>
+                                    
+                                    <div id="acsSecondaryDisImageWrapper" class="acsSecondImgWrapper ">
+                                        <div id="acsSecondaryDisImageBG" class="bgblack acsSecondImgBG">
+                                            <p id="acsDisPText" class="colorwhite acsSecondImgText fw600">1</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div id="acsRisk" class="acsDisRisks">
-                            <div id="acsRiskTextCont">
+                            <div id="acsRiskTextCont" class="acsDisRisksTextCont fleft">
                                 <p id="acsRiskText"><span class="em075">RISK CLASS:</span><br><span id="acsRiskTextTitle" class="fw600">NOTICE</span></p>
                             </div>
-                            <div id="acsRiskImageCont"></div>
+                            <div id="acsRiskImageCont" class="acsImageCont">
+                                <div id="acsRiskImageBGWrapper" class="acsImageBGWrapper bgblack">
+                                    <div id="acsRiskImageWrapper" class="acsImageWrapper fullcircle acsDisRiskImageWrapper">
+                                        <img id="acsRiskImg" class="acsImg" src="images/containment-classes/safe-icon.svg">
+                                    </div>
+                                    
+                                    <div id="acsSecondaryRiskImageWrapper" class="acsSecondImgWrapper ">
+                                        <div id="acsSecondaryRiskImageBG" class="bgblack acsSecondImgBG">
+                                            <p id="acsRiskPText" class="colorwhite fw600 acsSecondImgText ">1</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

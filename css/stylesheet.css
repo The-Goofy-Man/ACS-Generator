@@ -12,12 +12,15 @@
     --black: #000000;
     --lightblack: #ddddde;
     --cosmicred: #ff0000;
+    --white: white;
 }
 
 h3,h4,p{
     margin: 0;
 }
-
+h1{
+    text-align: center;
+}
 .sectionDiv {
 }
 
@@ -29,8 +32,11 @@ h3,h4,p{
     margin: 4px;
     padding: 5px;
     border: 1px solid black;
+    font-family: 'Inter', sans-serif;
 }
-
+.colorwhite{
+    color: white;
+}
 .width100 {
     width: 100%;
 }
@@ -75,6 +81,9 @@ h3,h4,p{
 .em15{
     font-size: 1.5em;
 }
+.em125{
+    font-size: 1.25em;
+}
 .em075{
     font-size: .75em;
 }
@@ -111,27 +120,92 @@ h3,h4,p{
 #acsObject{
     border-left: 16px solid;
     background-color: var(--lightblack);
-    padding: 15px 5px 15px 15px;
+    padding: 10px 10px 10px 15px;
+    display: flexbox;
 }
 #acsObjectTextCont{
     height: 100%;
     flex-direction: column;
     justify-content: center;
 }
-#acsDisRisk{
+.acsImageCont{
+    float: right;
+}
+.acsImageWrapper{
+    border: 5px solid black;
+}
+.fullcircle{
+    border-radius: 50%;
+}
+.bgblack{
+    background-color: black;
+}
+.acsImg{
+    height: 100%;
+}
+.acsImageBGWrapper{
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    position: relative;
+}
+.acsSecondImgWrapper{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: -50%;
+    border-bottom-left-radius: 50%;
+    border-top-left-radius: 50%;
+    overflow: hidden;
+}
+.acsSecondImgBG{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.acsSecondImg{
+    position: absolute;
+}
+#acsSecondaryObjectImg{
+    width: 50px;
+    filter: invert(100%);
+    left: 3px;
+}
+#acsObjectImageWrapper{
+    width: 85px;
+    height: 85px;
+}
+.borderright{
     border-right: 8px solid var(--black);
+}
+#acsDisRisk{
     padding-left: 5px;
-    display: grid;
     gap: 5px;
 }
 .acsDisRisks{
-    padding: 7px;
+    padding: 0 7px 0 7px;
     border-left: 7px solid;
+}
+.acsDisRisksTextCont{
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 #acsDis{
     border-color: var(--black);
     background-color: var(--lightblack);
 }
+.acsDisRiskImageWrapper{
+    width: 45px;
+    height: 45px;
+}
+.acsSecondImgText{
+    margin-left: 50%;
+}
+#acsDisImageWrapper{background-color: green;}
+
 #acsRisk{
     border-color: var(--black);
     background-color: var(--lightblack);

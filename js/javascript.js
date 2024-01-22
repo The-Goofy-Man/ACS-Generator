@@ -1,9 +1,36 @@
+onlyMainClass = false;
+
 function updateInput(){
+    checkOnlyMainClass();
     updateAccessLvl();
     updateItemTitle(document.getElementById("inputItemTitle").value, document.getElementById("inputItemSubtitle").value);
     updateOnjectClass();
     updteDisrupionClass();
     updteRiskClass();
+}
+
+function checkOnlyMainClass(){
+    if (document.getElementById("inputPrimaryObjectClass").value == "0" || (
+        document.getElementById("inputDisruptionClass").value == "0" &&
+        document.getElementById("inputRiskClass").value == "0"
+    )){
+        onlyMainClass = true;
+        if (!document.getElementById("acsDisRisk").classList.contains("disabled")){
+            document.getElementById("acsDisRisk").classList.remove("grid");
+            document.getElementById("acsDisRisk").classList.add("disabled");
+            document.getElementById("acsObject").classList.add("borderright");
+            document.getElementById("acsObjDisRisk").style.setProperty("grid-template-columns", "auto")
+        }
+    }
+    else{
+        onlyMainClass = false;
+        if (document.getElementById("acsDisRisk").classList.contains("disabled")){
+            document.getElementById("acsDisRisk").classList.add("grid");
+            document.getElementById("acsDisRisk").classList.remove("disabled");
+            document.getElementById("acsObject").classList.remove("borderright");
+            document.getElementById("acsObjDisRisk").style.setProperty("grid-template-columns", "auto auto")
+        }
+    }
 }
 
 function updateItemTitle(title, subtitle){
@@ -68,7 +95,11 @@ function updateOnjectClass(){
     let primary = "";
     let color = "";
     let colorSecondary = "";
+    let colorTertiary = "";
+    let path = "";
+    let pathSecondary = "";
     let v = parseInt(document.getElementById("inputPrimaryObjectClass").value);
+    let v2 = parseInt(document.getElementById("inputSecondaryObjectClass").value);
     if (v == -1){
         if (document.getElementById("inputPrimaryObjectClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputPrimaryObjectClassCustomCont").classList.remove("disabled");
@@ -78,9 +109,22 @@ function updateOnjectClass(){
         if (!document.getElementById("inputPrimaryObjectClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputPrimaryObjectClassCustomCont").classList.add("disabled");
         primary = objClass.class[v].toUpperCase();
-        color = "var("+objClass.color[v]+")";
+        color = "black black black var("+objClass.color[v]+")";
         colorSecondary = "var("+objClass.colorSecondary[v]+")";
+        colorTertiary = "var("+objClass.colorTertiary[v]+")";
+        if (v2 == 0){
+            path = objClass.path[v];
+        }else{
+            path = objSecondaryClass.path[v2];
+            pathSecondary = objClass.path[v];
+        }
     }
+    if (document.getElementById("acsObjectImg").src != path)
+        document.getElementById("acsObjectImg").src = path;
+    if (document.getElementById("acsSecondaryObjectImg").src != pathSecondary)
+        document.getElementById("acsSecondaryObjectImg").src = pathSecondary;
+    if (document.getElementById("acsObjectImageWrapper").style.getPropertyValue("background-color") != colorTertiary)
+        document.getElementById("acsObjectImageWrapper").style.setProperty("background-color", colorTertiary);
     if (document.getElementById("acsObjectPrimaryTextTitle").innerHTML != primary)
         document.getElementById("acsObjectPrimaryTextTitle").innerHTML = primary;
     if (document.getElementById("acsObject").style.getPropertyValue("border-color") != color)
@@ -90,18 +134,22 @@ function updateOnjectClass(){
 
 
 
-    v = parseInt(document.getElementById("inputSecondaryObjectClass").value);
-    if (v == 0 && !document.getElementById("acsObjectSecondaryText").classList.contains("disabled")){
+    
+    if (v2 == 0 && !document.getElementById("acsObjectSecondaryText").classList.contains("disabled")){
         document.getElementById("acsObjectSecondaryText").classList.add("disabled");
         document.getElementById("acsObjectPrimaryTextSubtitle").classList.remove("em075");
         document.getElementById("acsObjectPrimaryTextTitle").classList.add("em2");
+        document.getElementById("acsSecondaryObjectImageWrapper").classList.add("disabled");
+        document.getElementById("acsObjectImageBGWrapper").classList.remove("bgblack");
     }
-    else if (v != 0 && document.getElementById("acsObjectSecondaryText").classList.contains("disabled")){
+    else if (v2 != 0 && document.getElementById("acsObjectSecondaryText").classList.contains("disabled")){
         document.getElementById("acsObjectSecondaryText").classList.remove("disabled");
         document.getElementById("acsObjectPrimaryTextSubtitle").classList.add("em075");
         document.getElementById("acsObjectPrimaryTextTitle").classList.remove("em2");
+        document.getElementById("acsSecondaryObjectImageWrapper").classList.remove("disabled");
+        document.getElementById("acsObjectImageBGWrapper").classList.add("bgblack");
     }
-    if (v == -1){
+    if (v2 == -1){
         if (document.getElementById("inputSecondaryObjectClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputSecondaryObjectClassCustomCont").classList.remove("disabled");
         primary = document.getElementById("inputSecondaryObjectClassCustom").value;
@@ -109,9 +157,7 @@ function updateOnjectClass(){
     else {
         if (!document.getElementById("inputSecondaryObjectClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputSecondaryObjectClassCustomCont").classList.add("disabled");
-        primary = objSecondaryClass.class[v].toUpperCase();
-        color = "var("+objClass.color[v]+")";
-        colorSecondary = "var("+objClass.colorSecondary[v]+")";
+        primary = objSecondaryClass.class[v2].toUpperCase();
     }
     if (document.getElementById("acsObjectSecondaryTextTitle").innerHTML != primary)
         document.getElementById("acsObjectSecondaryTextTitle").innerHTML = primary;
@@ -121,7 +167,10 @@ function updteDisrupionClass(){
     let primary = "";
     let color = "";
     let colorSecondary = "";
+    let colorTertiary = "";
+    let path = "";
     let v = parseInt(document.getElementById("inputDisruptionClass").value);
+    let l = "";
     if (v == -1){
         if (document.getElementById("inputDisruptionClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputDisruptionClassCustomCont").classList.remove("disabled");
@@ -133,19 +182,31 @@ function updteDisrupionClass(){
         primary = disruptionClass.class[v].toUpperCase();
         color = "var("+disruptionClass.color[v]+")";
         colorSecondary = "var("+disruptionClass.colorSecondary[v]+")";
+        colorTertiary = "var("+disruptionClass.colorTertiary[v]+")";
+        path = disruptionClass.path[v];
+        l = v;
     }
+    if (document.getElementById("acsDisImg").src != path)
+        document.getElementById("acsDisImg").src = path;
+    if (document.getElementById("acsDisImageWrapper").style.getPropertyValue("background-color") != colorTertiary)
+        document.getElementById("acsDisImageWrapper").style.setProperty("background-color", colorTertiary);
     if (document.getElementById("acsDisrupionTextTitle").innerHTML != primary)
         document.getElementById("acsDisrupionTextTitle").innerHTML = primary;
     if (document.getElementById("acsDis").style.getPropertyValue("border-color") != color)
         document.getElementById("acsDis").style.setProperty("border-color", color);
     if (document.getElementById("acsDis").style.getPropertyValue("background-color") != colorSecondary)
         document.getElementById("acsDis").style.setProperty("background-color", colorSecondary);
+    if (document.getElementById("acsDisPText").innerHTML != l)
+        document.getElementById("acsDisPText").innerHTML = l;
 }
 
 function updteRiskClass(){
     let primary = "";
     let color = "";
     let colorSecondary = "";
+    let colorTertiary = "";
+    let path = "";
+    let l = "";
     let v = parseInt(document.getElementById("inputRiskClass").value);
     if (v == -1){
         if (document.getElementById("inputRiskClassCustomCont").classList.contains("disabled"))
@@ -158,13 +219,22 @@ function updteRiskClass(){
         primary = riskClass.class[v].toUpperCase();
         color = "var("+riskClass.color[v]+")";
         colorSecondary = "var("+riskClass.colorSecondary[v]+")";
+        colorTertiary = "var("+riskClass.colorTertiary[v]+")";
+        path = riskClass.path[v];
+        l = v;
     }
+    if (document.getElementById("acsRiskImg").src != path)
+        document.getElementById("acsRiskImg").src = path;
+    if (document.getElementById("acsRiskImageWrapper").style.getPropertyValue("background-color") != colorTertiary)
+        document.getElementById("acsRiskImageWrapper").style.setProperty("background-color", colorTertiary);
     if (document.getElementById("acsRiskTextTitle").innerHTML != primary)
         document.getElementById("acsRiskTextTitle").innerHTML = primary;
     if (document.getElementById("acsRisk").style.getPropertyValue("border-color") != color)
         document.getElementById("acsRisk").style.setProperty("border-color", color);
     if (document.getElementById("acsRisk").style.getPropertyValue("background-color") != colorSecondary)
         document.getElementById("acsRisk").style.setProperty("background-color", colorSecondary);
+    if (document.getElementById("acsRiskPText").innerHTML != l)
+        document.getElementById("acsRiskPText").innerHTML = l;
 }
 
 function updateUI(){
