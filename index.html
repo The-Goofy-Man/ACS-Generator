@@ -33,13 +33,13 @@
         <div class="settingDiv">
             <h3>Access Level</h3>
             <select id="inputAccessLevel">
-                <option value="0">0 - Official Use</option>
                 <option value="1">1 - Unrestricted</option>
                 <option value="2">2 - Restricted</option>
                 <option value="3">3 - Confidential</option>
                 <option value="4">4 - Secret</option>
                 <option value="5">5 - Top Secret</option>
                 <option value="6">6 - Cosmic Top Secret</option>
+                <option value="0">0 - Official Use</option>
                 <option value="-1">Custom</option>
             </select>
             <div id="accessLevelCustom" class="disabled">
@@ -184,7 +184,7 @@
             <div id="acsMiddle" class="width100"></div>
 
             <div id="acsBottom" class="width100 grid">
-                <div id="acsObjDisRisk" class="grid">
+                <div id="acsObjDisRisk" class="grid borderright">
                     <div id="acsObject" class="">
                         <div id="acsObjectTextCont" class="flex fleft">
                             <p id="acsObjectPrimaryText"><span id="acsObjectPrimaryTextSubtitle" class="">CONAINMENT CLASS:</span>
@@ -206,7 +206,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="acsDisRisk" class="grid borderright">
+                    <div id="acsDisRisk" class="grid">
                         <div id="acsDis" class="acsDisRisks">
                             <div id="acsDisTextCont" class="acsDisRisksTextCont fleft">
                                 <p id="acsDisText"><span class="em075">DISRUPTION CLASS:</span><br><span id="acsDisrupionTextTitle" class="fw600">DARK</span></p>
@@ -245,7 +245,15 @@
                         </div>
                     </div>
                 </div>
-                <div id="acsDiamond"></div>
+                <div id="acsDiamond">
+                    <img id="acsDiamondImg" src="images/diamond.svg">
+                    <div class="quadrents">
+                        <div id="top-quad"></div>
+                        <div id="right-quad"></div>
+                        <div id="bottom-quad"></div>
+                        <div id="left-quad"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

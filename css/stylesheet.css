@@ -1,16 +1,16 @@
 :root{
     --green: #59a06d;
-    --lightgreen: #e3eee6;
+    --lightgreen: rgba(89, 160, 109,0.2);
     --blue: #5282b9;
-    --lightblue: #e2e9f2;
+    --lightblue: rgba(82, 130, 185,0.2);
     --yellow: #f0d93e;
-    --lightyellow: #faf6df;
+    --lightyellow: rgba(240, 217, 62,0.2);
     --orange: #de752c;
-    --lightorange: #f7e7dd;
+    --lightorange: rgba(222, 117, 44,0.2);
     --red: #a61739;
-    --lightred: #efd9de;
+    --lightred: rgba(166, 23, 57,0.2);
     --black: #000000;
-    --lightblack: #ddddde;
+    --lightblack: rgba(0, 0, 0,0.15);
     --cosmicred: #ff0000;
     --white: white;
 }
@@ -29,7 +29,6 @@ h1{
 }
 
 #acsbar {
-    margin: 4px;
     padding: 5px;
     border: 1px solid black;
     font-family: 'Inter', sans-serif;
@@ -171,7 +170,7 @@ h1{
     position: absolute;
 }
 #acsSecondaryObjectImg{
-    width: 50px;
+    width: 100%;
     filter: invert(100%);
     left: 3px;
 }
@@ -186,7 +185,7 @@ h1{
     gap: 5px;
 }
 .acsDisRisks{
-    padding: 0 7px 0 7px;
+    padding: 0 10px 0 10px;
     border-left: 7px solid;
 }
 .acsDisRisksTextCont{
@@ -213,7 +212,43 @@ h1{
 }
 
 #acsDiamond{
-    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg version='1.2' baseProfile='tiny' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 160 160' xml:space='preserve'%3E%3Cpath fill='%23010101' d='M136.1,133.3l23.9-23.9V51.2l-24-24l19.1-19.1l4.9,4.9l0-12.9l-12.9,0l4.9,4.9L133,24.2l-24-24H51l-24,24 L8,5.2l4.9-4.9L0,0.2l0,12.9l4.9-4.9L24,27.3l-24,24v58.2l23.9,23.9l-19,19L0,147.3l0,12.9l12.9,0L8,155.3l19-19l23.9,23.9h58.4 l23.9-23.9l19,19l-4.9,4.9l12.9,0l0-12.9l-4.9,4.9L136.1,133.3z M155.7,53v54.6l-22.6,22.6l-50-50L133,30.3L155.7,53z M52.8,4.5 h54.4l22.7,22.7L80,77.2L30.1,27.3L52.8,4.5z M4.3,107.6V53L27,30.3L77,80.2l-50,50L4.3,107.6z M107.4,155.9H52.6L30,133.3l50-50 l50,50L107.4,155.9z'/%3E%3C/svg%3E%0A");
+    display: flex;
+    position: relative;
+}
+
+#acsDiamondImg{
     height: 100%;
-    width: 115px;
+}
+
+.quadrents{
+    position: absolute;
+    width: 96%;
+    height: 96%;
+    top: 0;
+    left: 0;
+}
+
+.quadrents > div{
+    width: 67.5%;
+    padding-bottom: 50%;
+    position: absolute;
+    top: 2.25%;
+    left: 18.5%;
+    clip-path: polygon(22% 0, 77% 0, 100% 31%, 50% 100%, 0 31%);
+    transform-origin: bottom center;
+}
+
+#top-quad{
+}
+
+#right-quad{
+    transform: rotate(90deg);
+}
+
+#bottom-quad{
+    transform: rotate(180deg);
+}
+
+#left-quad{
+    transform: rotate(270deg);
 }

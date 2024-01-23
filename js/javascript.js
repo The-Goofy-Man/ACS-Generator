@@ -18,7 +18,6 @@ function checkOnlyMainClass(){
         if (!document.getElementById("acsDisRisk").classList.contains("disabled")){
             document.getElementById("acsDisRisk").classList.remove("grid");
             document.getElementById("acsDisRisk").classList.add("disabled");
-            document.getElementById("acsObject").classList.add("borderright");
             document.getElementById("acsObjDisRisk").style.setProperty("grid-template-columns", "auto")
         }
     }
@@ -27,7 +26,6 @@ function checkOnlyMainClass(){
         if (document.getElementById("acsDisRisk").classList.contains("disabled")){
             document.getElementById("acsDisRisk").classList.add("grid");
             document.getElementById("acsDisRisk").classList.remove("disabled");
-            document.getElementById("acsObject").classList.remove("borderright");
             document.getElementById("acsObjDisRisk").style.setProperty("grid-template-columns", "auto auto")
         }
     }
@@ -131,8 +129,12 @@ function updateOnjectClass(){
         document.getElementById("acsObject").style.setProperty("border-color", color);
     if (document.getElementById("acsObject").style.getPropertyValue("background-color") != colorSecondary)
         document.getElementById("acsObject").style.setProperty("background-color", colorSecondary);
-
-
+    if (!onlyMainClass){
+        if (document.getElementById("top-quad").style.getPropertyValue("background-color") != colorSecondary)
+            document.getElementById("top-quad").style.setProperty("background-color", colorSecondary);}
+    else{
+        if (document.getElementById("top-quad").style.getPropertyValue("background-color") != "transparent")
+            document.getElementById("top-quad").style.setProperty("background-color", "transparent");}
 
     
     if (v2 == 0 && !document.getElementById("acsObjectSecondaryText").classList.contains("disabled")){
@@ -198,6 +200,12 @@ function updteDisrupionClass(){
         document.getElementById("acsDis").style.setProperty("background-color", colorSecondary);
     if (document.getElementById("acsDisPText").innerHTML != l)
         document.getElementById("acsDisPText").innerHTML = l;
+    if (!onlyMainClass && v != 0){
+        if (document.getElementById("left-quad").style.getPropertyValue("background-color") != colorSecondary)
+            document.getElementById("left-quad").style.setProperty("background-color", colorSecondary);}
+    else{
+        if (document.getElementById("left-quad").style.getPropertyValue("background-color") != "transparent")
+            document.getElementById("left-quad").style.setProperty("background-color", "transparent");}
 }
 
 function updteRiskClass(){
@@ -235,6 +243,12 @@ function updteRiskClass(){
         document.getElementById("acsRisk").style.setProperty("background-color", colorSecondary);
     if (document.getElementById("acsRiskPText").innerHTML != l)
         document.getElementById("acsRiskPText").innerHTML = l;
+    if (!onlyMainClass && v != 0){
+        if (document.getElementById("right-quad").style.getPropertyValue("background-color") != colorSecondary)
+            document.getElementById("right-quad").style.setProperty("background-color", colorSecondary);}
+    else{
+        if (document.getElementById("right-quad").style.getPropertyValue("background-color") != "transparent")
+            document.getElementById("right-quad").style.setProperty("background-color", "transparent");}
 }
 
 function updateUI(){
