@@ -1,14 +1,14 @@
 :root{
     --green: #59a06d;
-    --lightgreen: rgba(89, 160, 109,0.2);
+    --lightgreen: rgba(89, 160, 109,0.25);
     --blue: #5282b9;
-    --lightblue: rgba(82, 130, 185,0.2);
+    --lightblue: rgba(82, 130, 185,0.25);
     --yellow: #f0d93e;
-    --lightyellow: rgba(240, 217, 62,0.2);
+    --lightyellow: rgba(240, 217, 62,0.25);
     --orange: #de752c;
-    --lightorange: rgba(222, 117, 44,0.2);
+    --lightorange: rgba(222, 117, 44,0.25);
     --red: #a61739;
-    --lightred: rgba(166, 23, 57,0.2);
+    --lightred: rgba(166, 23, 57,0.25);
     --black: #000000;
     --lightblack: rgba(0, 0, 0,0.15);
     --cosmicred: #ff0000;
@@ -18,7 +18,7 @@
 h3,h4,p{
     margin: 0;
 }
-h1{
+#tileArea{
     text-align: center;
 }
 .sectionDiv {
