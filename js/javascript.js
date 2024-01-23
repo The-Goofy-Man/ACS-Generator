@@ -123,6 +123,22 @@ function updateOnjectClass(){
         document.getElementById("acsSecondaryObjectImg").src = pathSecondary;
     if (document.getElementById("acsObjectImageWrapper").style.getPropertyValue("background-color") != colorTertiary)
         document.getElementById("acsObjectImageWrapper").style.setProperty("background-color", colorTertiary);
+    
+    if (v2 == 0){
+        if (document.getElementById("acsSmallObjectImg").src != path)
+            document.getElementById("acsSmallObjectImg").src = path;
+        if (document.getElementById("acsSmallObjectSecondaryImg").src != pathSecondary)
+            document.getElementById("acsSmallObjectSecondaryImg").src = pathSecondary;
+    }
+    else{
+        if (document.getElementById("acsSmallObjectImg").src != pathSecondary)
+            document.getElementById("acsSmallObjectImg").src = pathSecondary;
+        if (document.getElementById("acsSmallObjectSecondaryImg").src != path)
+            document.getElementById("acsSmallObjectSecondaryImg").src = path;
+    }
+    if (document.getElementById("acsSmallObjectImageWrapper").style.getPropertyValue("background-color") != colorTertiary)
+        document.getElementById("acsSmallObjectImageWrapper").style.setProperty("background-color", colorTertiary);
+
     if (document.getElementById("acsObjectPrimaryTextTitle").innerHTML != primary)
         document.getElementById("acsObjectPrimaryTextTitle").innerHTML = primary;
     if (document.getElementById("acsObject").style.getPropertyValue("border-color") != color)

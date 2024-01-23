@@ -58,7 +58,7 @@
                 <h4>Appearance of Lines</h4>
                 <select id="inputAccessLevelLineAppearance">
                     <option value="color">Colour</option>
-                    <option value="image">Background Image</option>
+                    <!--<option value="image">Background Image [WIP]</option>-->
                 </select>
 
                 <div id="inputAccessLevelLineColorCont" class="disabled">
@@ -66,7 +66,7 @@
                     <input type="color" value="#de752c" id="inputAccessLevelLineColor">
                 </div>
                 <div id="inputAccessLevelLineBGImageCont" class="disabled">
-                    <p><i>Images only (jpg, jpeg, png, etc)</i></p>
+                    <p>[WIP] <i>Images only (jpg, jpeg, png, etc)</i></p>
                     <input type="file" accept="image/*" id="inputAccessLevelLineBGImage">
                 </div>
             </div>
@@ -87,11 +87,11 @@
                 <option value="5">Neutralized</option>
                 <option value="6">Explained</option>
                 <option value="0">Pending</option>
-                <option value="-1">Custom</option>
+                <option value="-1">Custom [WIP]</option>
             </select>
 
             <div id="inputPrimaryObjectClassCustomCont" class="disabled">
-                <p><i>Example: EUCLID</i></p>
+                <p>[WIP] <i>Example: EUCLID</i></p>
                 <input type="text" placeholder="EUCLID" id="inputPrimaryObjectClassCustom">
             </div>
 
@@ -107,11 +107,11 @@
                 <option value="7">Tiamat</option>
                 <option value="8">Ticonderoga</option>
                 <option value="9">Uncontained</option>
-                <option value="-1">Custom</option>
+                <option value="-1">Custom [WIP]</option>
             </select>
 
             <div id="inputSecondaryObjectClassCustomCont" class="disabled">
-                <p><i>Example: Thaumial</i></p>
+                <p>[WIP] <i>Example: Thaumial</i></p>
                 <input type="text" placeholder="Thaumial" id="inputSecondaryObjectClassCustom">
             </div>
         </div>
@@ -125,11 +125,11 @@
                 <option value="4">Ekhi</option>
                 <option value="5">Amida</option>
                 <option value="0">None</option>
-                <!--<option value="-1">Custom</option>-->
+                <!--<option value="-1">Custom [WIP]</option>-->
             </select>
 
             <div id="inputDisruptionClassCustomCont" class="disabled">
-                <p><i>Example: Dark</i></p>
+                <p>[WIP] <i>Example: Dark</i></p>
                 <input type="text" placeholder="Dark" id="inputDisruptionClassCustom">
             </div>
 
@@ -141,11 +141,11 @@
                 <option value="4">Danger</option>
                 <option value="5">Critical</option>
                 <option value="0">None</option>
-                <!--<option value="-1">Custom</option>-->
+                <!--<option value="-1">Custom [WIP]</option>-->
             </select>
 
             <div id="inputRiskClassCustomCont" class="disabled">
-                <p><i>Example: Notice</i></p>
+                <p>[WIP] <i>Example: Notice</i></p>
                 <input type="text" placeholder="Notice" id="inputRiskClassCustom">
             </div>
         </div>
@@ -248,10 +248,45 @@
                 <div id="acsDiamond">
                     <img id="acsDiamondImg" src="images/diamond.svg">
                     <div class="quadrents">
-                        <div id="top-quad"></div>
-                        <div id="right-quad"></div>
-                        <div id="bottom-quad"></div>
-                        <div id="left-quad"></div>
+                        <div id="top-quad" class="quad"></div>
+                        <div id="right-quad" class="quad"></div>
+                        <div id="bottom-quad" class="quad"></div>
+                        <div id="left-quad" class="quad"></div>
+                    </div>
+                    <div id="acsSmallObjectImageCont" class="acsSmallImageCont">
+                        <div id="acsSmallObjectImageBGWrapper" class="acsSmallImageBGWrapper">
+                            <div id="acsSmallObjectImageWrapper" class="acsSmallImageWrapper fullcircle">
+                                <img id="acsSmallObjectImg" class="acsSmallImg" src="images/containment-classes/safe-icon.svg">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="acsSmallRiskImageCont" class="acsSmallImageCont">
+                        <div id="acsSmallRiskImageBGWrapper" class="acsSmallImageBGWrapper">
+                            <div id="acsSmallRiskImageWrapper" class="acsSmallImageWrapper fullcircle">
+                                <img id="acsSmallRiskImg" class="acsSmallImg" src="images/containment-classes/safe-icon.svg">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="acsSmallDisImageCont" class="acsSmallImageCont">
+                        <div id="acsSmallDisImageBGWrapper" class="acsSmallImageBGWrapper">
+                            <div id="acsSmallDisImageWrapper" class="acsSmallImageWrapper fullcircle">
+                                <img id="acsSmallDisImg" class="acsSmallImg" src="images/containment-classes/safe-icon.svg">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="acsSmallObjectSecondaryImageCont" class="acsSmallImageCont">
+                        <div id="acsSmallObjectSecondaryImageBGWrapper" class="acsSmallImageBGWrapper">
+                            <div id="acsSmallObjectSecondaryImageWrapper" class="acsSmallImageWrapper fullcircle">
+                                <img id="acsSmallObjectSecondaryImg" class="acsSmallImg" src="images/containment-classes/safe-icon.svg">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="acsBigObjectImageCont" class="acsSmallImageCont disabled">
+                        <div id="acsBigObjectImageBGWrapper" class="acsSmallImageBGWrapper">
+                            <div id="acsBigObjectImageWrapper" class="acsSmallImageWrapper fullcircle">
+                                <img id="acsBigObjectImg" class="acsSmallImg" src="images/containment-classes/safe-icon.svg">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
