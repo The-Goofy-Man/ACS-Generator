@@ -1,6 +1,8 @@
 # SCP-ACS-Gen
  Anomaly Classification Sysem Generator by F4Fridey
 
+[Discord Server](https://discord.gg/XpGfub6VyR)
+
 ---
 
 This is released under he CC-BY-SA license, more info [here](https://scp-wiki.wikidot.com/licensing-guide)
