@@ -21,6 +21,9 @@ h3,h4,p{
 #tileArea{
     text-align: center;
 }
+h1 {
+    margin: 0;
+}
 .sectionDiv {
 }
 
