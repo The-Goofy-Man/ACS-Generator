@@ -350,3 +350,19 @@ function updateUI(){
 }
 
 setInterval(updateUI, 100);
+
+var display = {
+    setWidth: function(width){
+        if (width < 0)
+            width = document.getElementById("acsBarWidthInput").value;
+        document.getElementById("acsbar").style.setProperty("width", width);
+    }
+}
+
+function setWidth(width){
+    if (width < 0)
+        width = document.getElementById("acsBarWidthInput").value
+    width = width + "px";
+    document.getElementById("acsbar").style.width = width;
+    console.log("hi")
+}
