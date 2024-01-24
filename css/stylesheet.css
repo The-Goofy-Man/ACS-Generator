@@ -41,9 +41,20 @@ h1 {
 
 #acsbar {
     padding: 5px;
+    width: 80%;
     border: 1px solid black;
     font-family: 'Inter', sans-serif;
+    position: relative;
 }
+#resizeHandle{
+    position: absolute;
+    width: 10px;
+    height: calc(100% - 10px);
+    right: -4px;
+    border-right: 1px solid black;
+    cursor: e-resize;
+}
+
 
 .min715{
     min-width: 715px;
