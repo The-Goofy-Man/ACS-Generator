@@ -7,6 +7,7 @@ function updateInput(){
     updateOnjectClass();
     updteDisrupionClass();
     updteRiskClass();
+    updateOpionalOptions();
 }
 
 function checkOnlyMainClass(){
@@ -322,6 +323,26 @@ function updteRiskClass(){
     else{
         if (document.getElementById("right-quad").style.getPropertyValue("background-color") != "transparent")
             document.getElementById("right-quad").style.setProperty("background-color", "transparent");}
+}
+
+function updateOpionalOptions(){
+    if (document.getElementById("gridCheckbox").checked == true &&
+        document.getElementById("acsObjDisRisk").style.getPropertyValue("grid-template-columns") != "auto auto"){
+            document.getElementById("acsObjDisRisk").style.setProperty("grid-template-columns", "auto auto");
+            if (!document.getElementById("acsbar").classList.contains("min715")){
+                document.getElementById("acsbar").classList.remove("min560");
+                document.getElementById("acsbar").classList.add("min715");
+            }
+    }
+    else if (document.getElementById("gridCheckbox").checked == false &&
+        document.getElementById("acsObjDisRisk").style.getPropertyValue("grid-template-columns") != ""){
+            document.getElementById("acsObjDisRisk").style.setProperty("grid-template-columns", "");
+            if (!document.getElementById("acsbar").classList.contains("min560")){
+                document.getElementById("acsbar").classList.remove("min715");
+                document.getElementById("acsbar").classList.add("min560");
+            }
+    }
+    
 }
 
 function updateUI(){
