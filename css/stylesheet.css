@@ -55,6 +55,10 @@ h1 {
     cursor: e-resize;
 }
 
+.textdeconone{
+    text-decoration: none;
+}
+
 
 .min715{
     min-width: 715px;
