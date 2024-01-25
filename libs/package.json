@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "html-to-image": "^1.11.11",
-    "html2canvas": "^1.4.1"
+    "modern-screenshot": "^4.4.37"
   }
 }
