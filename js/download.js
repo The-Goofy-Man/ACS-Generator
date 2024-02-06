@@ -32,4 +32,6 @@ function convertHtmlToPng()
     link.download = 'acsbar.png'
     link.href = dataUrl
     link.click()});
+
+    /* navigator.mediaDevices.getDisplayMedia(); */
 }
