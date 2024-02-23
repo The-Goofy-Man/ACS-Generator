@@ -13,10 +13,18 @@
     --lightblack: rgba(0, 0, 0,0.15);
     --cosmicred: #ff0000;
     --white: white;
+
+    --swatch-primary: 133,0,5;
+    --swatch-primary-darkest: 108,2,12;
+    --top-primary-darkest: 255,255,255,.05;
+
+    --gradient-header: linear-gradient(to top,rgb(100,46,44)0%,rgb(12,12,12)90%,rgb(12,12,12)100%);
 }
 
 body{
     margin: 0;
+    
+    font-family: sans-serif;
 }
 
 #generator{
@@ -26,14 +34,55 @@ body{
 h3,h4,p{
     margin: 0;
 }
-#tileArea{
-    text-align: center;
+
+#titleAreaPattern{
+    background-size: 6px 8.7px;
+    background-image: linear-gradient(55deg,rgba(var(--top-primary-darkest))15%,transparent 15%,transparent 50%,rgba(var(--top-primary-darkest))50%,rgba(var(--top-primary-darkest))65%,transparent 65%,transparent 100%);
 }
+
+#tileArea{
+    padding: 30px;
+    max-width: 800px;
+    background-repeat: repeat-x;
+    margin: auto;
+}
+
 h1 {
     margin: 0;
 }
+
+
+header {
+    color: white;
+    background-image: var(--gradient-header);
+}
+
+nav{
+    border-top: 2px  solid #19191b;
+    border-bottom: 2px  solid #19191b;
+    background-color: #424248;
+    margin: auto;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: center;
+    font-size: .8em;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    padding: 3px 7px 3px 7px;
+    transition: .2s background-color;
+}
+
+nav a:hover{
+    background-color: #37373a;
+}
+
 .sectionDiv {
 }
+
+
 
 .settingDiv {
     display: inline-grid;
@@ -333,4 +382,47 @@ h1 {
     width: 82.6%;
     top: 8.7%;
     left :8.7%;
+}
+
+/* Notice Box */
+
+.noticeBox{
+    margin: auto;
+    display: grid;
+    grid-template-columns: auto;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid #bababb;
+}
+
+#bugNotice{
+    max-width: 250px;
+    grid-template-columns: Auto;
+}
+
+.nb {
+    width: 100%;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.nbTop{
+    font-size: 1.5em;
+    font-weight: 600;
+    color: rgb(252,252,252);
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+    padding: 0.5em 1.25rem;
+    background-size: 3rem 4.35rem;
+    background-color: rgb(var(--swatch-primary));
+    background-image: linear-gradient(125deg,rgba(var(--swatch-primary-darkest),.75)25%,transparent 25%,transparent 50%,rgba(var(--swatch-primary-darkest),.75)50%,rgba(var(--swatch-primary-darkest),.75)75%,transparent 75%,transparent 100%);
+}
+
+.nbContent{
+    padding: 1em 0.5em;
+    text-align: center;
 }

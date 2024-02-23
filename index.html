@@ -20,12 +20,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <div id="tileArea">
-        <p><a href="../">&LessLess; Back</a></p>
-        <h1>SCP Anomaly Classification Sysem Generator</h1>
-        <h3>[SCP] ACS Generator - Development v0.0.5</h3>
-        <h4>By <a href="https://github.com/F4Fridey/ACS-Generator" target="_blank">F4Fridey</a> | Join the <a href="https://discord.gg/XpGfub6VyR" target="_blank">Discord</a>!</h4>
-    </div>
+    <header>
+        <div id="titleAreaPattern">
+            <div id="tileArea">
+                <h1>SCP Anomaly Classification Sysem Generator</h1>
+                <h3>[SCP] ACS Generator - Development v0.0.5</h3>
+            </div>
+        </div>
+        <nav class="fw600">
+            <a href="../">&LessLess; Back to Home</a>
+            <a href="https://github.com/F4Fridey/ACS-Generator" target="_blank">By F4Fridey</a>
+            <a href="https://discord.gg/XpGfub6VyR" target="_blank">Join the Discord!</a>
+        </nav>
+    </header>
+    
     <div id="generator">
         <div class="sectionDiv">
             <h2>Item Title</h2>
@@ -76,7 +84,7 @@
                         <input type="color" value="#de752c" id="inputAccessLevelLineColor">
                     </div>
                     <div id="inputAccessLevelLineBGImageCont" class="disabled">
-                        <p>[WIP] <i>Images only (jpg, jpeg, png, etc)</i></p>
+                        <p>[WIP] <i>Images only (jpg, svg, png, etc)</i></p>
                         <input type="file" accept="image/*" id="inputAccessLevelLineBGImage">
                     </div>
                 </div>
@@ -103,6 +111,10 @@
                 <div id="inputPrimaryObjectClassCustomCont" class="disabled">
                     <p>[WIP] <i>Example: EUCLID</i></p>
                     <input type="text" placeholder="EUCLID" id="inputPrimaryObjectClassCustom">
+                    <p><i>Example: #de752c</i></p>
+                    <input type="color" value="#de752c" id="inputPrimaryObjectClassColor">
+                    <p>[WIP] <i>Images only (jpg, svg, png, etc)</i></p>
+                    <input type="file" accept="image/*" id="inputPrimaryObjectClassImage">
                 </div>
 
                 <h4>Secondary</h4>
@@ -121,8 +133,10 @@
                 </select>
 
                 <div id="inputSecondaryObjectClassCustomCont" class="disabled">
-                    <p>[WIP] <i>Example: Thaumial</i></p>
-                    <input type="text" placeholder="Thaumial" id="inputSecondaryObjectClassCustom">
+                    <p>[WIP] <i>Example: THAUMIAL</i></p>
+                    <input type="text" placeholder="THAUMIAL" id="inputSecondaryObjectClassCustom">
+                    <p>[WIP] <i>Images only (jpg, svg, png, etc)</i></p>
+                    <input type="file" accept="image/*" id="inputSecondaryObjectClassImage">
                 </div>
             </div>
 
@@ -243,7 +257,7 @@
                             </div>
                             <div id="acsRisk" class="acsDisRisks">
                                 <div id="acsRiskTextCont" class="acsDisRisksTextCont fleft">
-                                    <p id="acsRiskText"><span class="em075">RISK CLASS:</span><br><span id="acsRiskTextTitle" class="fw600">NOTICE</span></p>
+                                    <p id="acsRiskText" style="display: inline;"><span class="em075">RISK CLASS:</span><br><span id="acsRiskTextTitle" class="fw600">NOTICE</span></p>
                                 </div>
                                 <div id="acsRiskImageCont" class="acsImageCont">
                                     <div id="acsRiskImageBGWrapper" class="acsImageBGWrapper bgblack">
@@ -309,5 +323,13 @@
             </div>
             <button id="convertToPngBtn" onclick="convertHtmlToPng()" style="margin: 10px;">Download as Png</button><label>[WIP]</label>
         </div>
+
+        <div class="sectionDiv">
+            <div class="noticeBox" id="bugNotice">
+                <h1 class="nb nbTop">NOTICE:</h1>
+                <p class="nb nbContent">Found a bug? Report it <a href="https://github.com/F4Fridey/ACS-Generator/issues">here</a>.</p>
+            </div>
+        </div>
+        
     </div>
 </body>
