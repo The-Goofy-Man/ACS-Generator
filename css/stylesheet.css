@@ -207,6 +207,9 @@ nav a:hover{
     padding: 10px 10px 10px 15px;
     display: flexbox;
 }
+#acsDiamondImg{
+    width: 115px;
+}
 #acsObjectTextCont{
     height: 100%;
     flex-direction: column;
@@ -227,6 +230,7 @@ nav a:hover{
 .acsImg{
     height: 100%;
 }
+
 .acsImageBGWrapper{
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
