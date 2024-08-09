@@ -388,22 +388,29 @@ function hexToRgbA(hex, alpha){
     throw new Error('Bad Hex');
 }
 
-function readImage(input, imgID, secImgID) {
+function readImage(input, imgID) {
     const reader = new FileReader();
     reader.addEventListener('load', (event) => {
       document.getElementById(imgID).src = event.target.result;
-      document.getElementById(secImgID).src = event.target.result;
     });
-    reader.readAsDataURL(input.files[0]);
+    if (input.files.length > 0)
+        reader.readAsDataURL(input.files[0]);
   }
 
-function readObjectImage(input, imgID, secImgID) {
+function readObjectImage(input, imgID, secImgID, bigImg) {
     let v = parseInt(document.getElementById("inputPrimaryObjectClass").value);
     let v2 = parseInt(document.getElementById("inputSecondaryObjectClass").value);
     if (v == -1 && v2 == -1 && imgID == "acsObjectImg") {
-        readImage(input, "acsSecondaryObjectImg", secImgID);
+        readImage(input, "acsSecondaryObjectImg");
     }
     else{
-        readImage(input, imgID, secImgID);
+        readImage(input, imgID);
     }
+    readImage(input, secImgID);
+    readImage(input, bigImg);
+}
+
+function updateCustomImages(){
+    readObjectImage(document.getElementById("inputSecondaryObjectClassImage"), 'acsSmallObjectImg', 'acsObjectImg', 'acsBigObjectImg');
+    readObjectImage(document.getElementById("inputPrimaryObjectClassImage"), 'acsObjectImg', 'acsSmallObjectImg', 'acsBigObjectImg');
 }

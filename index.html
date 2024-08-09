@@ -24,7 +24,7 @@
         <div id="titleAreaPattern">
             <div id="tileArea">
                 <h1>SCP Anomaly Classification Sysem Generator</h1>
-                <h3>[SCP] ACS Generator v0.0.6</h3>
+                <h3>[SCP] ACS Generator v0.0.7-dev</h3>
             </div>
         </div>
         <nav class="fw600">
@@ -113,7 +113,7 @@
                     <p><i>Color</i></p>
                     <input type="color" value="#73a170" id="inputPrimaryObjectClassColor">
                     <p><i>Images only (jpg, svg, or png)</i></p>
-                    <input type="file" onchange="readObjectImage(this, 'acsObjectImg', 'acsSmallObjectImg');" accept="image/png, image/jpeg, image/svg" id="inputPrimaryObjectClassImage">
+                    <input type="file" onchange="updateCustomImages()" accept="image/png, image/jpeg, image/svg" id="inputPrimaryObjectClassImage">
                 </div>
 
                 <h4>Secondary</h4>
@@ -135,7 +135,7 @@
                     <p><i>Example: THAUMIAL</i></p>
                     <input type="text" placeholder="THAUMIAL" id="inputSecondaryObjectClassCustom">
                     <p><i>Images only (jpeg, svg, or png)</i></p>
-                    <input type="file" onchange="readImage(this, 'acsObjectImg', 'acsSmallObjectSecondaryImg');" accept="image/png, image/jpeg, image/svg" id="inputSecondaryObjectClassImage">
+                    <input type="file" onchange="updateCustomImages()" accept="image/png, image/jpeg, image/svg" id="inputSecondaryObjectClassImage">
                 </div>
             </div>
 
