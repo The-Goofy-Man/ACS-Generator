@@ -41,7 +41,7 @@
             <div class="settingDiv">
                 <h3>Title</h3>
                 <p><i>Example: 173-J</i></p>
-                <input type="text" placeholder="0173" value="0000" id="inputItemTitle">
+                <input type="text" placeholder="0000" value="0000" id="inputItemTitle">
 
                 <h3>Subtitle</h3>
                 <p><i>Example: ITEM#:</i></p>
@@ -80,7 +80,6 @@
                     </select>
 
                     <div id="inputAccessLevelLineColorCont" class="disabled">
-                        <p><i>Example: #de752c</i></p>
                         <input type="color" value="#de752c" id="inputAccessLevelLineColor">
                     </div>
                     <div id="inputAccessLevelLineBGImageCont" class="disabled">
@@ -109,12 +108,12 @@
                 </select>
 
                 <div id="inputPrimaryObjectClassCustomCont" class="disabled">
-                    <p>[WIP] <i>Example: EUCLID</i></p>
-                    <input type="text" placeholder="EUCLID" id="inputPrimaryObjectClassCustom">
-                    <p><i>Example: #de752c</i></p>
-                    <input type="color" value="#de752c" id="inputPrimaryObjectClassColor">
-                    <p>[WIP] <i>Images only (jpg, svg, png, etc)</i></p>
-                    <input type="file" accept="image/*" id="inputPrimaryObjectClassImage">
+                    <p><i>Example: SAFE</i></p>
+                    <input type="text" placeholder="SAFE" id="inputPrimaryObjectClassCustom">
+                    <p><i>Color</i></p>
+                    <input type="color" value="#73a170" id="inputPrimaryObjectClassColor">
+                    <p><i>Images only (jpg, svg, or png)</i></p>
+                    <input type="file" onchange="readObjectImage(this, 'acsObjectImg', 'acsSmallObjectImg');" accept="image/png, image/jpeg, image/svg" id="inputPrimaryObjectClassImage">
                 </div>
 
                 <h4>Secondary</h4>
@@ -133,10 +132,10 @@
                 </select>
 
                 <div id="inputSecondaryObjectClassCustomCont" class="disabled">
-                    <p>[WIP] <i>Example: THAUMIAL</i></p>
+                    <p><i>Example: THAUMIAL</i></p>
                     <input type="text" placeholder="THAUMIAL" id="inputSecondaryObjectClassCustom">
-                    <p>[WIP] <i>Images only (jpg, svg, png, etc)</i></p>
-                    <input type="file" accept="image/*" id="inputSecondaryObjectClassImage">
+                    <p><i>Images only (jpeg, svg, or png)</i></p>
+                    <input type="file" onchange="readImage(this, 'acsObjectImg', 'acsSmallObjectSecondaryImg');" accept="image/png, image/jpeg, image/svg" id="inputSecondaryObjectClassImage">
                 </div>
             </div>
 
@@ -230,7 +229,7 @@
                                     
                                     <div id="acsSecondaryObjectImageWrapper" class="acsSecondImgWrapper disabled">
                                         <div id="acsSecondaryObjectImageBG" class="bgblack acsSecondImgBG">
-                                            <img id="acsSecondaryObjectImg" class="acsImg acsSecondImg" src="images/containment-classes/safe-icon.svg">
+                                            <img id="acsSecondaryObjectImg" class="acsSecondImg" src="images/containment-classes/safe-icon.svg">
                                         </div>
                                     </div>
                                 </div>

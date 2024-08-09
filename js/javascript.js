@@ -103,6 +103,9 @@ function updateOnjectClass(){
         if (document.getElementById("inputPrimaryObjectClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputPrimaryObjectClassCustomCont").classList.remove("disabled");
         primary = document.getElementById("inputPrimaryObjectClassCustom").value;
+        color = "black black black "+document.getElementById("inputPrimaryObjectClassColor").value+"";
+        colorSecondary = ""+hexToRgbA(document.getElementById("inputPrimaryObjectClassColor").value, .25)+"";
+        colorTertiary = ""+document.getElementById("inputPrimaryObjectClassColor").value+"";
     }
     else {
         if (!document.getElementById("inputPrimaryObjectClassCustomCont").classList.contains("disabled"))
@@ -114,21 +117,22 @@ function updateOnjectClass(){
         if (v2 == 0){
             path = objClass.path[v];
         }else{
-            path = objSecondaryClass.path[v2];
             pathSecondary = objClass.path[v];
+            if (v2 != -1){
+                path = objSecondaryClass.path[v2];}
         }
     }
-    if (document.getElementById("acsObjectImg").src != path)
+    if (document.getElementById("acsObjectImg").src != path && (v != -1 && v2 != -1))
         document.getElementById("acsObjectImg").src = path;
-    if (document.getElementById("acsSecondaryObjectImg").src != pathSecondary)
+    if (document.getElementById("acsSecondaryObjectImg").src != pathSecondary && v != -1)
         document.getElementById("acsSecondaryObjectImg").src = pathSecondary;
     if (document.getElementById("acsObjectImageWrapper").style.getPropertyValue("background-color") != colorTertiary)
         document.getElementById("acsObjectImageWrapper").style.setProperty("background-color", colorTertiary);
     
     if (v2 == 0){
-        if (document.getElementById("acsSmallObjectImg").src != path)
+        if (document.getElementById("acsSmallObjectImg").src != path && v != -1)
             document.getElementById("acsSmallObjectImg").src = path;
-            if (document.getElementById("acsBigObjectImg").src != path)
+            if (document.getElementById("acsBigObjectImg").src != path && v != -1)
                 document.getElementById("acsBigObjectImg").src = path;
         if (!document.getElementById("acsSmallObjectSecondaryImageCont").classList.contains("disabled"))
             document.getElementById("acsSmallObjectSecondaryImageCont").classList.add("disabled");
@@ -149,13 +153,13 @@ function updateOnjectClass(){
         }
     }
     else{
-        if (document.getElementById("acsSmallObjectImg").src != pathSecondary)
+        if (document.getElementById("acsSmallObjectImg").src != pathSecondary && v2 != -1 && v != -1)
             document.getElementById("acsSmallObjectImg").src = pathSecondary;
         if (document.getElementById("acsBigObjectImg").src != pathSecondary)
             document.getElementById("acsBigObjectImg").src = pathSecondary;
         if (document.getElementById("acsSmallObjectSecondaryImageCont").classList.contains("disabled"))
             document.getElementById("acsSmallObjectSecondaryImageCont").classList.remove("disabled");
-        if (document.getElementById("acsSmallObjectSecondaryImg").src != path)
+        if (document.getElementById("acsSmallObjectSecondaryImg").src != path && v2 != -1)
             document.getElementById("acsSmallObjectSecondaryImg").src = path;
         if (document.getElementById("acsSmallObjectImageCont").classList.contains("disabled"))
             document.getElementById("acsSmallObjectImageCont").classList.remove("disabled");
@@ -369,4 +373,37 @@ function setWidth(width){
     width = width + "px";
     document.getElementById("acsbar").style.width = width;
     console.log("hi")
+}
+
+function hexToRgbA(hex, alpha){
+    var c;
+    if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+        c= hex.substring(1).split('');
+        if(c.length== 3){
+            c= [c[0], c[0], c[1], c[1], c[2], c[2]];
+        }
+        c= '0x'+c.join('');
+        return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+','+alpha+')';
+    }
+    throw new Error('Bad Hex');
+}
+
+function readImage(input, imgID, secImgID) {
+    const reader = new FileReader();
+    reader.addEventListener('load', (event) => {
+      document.getElementById(imgID).src = event.target.result;
+      document.getElementById(secImgID).src = event.target.result;
+    });
+    reader.readAsDataURL(input.files[0]);
+  }
+
+function readObjectImage(input, imgID, secImgID) {
+    let v = parseInt(document.getElementById("inputPrimaryObjectClass").value);
+    let v2 = parseInt(document.getElementById("inputSecondaryObjectClass").value);
+    if (v == -1 && v2 == -1 && imgID == "acsObjectImg") {
+        readImage(input, "acsSecondaryObjectImg", secImgID);
+    }
+    else{
+        readImage(input, imgID, secImgID);
+    }
 }
