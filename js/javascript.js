@@ -328,7 +328,8 @@ function updteRiskClass(){
 function updateOpionalOptions(){
     if (document.getElementById("gridCheckbox").checked == true &&
         document.getElementById("acsObjDisRisk").style.getPropertyValue("grid-template-columns") != "auto auto"){
-            document.getElementById("acsObjDisRisk").style.setProperty("grid-template-columns", "auto auto");
+            if (document.getElementById("acsObjDisRisk").style.getPropertyValue("grid-template-columns") == ""){
+                document.getElementById("acsObjDisRisk").style.setProperty("grid-template-columns", "auto auto");}
             document.getElementById("acsDiamondImg").style.setProperty("width", "");
             if (!document.getElementById("acsbar").classList.contains("min715")){
                 document.getElementById("acsbar").classList.remove("min560");
@@ -337,7 +338,8 @@ function updateOpionalOptions(){
     }
     else if (document.getElementById("gridCheckbox").checked == false &&
         document.getElementById("acsObjDisRisk").style.getPropertyValue("grid-template-columns") != ""){
-            document.getElementById("acsObjDisRisk").style.setProperty("grid-template-columns", "");
+            if (document.getElementById("acsObjDisRisk").style.getPropertyValue("grid-template-columns") == "auto auto"){
+                document.getElementById("acsObjDisRisk").style.setProperty("grid-template-columns", "");}
             document.getElementById("acsDiamondImg").style.setProperty("width", "235px");
             if (!document.getElementById("acsbar").classList.contains("min560")){
                 document.getElementById("acsbar").classList.remove("min715");
