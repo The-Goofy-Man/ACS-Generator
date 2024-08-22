@@ -205,7 +205,12 @@ nav a:hover{
     border-left: 16px solid;
     background-color: var(--lightblack);
     padding: 10px 10px 10px 15px;
-    display: flexbox;
+    display: grid;
+    grid-template-columns: auto max-content;
+}
+#acsObjectImageCont{
+    justify-self: center;
+    align-self: center;
 }
 #acsDiamondImg{
     width: 115px;
