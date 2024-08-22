@@ -106,6 +106,10 @@ function updateOnjectClass(){
         color = "black black black "+document.getElementById("inputPrimaryObjectClassColor").value+"";
         colorSecondary = ""+hexToRgbA(document.getElementById("inputPrimaryObjectClassColor").value, .25)+"";
         colorTertiary = ""+document.getElementById("inputPrimaryObjectClassColor").value+"";
+        if (v2 != -1 && v2 != 0){
+            path = objSecondaryClass.path[v2];
+        }
+        else if (v2 == 0){}
     }
     else {
         if (!document.getElementById("inputPrimaryObjectClassCustomCont").classList.contains("disabled"))
@@ -122,10 +126,21 @@ function updateOnjectClass(){
                 path = objSecondaryClass.path[v2];}
         }
     }
-    if (document.getElementById("acsObjectImg").src != path && (v != -1 && v2 != -1))
+    if (document.getElementById("acsObjectImg").src != path && v != -1 && v2 != -1){
         document.getElementById("acsObjectImg").src = path;
-    if (document.getElementById("acsSecondaryObjectImg").src != pathSecondary && v != -1)
+        document.getElementById("acsSecondaryObjectImg").style.filter = "";
+    }
+    if (document.getElementById("acsObjectImg").src != path && v == -1 && v2 != -1){
+        document.getElementById("acsObjectImg").src = path;
+        readObjectImage(document.getElementById("inputPrimaryObjectClassImage"), 'acsSmallObjectImg', 'acsSecondaryObjectImg', '');
+        if (v2 == 0)
+            readObjectImage(document.getElementById("inputPrimaryObjectClassImage"), 'acsObjectImg', '', '');
+        document.getElementById("acsSecondaryObjectImg").style.filter = "";
+    }
+    if (document.getElementById("acsSecondaryObjectImg").src != pathSecondary && v != -1){
         document.getElementById("acsSecondaryObjectImg").src = pathSecondary;
+        document.getElementById("acsSecondaryObjectImg").style.filter = "invert(100%)";
+    }
     if (document.getElementById("acsObjectImageWrapper").style.getPropertyValue("background-color") != colorTertiary)
         document.getElementById("acsObjectImageWrapper").style.setProperty("background-color", colorTertiary);
     
@@ -155,7 +170,7 @@ function updateOnjectClass(){
     else{
         if (document.getElementById("acsSmallObjectImg").src != pathSecondary && v2 != -1 && v != -1)
             document.getElementById("acsSmallObjectImg").src = pathSecondary;
-        if (document.getElementById("acsBigObjectImg").src != pathSecondary)
+        if (document.getElementById("acsBigObjectImg").src != pathSecondary && v != -1)
             document.getElementById("acsBigObjectImg").src = pathSecondary;
         if (document.getElementById("acsSmallObjectSecondaryImageCont").classList.contains("disabled"))
             document.getElementById("acsSmallObjectSecondaryImageCont").classList.remove("disabled");
@@ -391,7 +406,8 @@ function hexToRgbA(hex, alpha){
 function readImage(input, imgID) {
     const reader = new FileReader();
     reader.addEventListener('load', (event) => {
-      document.getElementById(imgID).src = event.target.result;
+      if (document.getElementById(imgID).src != event.target.result){
+      document.getElementById(imgID).src = event.target.result;}
     });
     if (input.files.length > 0)
         reader.readAsDataURL(input.files[0]);
@@ -403,11 +419,16 @@ function readObjectImage(input, imgID, secImgID, bigImg) {
     if (v == -1 && v2 == -1 && imgID == "acsObjectImg") {
         readImage(input, "acsSecondaryObjectImg");
     }
-    else{
+    else if (imgID != ""){
         readImage(input, imgID);
     }
-    readImage(input, secImgID);
-    readImage(input, bigImg);
+    if (v2 == -1 && imgID == 'acsSmallObjectImg'){
+        readImage(input, 'acsSmallObjectSecondaryImg');
+    }
+    if (secImgID != "")
+        readImage(input, secImgID);
+    if (bigImg != "")
+        readImage(input, bigImg);
 }
 
 function updateCustomImages(){
