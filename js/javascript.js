@@ -3,12 +3,11 @@ onlyMainClass = false;
 firstTimes = JSON.parse(localStorage.getItem('firstTimes'));
 if (firstTimes == null)
     firstTimes = [];
-
-console.log(firstTimes);
-
 for (let i = 0; i < firstTimes.length; i++){
     document.getElementById(firstTimes[i]).classList.add("hidden");
 }
+
+previous_selections = [0,0,0,0]
 
 function updateInput(){
     checkOnlyMainClass();
@@ -112,7 +111,7 @@ function updateOnjectClass(){
     if (v == -1){
         if (document.getElementById("inputPrimaryObjectClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputPrimaryObjectClassCustomCont").classList.remove("disabled");
-        primary = document.getElementById("inputPrimaryObjectClassCustom").value;
+        primary = document.getElementById("inputPrimaryObjectClassSubtitle").value;
         color = "black black black "+document.getElementById("inputPrimaryObjectClassColor").value+"";
         colorSecondary = ""+hexToRgbA(document.getElementById("inputPrimaryObjectClassColor").value, .25)+"";
         colorTertiary = ""+document.getElementById("inputPrimaryObjectClassColor").value+"";
@@ -124,7 +123,11 @@ function updateOnjectClass(){
     else {
         if (!document.getElementById("inputPrimaryObjectClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputPrimaryObjectClassCustomCont").classList.add("disabled");
-        primary = objClass.class[v].toUpperCase();
+        if (previous_selections[0] != v){
+            document.getElementById("inputPrimaryObjectClassSubtitle").value = objClass.class[v].toUpperCase();
+            previous_selections[0] = v;
+        }
+        primary = document.getElementById("inputPrimaryObjectClassSubtitle").value;
         color = "black black black var("+objClass.color[v]+")";
         colorSecondary = "var("+objClass.colorSecondary[v]+")";
         colorTertiary = "var("+objClass.colorTertiary[v]+")";
@@ -231,12 +234,16 @@ function updateOnjectClass(){
     if (v2 == -1){
         if (document.getElementById("inputSecondaryObjectClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputSecondaryObjectClassCustomCont").classList.remove("disabled");
-        primary = document.getElementById("inputSecondaryObjectClassCustom").value;
+        primary = document.getElementById("inputSecondaryObjectClassSubtitle").value;
     }
     else {
         if (!document.getElementById("inputSecondaryObjectClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputSecondaryObjectClassCustomCont").classList.add("disabled");
-        primary = objSecondaryClass.class[v2].toUpperCase();
+        if (previous_selections[1] != v2){
+            document.getElementById("inputSecondaryObjectClassSubtitle").value = objSecondaryClass.class[v2].toUpperCase();
+            previous_selections[1] = v2;
+        }
+        primary = document.getElementById("inputSecondaryObjectClassSubtitle").value;
     }
     if (document.getElementById("acsObjectSecondaryTextTitle").innerHTML != primary)
         document.getElementById("acsObjectSecondaryTextTitle").innerHTML = primary;
@@ -253,12 +260,16 @@ function updteDisrupionClass(){
     if (v == -1){
         if (document.getElementById("inputDisruptionClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputDisruptionClassCustomCont").classList.remove("disabled");
-        primary = document.getElementById("inputDisruptionClassCustom").value;
+        primary = document.getElementById("inputDisruptionClassSubtitle").value;
     }
     else {
         if (!document.getElementById("inputDisruptionClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputDisruptionClassCustomCont").classList.add("disabled");
-        primary = disruptionClass.class[v].toUpperCase();
+        if (previous_selections[2] != v){
+            document.getElementById("inputDisruptionClassSubtitle").value = disruptionClass.class[v].toUpperCase();
+            previous_selections[2] = v;
+        }
+        primary = document.getElementById("inputDisruptionClassSubtitle").value;
         color = "var("+disruptionClass.color[v]+")";
         colorSecondary = "var("+disruptionClass.colorSecondary[v]+")";
         colorTertiary = "var("+disruptionClass.colorTertiary[v]+")";
@@ -309,12 +320,16 @@ function updteRiskClass(){
     if (v == -1){
         if (document.getElementById("inputRiskClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputRiskClassCustomCont").classList.remove("disabled");
-        primary = document.getElementById("inputRiskClassCustom").value;
+        primary = document.getElementById("inputRiskClassSubtitle").value;
     }
     else {
         if (!document.getElementById("inputRiskClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputRiskClassCustomCont").classList.add("disabled");
-        primary = riskClass.class[v].toUpperCase();
+        if (previous_selections[3] != v){
+            document.getElementById("inputRiskClassSubtitle").value = riskClass.class[v].toUpperCase();
+            previous_selections[3] = v;
+        }
+        primary = document.getElementById("inputRiskClassSubtitle").value;
         color = "var("+riskClass.color[v]+")";
         colorSecondary = "var("+riskClass.colorSecondary[v]+")";
         colorTertiary = "var("+riskClass.colorTertiary[v]+")";

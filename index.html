@@ -24,7 +24,7 @@
         <div id="titleAreaPattern">
             <div id="tileArea">
                 <h1>SCP Anomaly Classification Sysem Generator</h1>
-                <h3>[SCP] ACS Generator v0.0.7.1</h3>
+                <h3>[SCP] ACS Generator v0.0.8</h3>
             </div>
         </div>
         <nav class="fw600">
@@ -103,6 +103,9 @@
             <div class="settingDiv">
                 <h3>Object Class</h3>
                 <h4>Primary</h4>
+                <p><i>Title</i></p>
+                <input type="text" placeholder="CONTAINMENT CLASS:" value="CONTAINMENT CLASS:" id="inputPrimaryObjectClassTitle">
+                <p><i>Theme</i></p>
                 <select id="inputPrimaryObjectClass">
                     <option value="1">Safe</option>
                     <option value="2">Euclid</option>
@@ -113,10 +116,9 @@
                     <option value="0">Pending</option>
                     <option value="-1">Custom [WIP]</option>
                 </select>
+                <input type="text" placeholder="SAFE" value="SAFE" id="inputPrimaryObjectClassSubtitle">
 
                 <div id="inputPrimaryObjectClassCustomCont" class="disabled">
-                    <p><i>Example: SAFE</i></p>
-                    <input type="text" placeholder="SAFE" id="inputPrimaryObjectClassCustom">
                     <p><i>Color</i></p>
                     <input type="color" value="#73a170" id="inputPrimaryObjectClassColor">
                     <p><i>Images only (jpg, svg, or png)</i></p>
@@ -124,6 +126,9 @@
                 </div>
 
                 <h4>Secondary</h4>
+                <p><i>Theme</i></p>
+                <input type="text" placeholder="SECONDARY CLASS:" value="SECONDARY CLASS:" id="inputSecondaryObjectClassTitle">
+                <p><i>Theme</i></p>
                 <select id="inputSecondaryObjectClass">
                     <option value="0">None</option>
                     <option value="1">Thaumial</option>
@@ -137,10 +142,9 @@
                     <option value="9">Uncontained</option>
                     <option value="-1">Custom [WIP]</option>
                 </select>
+                <input type="text" placeholder="THAUMIAL" value="" id="inputSecondaryObjectClassSubtitle">
 
                 <div id="inputSecondaryObjectClassCustomCont" class="disabled">
-                    <p><i>Example: THAUMIAL</i></p>
-                    <input type="text" placeholder="THAUMIAL" id="inputSecondaryObjectClassCustom">
                     <p><i>Images only (jpeg, svg, or png)</i></p>
                     <input type="file" onchange="updateCustomImages()" accept="image/png, image/jpeg, image/svg" id="inputSecondaryObjectClassImage">
                 </div>
@@ -148,6 +152,9 @@
 
             <div class="settingDiv">
                 <h3>Disruption Class <a href="https://scp-wiki.wikidot.com/anomaly-classification-system-guide#disruption-class" title="Disruption Class Explanation" target="_blank" class="textdeconone"><i class="fa fa-question-circle-o"></i></a></h3>
+                <p><i>Title</i></p>
+                <input type="text" placeholder="DISRUPTION CLASS:" value="DISRUPTION CLASS:" id="inputDisruptionClassTitle">
+                <p><i>Theme</i></p>
                 <select id="inputDisruptionClass">
                     <option value="1">Dark</option>
                     <option value="2">Vlam</option>
@@ -157,6 +164,7 @@
                     <option value="0">None</option>
                     <!--<option value="-1">Custom [WIP]</option>-->
                 </select>
+                <input type="text" placeholder="DARK" value="DARK" id="inputDisruptionClassSubtitle">
 
                 <div id="inputDisruptionClassCustomCont" class="disabled">
                     <p>[WIP] <i>Example: Dark</i></p>
@@ -164,6 +172,9 @@
                 </div>
 
                 <h3>Risk Class <a href="https://scp-wiki.wikidot.com/anomaly-classification-system-guide#risk-class" title="Risk Class Explanation" target="_blank" class="textdeconone"><i class="fa fa-question-circle-o"></i></a></h3>
+                <p><i>Title</i></p>
+                <input type="text" placeholder="RISK CLASS:" value="RISK CLASS:" id="inputRiskClassTitle">
+                <p><i>Theme</i></p>
                 <select id="inputRiskClass">
                     <option value="1">Notice</option>
                     <option value="2">Cauion</option>
@@ -173,6 +184,7 @@
                     <option value="0">None</option>
                     <!--<option value="-1">Custom [WIP]</option>-->
                 </select>
+                <input type="text" placeholder="NOTICE" value="NOTICE" id="inputRiskClassSubtitle">
 
                 <div id="inputRiskClassCustomCont" class="disabled">
                     <p>[WIP] <i>Example: Notice</i></p>
@@ -196,7 +208,7 @@
                             <p id="acsItemSubtitleText">ITEM#:</p>
                         </div>
                         <div id="acsItemTitle" class="inblock em35">
-                            <p id="acsItemTitleText">0173</p>
+                            <p id="acsItemTitleText">0000</p>
                         </div>
                     </div>
                     <div id="acsLevelBars" class="fleft flex">
@@ -209,10 +221,10 @@
                     </div>
                     <div id="acsLevel" class="">
                         <div id="acsLevelTitle" class="em25">
-                            <p id="acsLevelTitleText" >LEVEL4</p>
+                            <p id="acsLevelTitleText" >LEVEL1</p>
                         </div>
                         <div id="acsLevelSubtitle">
-                            <p id="acsLevelSubtitleText">SECRET</p>
+                            <p id="acsLevelSubtitleText">UNRESTRICTED</p>
                         </div>
                     </div>
                 </div>
@@ -224,7 +236,7 @@
                         <div id="acsObject" class="">
                             <div id="acsObjectTextCont" class="flex fleft">
                                 <p id="acsObjectPrimaryText"><span id="acsObjectPrimaryTextSubtitle" class="">CONAINMENT CLASS:</span>
-                                    <br><span id="acsObjectPrimaryTextTitle" class="fw600 em2">EUCLID</span></p>
+                                    <br><span id="acsObjectPrimaryTextTitle" class="fw600 em2">SAFE</span></p>
                                 <p id="acsObjectSecondaryText" class="disabled"><span  id="acsObjectSecondaryTextSubtitle" >SECONDARY CLASS:</span>
                                     <br><span id="acsObjectSecondaryTextTitle" class="fw600">NONE</span></p>
                             </div>
@@ -245,7 +257,7 @@
                         <div id="acsDisRisk" class="grid">
                             <div id="acsDis" class="acsDisRisks">
                                 <div id="acsDisTextCont" class="acsDisRisksTextCont fleft">
-                                    <p id="acsDisText"><span class="em075">DISRUPTION CLASS:</span><br><span id="acsDisrupionTextTitle" class="fw600">DARK</span></p>
+                                    <p id="acsDisText"><span class="em075" id="acsDisruptionTextTitleTitle">DISRUPTION CLASS:</span><br><span id="acsDisrupionTextTitle" class="fw600">DARK</span></p>
                                 </div>
                                 <div id="acsDisImageCont" class="acsImageCont">
                                     <div id="acsDisImageBGWrapper" class="acsImageBGWrapper bgblack">
@@ -263,7 +275,7 @@
                             </div>
                             <div id="acsRisk" class="acsDisRisks">
                                 <div id="acsRiskTextCont" class="acsDisRisksTextCont fleft">
-                                    <p id="acsRiskText" style="display: inline;"><span class="em075">RISK CLASS:</span><br><span id="acsRiskTextTitle" class="fw600">NOTICE</span></p>
+                                    <p id="acsRiskText" style="display: inline;"><span class="em075" id="acsRiskTextTitleTitle">RISK CLASS:</span><br><span id="acsRiskTextTitle" class="fw600">NOTICE</span></p>
                                 </div>
                                 <div id="acsRiskImageCont" class="acsImageCont">
                                     <div id="acsRiskImageBGWrapper" class="acsImageBGWrapper bgblack">
