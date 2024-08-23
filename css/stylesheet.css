@@ -53,7 +53,7 @@ body{
 }
 
 #resizeInfoBox {
-    left: 1465px;
+    left: calc(80vw - 41px);
     top: 645px;
 }
 
