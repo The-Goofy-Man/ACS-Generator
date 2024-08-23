@@ -1,5 +1,15 @@
 onlyMainClass = false;
 
+firstTimes = JSON.parse(localStorage.getItem('firstTimes'));
+if (firstTimes == null)
+    firstTimes = [];
+
+console.log(firstTimes);
+
+for (let i = 0; i < firstTimes.length; i++){
+    document.getElementById(firstTimes[i]).classList.add("hidden");
+}
+
 function updateInput(){
     checkOnlyMainClass();
     updateAccessLvl();
@@ -434,4 +444,12 @@ function readObjectImage(input, imgID, secImgID, bigImg) {
 function updateCustomImages(){
     readObjectImage(document.getElementById("inputSecondaryObjectClassImage"), 'acsSmallObjectImg', 'acsObjectImg', 'acsBigObjectImg');
     readObjectImage(document.getElementById("inputPrimaryObjectClassImage"), 'acsObjectImg', 'acsSmallObjectImg', 'acsBigObjectImg');
+}
+
+function removeInfoBox(id){
+    if (!document.getElementById(id).classList.contains("hidden")){
+        document.getElementById(id).classList.add("hidden");
+        firstTimes.push(id);
+        localStorage.setItem('firstTimes', JSON.stringify(firstTimes));
+    }
 }
