@@ -17,6 +17,18 @@ function updateInput(){
     updteDisrupionClass();
     updteRiskClass();
     updateOpionalOptions();
+    updateClassTitles()
+}
+
+function updateClassTitles(){
+    if (document.getElementById("acsObjectPrimaryTextSubtitle").innerHTML != document.getElementById("inputPrimaryObjectClassTitle").value)
+    document.getElementById("acsObjectPrimaryTextSubtitle").innerHTML = document.getElementById("inputPrimaryObjectClassTitle").value;
+    if (document.getElementById("acsObjectSecondaryTextSubtitle").innerHTML != document.getElementById("inputSecondaryObjectClassTitle").value)
+    document.getElementById("acsObjectSecondaryTextSubtitle").innerHTML = document.getElementById("inputSecondaryObjectClassTitle").value;
+    if (document.getElementById("acsDisruptionTextTitleTitle").innerHTML != document.getElementById("inputDisruptionClassTitle").value)
+    document.getElementById("acsDisruptionTextTitleTitle").innerHTML = document.getElementById("inputDisruptionClassTitle").value;
+    if (document.getElementById("acsRiskTextTitleTitle").innerHTML != document.getElementById("inputRiskClassTitle").value)
+    document.getElementById("acsRiskTextTitleTitle").innerHTML = document.getElementById("inputRiskClassTitle").value;
 }
 
 function checkOnlyMainClass(){
@@ -234,16 +246,12 @@ function updateOnjectClass(){
     if (v2 == -1){
         if (document.getElementById("inputSecondaryObjectClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputSecondaryObjectClassCustomCont").classList.remove("disabled");
-        primary = document.getElementById("inputSecondaryObjectClassSubtitle").value;
+        primary = document.getElementById("inputSecondaryObjectClassCustom").value;
     }
     else {
         if (!document.getElementById("inputSecondaryObjectClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputSecondaryObjectClassCustomCont").classList.add("disabled");
-        if (previous_selections[1] != v2){
-            document.getElementById("inputSecondaryObjectClassSubtitle").value = objSecondaryClass.class[v2].toUpperCase();
-            previous_selections[1] = v2;
-        }
-        primary = document.getElementById("inputSecondaryObjectClassSubtitle").value;
+        primary = objSecondaryClass.class[v2].toUpperCase();
     }
     if (document.getElementById("acsObjectSecondaryTextTitle").innerHTML != primary)
         document.getElementById("acsObjectSecondaryTextTitle").innerHTML = primary;
