@@ -21,6 +21,7 @@ document.addEventListener('mousemove', (e) => {
     //const deltaY = e.clientY - initialY;
     resizableDiv.style.width = `${initialWidth + deltaX}px`;
     //resizableDiv.style.height = `${initialHeight + deltaY}px`;
+    removeInfoBox('resizeInfoBox')
   }
 });
 

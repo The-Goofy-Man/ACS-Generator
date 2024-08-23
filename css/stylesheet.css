@@ -27,6 +27,46 @@ body{
     font-family: sans-serif;
 }
 
+.infoBox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #f5e7ce;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.infoBoxClose {
+    position: absolute;
+    top: -9px;
+    right: -9px;
+    padding: 0;
+    margin: 0;
+    width: 18px;
+    height: 18px;
+    background-color: #f5e7ce;
+    border-radius: 10px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+#resizeInfoBox {
+    left: 1480px;
+    top: 515px;
+}
+
+.infoBoxClose:hover {
+    background-color: #a61739;
+    color: white;
+}
+
+.infoBoxClose:active {
+    background-color: gray;
+    color: white;
+}
+
 #generator{
     margin: 5px;
 }
@@ -434,4 +474,8 @@ nav a:hover{
 .nbContent{
     padding: 1em 0.5em;
     text-align: center;
+}
+
+.hidden {
+    display: none;
 }
