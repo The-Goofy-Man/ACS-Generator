@@ -246,12 +246,16 @@ function updateOnjectClass(){
     if (v2 == -1){
         if (document.getElementById("inputSecondaryObjectClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputSecondaryObjectClassCustomCont").classList.remove("disabled");
-        primary = document.getElementById("inputSecondaryObjectClassCustom").value;
+        primary = document.getElementById("inputSecondaryObjectClassSubtitle").value;
     }
     else {
         if (!document.getElementById("inputSecondaryObjectClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputSecondaryObjectClassCustomCont").classList.add("disabled");
-        primary = objSecondaryClass.class[v2].toUpperCase();
+        if (previous_selections[1] != v2){
+            document.getElementById("inputSecondaryObjectClassSubtitle").value = objSecondaryClass.class[v].toUpperCase();
+            previous_selections[1] = v2;
+        }
+        primary = document.getElementById("inputSecondaryObjectClassSubtitle").value;
     }
     if (document.getElementById("acsObjectSecondaryTextTitle").innerHTML != primary)
         document.getElementById("acsObjectSecondaryTextTitle").innerHTML = primary;
