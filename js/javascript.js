@@ -252,7 +252,7 @@ function updateOnjectClass(){
         if (!document.getElementById("inputSecondaryObjectClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputSecondaryObjectClassCustomCont").classList.add("disabled");
         if (previous_selections[1] != v2){
-            document.getElementById("inputSecondaryObjectClassSubtitle").value = objSecondaryClass.class[v].toUpperCase();
+            document.getElementById("inputSecondaryObjectClassSubtitle").value = objSecondaryClass.class[v2].toUpperCase();
             previous_selections[1] = v2;
         }
         primary = document.getElementById("inputSecondaryObjectClassSubtitle").value;
