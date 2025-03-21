@@ -24,7 +24,7 @@
         <div id="titleAreaPattern">
             <div id="tileArea">
                 <h1>SCP Anomaly Classification Sysem Generator</h1>
-                <h3>[SCP] ACS Generator v0.0.8.5</h3>
+                <h3>[SCP] ACS Generator v0.9.0</h3>
             </div>
         </div>
         <nav class="fw600">
@@ -339,7 +339,12 @@
                     </div>
                 </div>
             </div>
-            <button id="convertToPngBtn" onclick="convertHtmlToPng()" style="margin: 10px;">Download Image</button><label>[WIP]</label>
+            <button class="generateBtn" id="convertToPngBtn" onclick="convertHtmlToPng()">Download Image</button><label>as PNG [WIP]</label><br>
+            <button class="generateBtn" id="convertToWikiSyntaxBtn" onclick="generateWikiSyntax()">Generate</button><label>as Wiki Syntax</label>
+            <div class="codeBlock">
+                <p id="outputSyntaxText">...</p><br>
+                <button class="codeBlockCopy" onclick="copyText('outputSyntaxText')">Copy</button>
+            </div>
         </div>
 
         <div class="sectionDiv">
@@ -351,14 +356,19 @@
         
         <div class="sectionDiv" id="changelogSectionDiv">
             <h2>Changelog</h2>
-            <h4>0.0.8.5 - 15/10/2024</h4>
+            <h4>0.9.0 - 21/03/2025</h4>
+            <ul class="changelogList">
+                <li>added wiki syntax text generator.</li>
+                <li>fixed bug "secondary class image overiding primary class icon in diamond #14".</li>
+            </ul>
+            <h4>0.8.5 - 15/10/2024</h4>
             <ul class="changelogList">
                 <li>added help link for secondary classes.</li>
                 <li>fixed resize tutorial box not having a min postition like the ACS Bar.</li>
                 <li>fixed spelling mistakes.</li>
                 <li>temp fix for distruption and risk class title new line issue in downloaded image.</li>
             </ul>
-            <h4>0.0.8.4 - 26/08/2024</h4>
+            <h4>0.8.4 - 26/08/2024</h4>
             <ul class="changelogList">
                 <li>added changelog.</li>
                 <li>fixed secondary theme text input not changing the secondary class on the ACS Bar.</li>

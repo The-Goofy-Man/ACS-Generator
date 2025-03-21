@@ -432,6 +432,34 @@ nav a:hover{
     left :8.7%;
 }
 
+/* Generation buttons */
+
+.generateBtn {
+    padding: 5px 10px 5px 10px;
+    margin: 5px 10px 0 10px;
+    width: 130px;
+}
+
+.codeBlock{
+    padding: 5px 10px 5px 10px;
+    margin: 5px 10px 5px 10px;
+    max-width: 500px;
+    background-color: rgb(230, 230, 230);
+    border-radius: 5px;
+    border: 1px solid rgb(182, 182, 182);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
+}
+
+.codeBlockCopy {
+    
+}
+
+.codeBlock p {
+    word-wrap: break-word; /* For older browsers */
+    overflow-wrap: break-word; /* Modern standard */
+}
+
 /* Notice Box */
 
 .noticeBox{

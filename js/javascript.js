@@ -261,7 +261,7 @@ function updateOnjectClass(){
     }
     else{ // enable secodary obj class elements.
         // set preset images.
-        if (document.getElementById("acsSmallObjectImg").src != image_path_secondary && sec_obj_class_val != -1 && obj_class_val != -1)
+        if (document.getElementById("acsSmallObjectImg").src != image_path_secondary && obj_class_val != -1)
             document.getElementById("acsSmallObjectImg").src = image_path_secondary;
         if (document.getElementById("acsBigObjectImg").src != image_path_secondary && obj_class_val != -1)
             document.getElementById("acsBigObjectImg").src = image_path_secondary;
@@ -594,6 +594,7 @@ function changeObjectImage(input, imgID, secImgID, bigImg) {
     // Otherwise change obj class image.
     else if (imgID != ""){
         changeImage(input, imgID);
+        console.log(input)
     }
 
     // Change the secondary obj class image.
@@ -612,7 +613,7 @@ function updateCustomImages(){
 }
 
 function removeInfoBox(id){
-    // Remove info box and add it to the "do not show up again list"
+    // Remove info box and add it to the "do not show up again list".
     if (!document.getElementById(id).classList.contains("hidden")){
         document.getElementById(id).classList.add("hidden");
 
@@ -620,4 +621,33 @@ function removeInfoBox(id){
         firstTimes.push(id);
         localStorage.setItem('firstTimes', JSON.stringify(firstTimes));
     }
+}
+
+function copyText(id) {
+    // Copy text of given element id.
+    // Get the text from the paragraph.
+    let text = document.getElementById(id).innerText;
+
+    // Use Clipboard API to copy text.
+    navigator.clipboard.writeText(text)
+        .then(() => {
+            alert("Text copied!");
+        })
+        .catch(err => {
+            console.error("Failed to copy text: ", err);
+        });
+}
+
+function generateWikiSyntax(){
+    let output = ("[[include :scp-wiki:component:anomaly-class-bar-source" +
+    "<br>|item-number= " + document.getElementById("inputItemTitle").value +
+    "<br>|clearance= " + document.getElementById("inputAccessLevel").value +
+    "<br>|container-class= " + objClass.class[parseInt(document.getElementById("inputPrimaryObjectClass").value)].toLowerCase() +
+    "<br>|secondary-class= " + document.getElementById("inputSecondaryObjectClassSubtitle").value.toLowerCase() +
+    "<br>|secondary-icon= " + "" +
+    "<br>|disruption-class= " + disruptionClass.class[parseInt(document.getElementById("inputDisruptionClass").value)].toLowerCase() +
+    "<br>|risk-class= " + riskClass.class[parseInt(document.getElementById("inputRiskClass").value)].toLowerCase() +
+    "<br>]]")
+
+    document.getElementById("outputSyntaxText").innerHTML = output
 }
