@@ -1,15 +1,21 @@
-onlyMainClass = false;
+// Global vaiables:
+onlyShowObjectClass = false;
 
+// Load list of hidden elements.
 firstTimes = JSON.parse(localStorage.getItem('firstTimes'));
+// Create new one if does not exist.
 if (firstTimes == null)
     firstTimes = [];
+// Hide all elements on the list.
 for (let i = 0; i < firstTimes.length; i++){
     document.getElementById(firstTimes[i]).classList.add("hidden");
 }
 
+// ??? No idea why i added this. No idea what it does. Im the best programer, hands down.
 previous_selections = [0,0,0,0]
 
 function updateInput(){
+    // Updates all UI elements.
     checkOnlyMainClass();
     updateAccessLvl();
     updateItemTitle(document.getElementById("inputItemTitle").value, document.getElementById("inputItemSubtitle").value);
@@ -21,22 +27,34 @@ function updateInput(){
 }
 
 function updateClassTitles(){
+    // Update all the class titles with the ones from the input fields.
+
+    // primary.
     if (document.getElementById("acsObjectPrimaryTextSubtitle").innerHTML != document.getElementById("inputPrimaryObjectClassTitle").value)
     document.getElementById("acsObjectPrimaryTextSubtitle").innerHTML = document.getElementById("inputPrimaryObjectClassTitle").value;
+
+    // secondary.
     if (document.getElementById("acsObjectSecondaryTextSubtitle").innerHTML != document.getElementById("inputSecondaryObjectClassTitle").value)
     document.getElementById("acsObjectSecondaryTextSubtitle").innerHTML = document.getElementById("inputSecondaryObjectClassTitle").value;
+
+    // disruption.
     if (document.getElementById("acsDisruptionTextTitleTitle").innerHTML != document.getElementById("inputDisruptionClassTitle").value)
     document.getElementById("acsDisruptionTextTitleTitle").innerHTML = document.getElementById("inputDisruptionClassTitle").value;
+
+    // risk.
     if (document.getElementById("acsRiskTextTitleTitle").innerHTML != document.getElementById("inputRiskClassTitle").value)
     document.getElementById("acsRiskTextTitleTitle").innerHTML = document.getElementById("inputRiskClassTitle").value;
 }
 
 function checkOnlyMainClass(){
+    // Handles when risk and disruption classes are set to None.
+
+    // If obj class is pending, or disruption and risk class are none, disable disruption and risk class elements.
     if (document.getElementById("inputPrimaryObjectClass").value == "0" || (
         document.getElementById("inputDisruptionClass").value == "0" &&
         document.getElementById("inputRiskClass").value == "0"
     )){
-        onlyMainClass = true;
+        onlyShowObjectClass = true;
         if (!document.getElementById("acsDisRisk").classList.contains("disabled")){
             document.getElementById("acsDisRisk").classList.remove("grid");
             document.getElementById("acsDisRisk").classList.add("disabled");
@@ -44,7 +62,7 @@ function checkOnlyMainClass(){
         }
     }
     else{
-        onlyMainClass = false;
+        onlyShowObjectClass = false;
         if (document.getElementById("acsDisRisk").classList.contains("disabled")){
             document.getElementById("acsDisRisk").classList.add("grid");
             document.getElementById("acsDisRisk").classList.remove("disabled");
@@ -54,25 +72,34 @@ function checkOnlyMainClass(){
 }
 
 function updateItemTitle(title, subtitle){
+    // Update the Item title and number.
+
+    // Item Number eg "173".
     if (document.getElementById("acsItemTitleText").innerHTML != title)
         document.getElementById("acsItemTitleText").innerHTML = title;
+
+    // item subtitle, eg "ITEM#:".
     if (document.getElementById("acsItemSubtitleText").innerHTML != subtitle)
         document.getElementById("acsItemSubtitleText").innerHTML = subtitle;
 }
 
 function updateAccessLvl(){
-    let v = parseInt(document.getElementById("inputAccessLevel").value);
+    let access_lvl_val = parseInt(document.getElementById("inputAccessLevel").value);
 
-    if (v >= 0){
-        setAccessLvlText("LEVEL"+v,accessLvl.subtitle[v].toUpperCase(),v,"var("+accessLvl.color[v]+")")
+    // if not custom, set the access level titles.
+    if (access_lvl_val >= 0){
+        setAccessLvlText("LEVEL"+access_lvl_val,accessLvl.subtitle[access_lvl_val].toUpperCase(),access_lvl_val,"var("+accessLvl.color[access_lvl_val]+")")
         if (!document.getElementById("accessLevelCustom").classList.contains("disabled"))
             document.getElementById("accessLevelCustom").classList.add("disabled");
         return;
     }
 
+    // enable customization elements.
     document.getElementById("accessLevelCustom").classList.remove("disabled");
 
+    // access level bars customization.
     switch (document.getElementById("inputAccessLevelLineAppearance").value){
+        // color.
         default:
             if (document.getElementById("inputAccessLevelLineColorCont").classList.contains("disabled"))
                 document.getElementById("inputAccessLevelLineColorCont").classList.remove("disabled")
@@ -94,17 +121,28 @@ function updateAccessLvl(){
 }
 
 function setAccessLvlText(title, subtitle, lines, color){
+    // set the custom text of the access level titles.
+
+    // eg "LEVEL1".
     if (document.getElementById("acsLevelTitleText").innerHTML != title)
         document.getElementById("acsLevelTitleText").innerHTML = title;
+
+    // eg "RESTRICTED".
     if (document.getElementById("acsLevelSubtitleText").innerHTML != subtitle)
         document.getElementById("acsLevelSubtitleText").innerHTML = subtitle;
+
+    // lines setup.
     if (lines < 1){
         document.getElementById("acsLevelBarsCont").innerHTML = "";
-        return;}
+        return;
+    }
     if (document.getElementById("acsLevelBarsCont").children.length != lines || 
-            document.getElementById("acsLevelBarsCont").getElementsByTagName("div")[0].style.getPropertyValue("background-color") != color)
+        document.getElementById("acsLevelBarsCont").getElementsByTagName("div")[0].style.getPropertyValue("background-color") != color)
     {
+        // reset lines.
         document.getElementById("acsLevelBarsCont").innerHTML = "";
+
+        // instantiate lines.
         for (let i = 0; i < lines; i++){
             document.getElementById("acsLevelBarsCont").innerHTML += "<div class='acsLevelBar' style='background-color: "+color+"'></div>"
         }
@@ -112,78 +150,109 @@ function setAccessLvlText(title, subtitle, lines, color){
 }
 
 function updateOnjectClass(){
-    let primary = "";
-    let color = "";
-    let colorSecondary = "";
-    let colorTertiary = "";
-    let path = "";
-    let pathSecondary = "";
-    let v = parseInt(document.getElementById("inputPrimaryObjectClass").value);
-    let v2 = parseInt(document.getElementById("inputSecondaryObjectClass").value);
-    if (v == -1){
+    let obj_class_subtitle_txt = "";
+
+    let main_color = "";
+    let bg_color = "";
+    let img_bg_color = "";
+
+    let image_path = "";
+    let image_path_secondary = "";
+    
+    let obj_class_val = parseInt(document.getElementById("inputPrimaryObjectClass").value);
+    let sec_obj_class_val = parseInt(document.getElementById("inputSecondaryObjectClass").value);
+
+    if (obj_class_val == -1){// custom obj class.
+        // show customization elements.
         if (document.getElementById("inputPrimaryObjectClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputPrimaryObjectClassCustomCont").classList.remove("disabled");
-        primary = document.getElementById("inputPrimaryObjectClassSubtitle").value;
-        color = "black black black "+document.getElementById("inputPrimaryObjectClassColor").value+"";
-        colorSecondary = ""+hexToRgbA(document.getElementById("inputPrimaryObjectClassColor").value, .25)+"";
-        colorTertiary = ""+document.getElementById("inputPrimaryObjectClassColor").value+"";
-        if (v2 != -1 && v2 != 0){
-            path = objSecondaryClass.path[v2];
+
+        obj_class_subtitle_txt = document.getElementById("inputPrimaryObjectClassSubtitle").value;
+        main_color = "black black black "+document.getElementById("inputPrimaryObjectClassColor").value+"";
+        bg_color = ""+hexToRgbA(document.getElementById("inputPrimaryObjectClassColor").value, .25)+"";
+        img_bg_color = ""+document.getElementById("inputPrimaryObjectClassColor").value+"";
+
+        if (sec_obj_class_val != -1 && sec_obj_class_val != 0){ // preset seconday obj classes.
+            image_path = objSecondaryClass.path[sec_obj_class_val];
         }
-        else if (v2 == 0){}
     }
-    else {
+    else {// preset obj classs.
+        // hide customization.
         if (!document.getElementById("inputPrimaryObjectClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputPrimaryObjectClassCustomCont").classList.add("disabled");
-        if (previous_selections[0] != v){
-            document.getElementById("inputPrimaryObjectClassSubtitle").value = objClass.class[v].toUpperCase();
-            previous_selections[0] = v;
+
+        // ???
+        if (previous_selections[0] != obj_class_val){
+            document.getElementById("inputPrimaryObjectClassSubtitle").value = objClass.class[obj_class_val].toUpperCase();
+            previous_selections[0] = obj_class_val;
         }
-        primary = document.getElementById("inputPrimaryObjectClassSubtitle").value;
-        color = "black black black var("+objClass.color[v]+")";
-        colorSecondary = "var("+objClass.colorSecondary[v]+")";
-        colorTertiary = "var("+objClass.colorTertiary[v]+")";
-        if (v2 == 0){
-            path = objClass.path[v];
-        }else{
-            pathSecondary = objClass.path[v];
-            if (v2 != -1){
-                path = objSecondaryClass.path[v2];}
+
+        obj_class_subtitle_txt = document.getElementById("inputPrimaryObjectClassSubtitle").value;
+        main_color = "black black black var("+objClass.color[obj_class_val]+")";
+        bg_color = "var("+objClass.colorSecondary[obj_class_val]+")";
+        img_bg_color = "var("+objClass.colorTertiary[obj_class_val]+")";
+
+        if (sec_obj_class_val == 0){// 2nd obj class = None.
+            image_path = objClass.path[obj_class_val];
+        }
+        else {
+            image_path_secondary = objClass.path[obj_class_val];
+            if (sec_obj_class_val != -1){
+                image_path = objSecondaryClass.path[sec_obj_class_val];}
         }
     }
-    if (document.getElementById("acsObjectImg").src != path && v != -1 && v2 != -1){
-        document.getElementById("acsObjectImg").src = path;
+
+    // ### Update images.
+
+    //  preset obj class w/ preset 2nd obj class.
+    if (document.getElementById("acsObjectImg").src != image_path && obj_class_val != -1 && sec_obj_class_val != -1){
+        document.getElementById("acsObjectImg").src = image_path;
         document.getElementById("acsSecondaryObjectImg").style.filter = "";
     }
-    if (document.getElementById("acsObjectImg").src != path && v == -1 && v2 != -1){
-        document.getElementById("acsObjectImg").src = path;
-        readObjectImage(document.getElementById("inputPrimaryObjectClassImage"), 'acsSmallObjectImg', 'acsSecondaryObjectImg', '');
-        if (v2 == 0)
-            readObjectImage(document.getElementById("inputPrimaryObjectClassImage"), 'acsObjectImg', '', '');
+    // custom obj class w/ preset 2nd obj class.
+    else if (document.getElementById("acsObjectImg").src != image_path && obj_class_val == -1 && sec_obj_class_val != -1){
+        console.log(image_path.toString())
+        changeObjectImage(document.getElementById("inputPrimaryObjectClassImage"), 'acsSmallObjectImg', 'acsSecondaryObjectImg', '');
+        if (sec_obj_class_val == 0)
+            changeObjectImage(document.getElementById("inputPrimaryObjectClassImage"), 'acsObjectImg', '', '');
+        // disable color inversion.
         document.getElementById("acsSecondaryObjectImg").style.filter = "";
     }
-    if (document.getElementById("acsSecondaryObjectImg").src != pathSecondary && v != -1){
-        document.getElementById("acsSecondaryObjectImg").src = pathSecondary;
+
+    // enable color inversion.
+    if (document.getElementById("acsSecondaryObjectImg").src != image_path_secondary && obj_class_val != -1){
+        document.getElementById("acsSecondaryObjectImg").src = image_path_secondary;
+    }
+    if (document.getElementById("invertCheckbox").checked)
         document.getElementById("acsSecondaryObjectImg").style.filter = "invert(100%)";
-    }
-    if (document.getElementById("acsObjectImageWrapper").style.getPropertyValue("background-color") != colorTertiary)
-        document.getElementById("acsObjectImageWrapper").style.setProperty("background-color", colorTertiary);
+    else document.getElementById("acsSecondaryObjectImg").style.filter = "";
+
+    // set object class image background colors.
+    if (document.getElementById("acsObjectImageWrapper").style.getPropertyValue("background-color") != img_bg_color)
+        document.getElementById("acsObjectImageWrapper").style.setProperty("background-color", img_bg_color);
     
-    if (v2 == 0){
-        if (document.getElementById("acsSmallObjectImg").src != path && v != -1)
-            document.getElementById("acsSmallObjectImg").src = path;
-            if (document.getElementById("acsBigObjectImg").src != path && v != -1)
-                document.getElementById("acsBigObjectImg").src = path;
+    // disable secondary obj class elements.
+    if (sec_obj_class_val == 0){
+        // set preset obj class images.
+        if (document.getElementById("acsSmallObjectImg").src != image_path && obj_class_val != -1)
+            document.getElementById("acsSmallObjectImg").src = image_path;
+            if (document.getElementById("acsBigObjectImg").src != image_path && obj_class_val != -1)
+                document.getElementById("acsBigObjectImg").src = image_path;
+
+        // disable secondary elements.
         if (!document.getElementById("acsSmallObjectSecondaryImageCont").classList.contains("disabled"))
             document.getElementById("acsSmallObjectSecondaryImageCont").classList.add("disabled");
-        if (onlyMainClass){
+
+        // whether to show obj class on diamond or not.
+        if (onlyShowObjectClass){
             if (!document.getElementById("acsSmallObjectImageCont").classList.contains("disabled"))
                 document.getElementById("acsSmallObjectImageCont").classList.add("disabled");
             if (!document.getElementById("acsObjectImageCont").classList.contains("disabled"))
                 document.getElementById("acsObjectImageCont").classList.add("disabled");
             if (document.getElementById("acsBigObjectImageCont").classList.contains("disabled"))
                 document.getElementById("acsBigObjectImageCont").classList.remove("disabled");
-        }else{
+        }
+        else{
             if (document.getElementById("acsSmallObjectImageCont").classList.contains("disabled"))
                 document.getElementById("acsSmallObjectImageCont").classList.remove("disabled");
             if (document.getElementById("acsObjectImageCont").classList.contains("disabled"))
@@ -192,15 +261,18 @@ function updateOnjectClass(){
                 document.getElementById("acsBigObjectImageCont").classList.add("disabled");
         }
     }
-    else{
-        if (document.getElementById("acsSmallObjectImg").src != pathSecondary && v2 != -1 && v != -1)
-            document.getElementById("acsSmallObjectImg").src = pathSecondary;
-        if (document.getElementById("acsBigObjectImg").src != pathSecondary && v != -1)
-            document.getElementById("acsBigObjectImg").src = pathSecondary;
+    else{ // enable secodary obj class elements.
+        // set preset images.
+        if (document.getElementById("acsSmallObjectImg").src != image_path_secondary && obj_class_val != -1)
+            document.getElementById("acsSmallObjectImg").src = image_path_secondary;
+        if (document.getElementById("acsBigObjectImg").src != image_path_secondary && obj_class_val != -1)
+            document.getElementById("acsBigObjectImg").src = image_path_secondary;
+
+        // show the secondary obj class on diamond.
         if (document.getElementById("acsSmallObjectSecondaryImageCont").classList.contains("disabled"))
             document.getElementById("acsSmallObjectSecondaryImageCont").classList.remove("disabled");
-        if (document.getElementById("acsSmallObjectSecondaryImg").src != path && v2 != -1)
-            document.getElementById("acsSmallObjectSecondaryImg").src = path;
+        if (document.getElementById("acsSmallObjectSecondaryImg").src != image_path && sec_obj_class_val != -1)
+            document.getElementById("acsSmallObjectSecondaryImg").src = image_path;
         if (document.getElementById("acsSmallObjectImageCont").classList.contains("disabled"))
             document.getElementById("acsSmallObjectImageCont").classList.remove("disabled");
         if (!document.getElementById("acsBigObjectImageCont").classList.contains("disabled"))
@@ -208,104 +280,130 @@ function updateOnjectClass(){
         if (document.getElementById("acsObjectImageCont").classList.contains("disabled"))
             document.getElementById("acsObjectImageCont").classList.remove("disabled");
     }
-    if (document.getElementById("acsSmallObjectImageWrapper").style.getPropertyValue("background-color") != colorTertiary)
-        document.getElementById("acsSmallObjectImageWrapper").style.setProperty("background-color", colorTertiary);
-    if (document.getElementById("acsBigObjectImageWrapper").style.getPropertyValue("background-color") != colorTertiary)
-        document.getElementById("acsBigObjectImageWrapper").style.setProperty("background-color", colorTertiary);
 
-    if (document.getElementById("acsObjectPrimaryTextTitle").innerHTML != primary)
-        document.getElementById("acsObjectPrimaryTextTitle").innerHTML = primary;
-    if (document.getElementById("acsObject").style.getPropertyValue("border-color") != color)
-        document.getElementById("acsObject").style.setProperty("border-color", color);
-    if (document.getElementById("acsObject").style.getPropertyValue("background-color") != colorSecondary)
-        document.getElementById("acsObject").style.setProperty("background-color", colorSecondary);
-    if (!onlyMainClass){
-        if (document.getElementById("top-quad").style.getPropertyValue("background-color") != colorSecondary)
-            document.getElementById("top-quad").style.setProperty("background-color", colorSecondary);
+    // set image background colors.
+    if (document.getElementById("acsSmallObjectImageWrapper").style.getPropertyValue("background-color") != img_bg_color)
+        document.getElementById("acsSmallObjectImageWrapper").style.setProperty("background-color", img_bg_color);
+    if (document.getElementById("acsBigObjectImageWrapper").style.getPropertyValue("background-color") != img_bg_color)
+        document.getElementById("acsBigObjectImageWrapper").style.setProperty("background-color", img_bg_color);
+
+    // change title.
+    if (document.getElementById("acsObjectPrimaryTextTitle").innerHTML != obj_class_subtitle_txt)
+        document.getElementById("acsObjectPrimaryTextTitle").innerHTML = obj_class_subtitle_txt;
+
+    // change colors.
+    if (document.getElementById("acsObject").style.getPropertyValue("border-color") != main_color)
+        document.getElementById("acsObject").style.setProperty("border-color", main_color);
+    if (document.getElementById("acsObject").style.getPropertyValue("background-color") != bg_color)
+        document.getElementById("acsObject").style.setProperty("background-color", bg_color);
+    if (!onlyShowObjectClass){
+        if (document.getElementById("top-quad").style.getPropertyValue("background-color") != bg_color)
+            document.getElementById("top-quad").style.setProperty("background-color", bg_color);
     }
     else{
         if (document.getElementById("top-quad").style.getPropertyValue("background-color") != "transparent")
             document.getElementById("top-quad").style.setProperty("background-color", "transparent");
     }
 
-    
-    if (v2 == 0 && !document.getElementById("acsObjectSecondaryText").classList.contains("disabled")){
+    // change font size and make seconday title apear or not.    
+    if (sec_obj_class_val == 0 && !document.getElementById("acsObjectSecondaryText").classList.contains("disabled")){
         document.getElementById("acsObjectSecondaryText").classList.add("disabled");
         document.getElementById("acsObjectPrimaryTextSubtitle").classList.remove("em075");
         document.getElementById("acsObjectPrimaryTextTitle").classList.add("em2");
         document.getElementById("acsSecondaryObjectImageWrapper").classList.add("disabled");
         document.getElementById("acsObjectImageBGWrapper").classList.remove("bgblack");
     }
-    else if (v2 != 0 && document.getElementById("acsObjectSecondaryText").classList.contains("disabled")){
+    else if (sec_obj_class_val != 0 && document.getElementById("acsObjectSecondaryText").classList.contains("disabled")){
         document.getElementById("acsObjectSecondaryText").classList.remove("disabled");
         document.getElementById("acsObjectPrimaryTextSubtitle").classList.add("em075");
         document.getElementById("acsObjectPrimaryTextTitle").classList.remove("em2");
         document.getElementById("acsSecondaryObjectImageWrapper").classList.remove("disabled");
         document.getElementById("acsObjectImageBGWrapper").classList.add("bgblack");
     }
-    if (v2 == -1){
+
+    // show/hide 2nd obj class customizations.
+    if (sec_obj_class_val == -1){
         if (document.getElementById("inputSecondaryObjectClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputSecondaryObjectClassCustomCont").classList.remove("disabled");
-        primary = document.getElementById("inputSecondaryObjectClassSubtitle").value;
+        obj_class_subtitle_txt = document.getElementById("inputSecondaryObjectClassSubtitle").value;
     }
     else {
         if (!document.getElementById("inputSecondaryObjectClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputSecondaryObjectClassCustomCont").classList.add("disabled");
-        if (previous_selections[1] != v2){
-            document.getElementById("inputSecondaryObjectClassSubtitle").value = objSecondaryClass.class[v2].toUpperCase();
-            previous_selections[1] = v2;
+
+        // ???
+        if (previous_selections[1] != sec_obj_class_val){
+            document.getElementById("inputSecondaryObjectClassSubtitle").value = objSecondaryClass.class[sec_obj_class_val].toUpperCase();
+            previous_selections[1] = sec_obj_class_val;
         }
-        primary = document.getElementById("inputSecondaryObjectClassSubtitle").value;
+
+        obj_class_subtitle_txt = document.getElementById("inputSecondaryObjectClassSubtitle").value;
     }
-    if (document.getElementById("acsObjectSecondaryTextTitle").innerHTML != primary)
-        document.getElementById("acsObjectSecondaryTextTitle").innerHTML = primary;
+
+    // set secondary obj class title.
+    if (document.getElementById("acsObjectSecondaryTextTitle").innerHTML != obj_class_subtitle_txt)
+        document.getElementById("acsObjectSecondaryTextTitle").innerHTML = obj_class_subtitle_txt;
 }
 
 function updteDisrupionClass(){
-    let primary = "";
-    let color = "";
-    let colorSecondary = "";
-    let colorTertiary = "";
-    let path = "";
-    let v = parseInt(document.getElementById("inputDisruptionClass").value);
-    let l = "";
-    if (v == -1){
+    // Handles the disrution class.
+    let obj_class_subtitle_txt = "";
+    let level_txt = "";// the level of the class 0-5 or custom.
+
+    let main_color = "";
+    let bg_color = "";
+    let img_bg_color = "";
+    let image_path = "";
+
+    let dis_cls_val = parseInt(document.getElementById("inputDisruptionClass").value);
+
+    if (dis_cls_val == -1){// custom disruption class. WIP
         if (document.getElementById("inputDisruptionClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputDisruptionClassCustomCont").classList.remove("disabled");
-        primary = document.getElementById("inputDisruptionClassSubtitle").value;
     }
-    else {
+    else {// preset dis class.
+        // hide custom.
         if (!document.getElementById("inputDisruptionClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputDisruptionClassCustomCont").classList.add("disabled");
-        if (previous_selections[2] != v){
-            document.getElementById("inputDisruptionClassSubtitle").value = disruptionClass.class[v].toUpperCase();
-            previous_selections[2] = v;
-        }
-        primary = document.getElementById("inputDisruptionClassSubtitle").value;
-        color = "var("+disruptionClass.color[v]+")";
-        colorSecondary = "var("+disruptionClass.colorSecondary[v]+")";
-        colorTertiary = "var("+disruptionClass.colorTertiary[v]+")";
-        path = disruptionClass.path[v];
-        l = v;
-    }
-    if (document.getElementById("acsDisImg").src != path)
-        document.getElementById("acsDisImg").src = path;
-    if (document.getElementById("acsDisImageWrapper").style.getPropertyValue("background-color") != colorTertiary)
-        document.getElementById("acsDisImageWrapper").style.setProperty("background-color", colorTertiary);
-    if (document.getElementById("acsDisrupionTextTitle").innerHTML != primary)
-        document.getElementById("acsDisrupionTextTitle").innerHTML = primary;
-    if (document.getElementById("acsDis").style.getPropertyValue("border-color") != color)
-        document.getElementById("acsDis").style.setProperty("border-color", color);
-    if (document.getElementById("acsDis").style.getPropertyValue("background-color") != colorSecondary)
-        document.getElementById("acsDis").style.setProperty("background-color", colorSecondary);
-    if (document.getElementById("acsDisPText").innerHTML != l)
-        document.getElementById("acsDisPText").innerHTML = l;
 
-    if (document.getElementById("acsSmallDisImg").src != path)
-        document.getElementById("acsSmallDisImg").src = path;
-    if (document.getElementById("acsSmallDisImageWrapper").style.getPropertyValue("background-color") != colorTertiary)
-        document.getElementById("acsSmallDisImageWrapper").style.setProperty("background-color", colorTertiary);
-    if (v == 0 || onlyMainClass){
+        // ???
+        if (previous_selections[2] != dis_cls_val){
+            document.getElementById("inputDisruptionClassSubtitle").value = disruptionClass.class[dis_cls_val].toUpperCase();
+            previous_selections[2] = dis_cls_val;
+        }
+
+        main_color = "var("+disruptionClass.color[dis_cls_val]+")";
+        bg_color = "var("+disruptionClass.colorSecondary[dis_cls_val]+")";
+        img_bg_color = "var("+disruptionClass.colorTertiary[dis_cls_val]+")";
+
+        image_path = disruptionClass.path[dis_cls_val];
+
+        level_txt = dis_cls_val;
+    }
+
+    obj_class_subtitle_txt = document.getElementById("inputDisruptionClassSubtitle").value;
+
+    if (document.getElementById("acsDisImg").src != image_path)
+        document.getElementById("acsDisImg").src = image_path;
+
+    if (document.getElementById("acsDisrupionTextTitle").innerHTML != obj_class_subtitle_txt)
+        document.getElementById("acsDisrupionTextTitle").innerHTML = obj_class_subtitle_txt;
+
+    if (document.getElementById("acsDis").style.getPropertyValue("border-color") != main_color)
+        document.getElementById("acsDis").style.setProperty("border-color", main_color);
+    if (document.getElementById("acsDis").style.getPropertyValue("background-color") != bg_color)
+        document.getElementById("acsDis").style.setProperty("background-color", bg_color);
+    if (document.getElementById("acsDisImageWrapper").style.getPropertyValue("background-color") != img_bg_color)
+        document.getElementById("acsDisImageWrapper").style.setProperty("background-color", img_bg_color);
+
+    if (document.getElementById("acsDisPText").innerHTML != level_txt)
+        document.getElementById("acsDisPText").innerHTML = level_txt;
+
+    // in diamond.
+    if (document.getElementById("acsSmallDisImg").src != image_path)
+        document.getElementById("acsSmallDisImg").src = image_path;
+
+    if (dis_cls_val == 0 || onlyShowObjectClass){// should disable in diamond?
         if (!document.getElementById("acsSmallDisImageCont").classList.contains("disabled"))
             document.getElementById("acsSmallDisImageCont").classList.add("disabled");
     }else{
@@ -313,75 +411,98 @@ function updteDisrupionClass(){
             document.getElementById("acsSmallDisImageCont").classList.remove("disabled");
     }
 
-    if (!onlyMainClass && v != 0){
-        if (document.getElementById("left-quad").style.getPropertyValue("background-color") != colorSecondary)
-            document.getElementById("left-quad").style.setProperty("background-color", colorSecondary);}
+    if (document.getElementById("acsSmallDisImageWrapper").style.getPropertyValue("background-color") != img_bg_color)
+        document.getElementById("acsSmallDisImageWrapper").style.setProperty("background-color", img_bg_color);
+
+    if (!onlyShowObjectClass && dis_cls_val != 0){ // diamond background.
+        if (document.getElementById("left-quad").style.getPropertyValue("background-color") != bg_color)
+            document.getElementById("left-quad").style.setProperty("background-color", bg_color);}
     else{
         if (document.getElementById("left-quad").style.getPropertyValue("background-color") != "transparent")
             document.getElementById("left-quad").style.setProperty("background-color", "transparent");}
 }
 
 function updteRiskClass(){
-    let primary = "";
-    let color = "";
-    let colorSecondary = "";
-    let colorTertiary = "";
-    let path = "";
-    let l = "";
-    let v = parseInt(document.getElementById("inputRiskClass").value);
-    if (v == -1){
+    // Handles the risk class.
+    let obj_class_subtitle_txt = "";
+    let level_txt = "";// the level of the class 0-5 or custom.
+
+    let main_color = "";
+    let bg_color = "";
+    let img_bg_color = "";
+
+    let image_path = "";
+
+    let risk_cls_val = parseInt(document.getElementById("inputRiskClass").value);
+
+    if (risk_cls_val == -1){// cutom risk class. WIP
+        // show customization elements
         if (document.getElementById("inputRiskClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputRiskClassCustomCont").classList.remove("disabled");
-        primary = document.getElementById("inputRiskClassSubtitle").value;
     }
     else {
+        // hide customization elements
         if (!document.getElementById("inputRiskClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputRiskClassCustomCont").classList.add("disabled");
-        if (previous_selections[3] != v){
-            document.getElementById("inputRiskClassSubtitle").value = riskClass.class[v].toUpperCase();
-            previous_selections[3] = v;
-        }
-        primary = document.getElementById("inputRiskClassSubtitle").value;
-        color = "var("+riskClass.color[v]+")";
-        colorSecondary = "var("+riskClass.colorSecondary[v]+")";
-        colorTertiary = "var("+riskClass.colorTertiary[v]+")";
-        path = riskClass.path[v];
-        l = v;
-    }
-    if (document.getElementById("acsRiskImg").src != path)
-        document.getElementById("acsRiskImg").src = path;
-    if (document.getElementById("acsRiskImageWrapper").style.getPropertyValue("background-color") != colorTertiary)
-        document.getElementById("acsRiskImageWrapper").style.setProperty("background-color", colorTertiary);
-    if (document.getElementById("acsRiskTextTitle").innerHTML != primary)
-        document.getElementById("acsRiskTextTitle").innerHTML = primary;
-    if (document.getElementById("acsRisk").style.getPropertyValue("border-color") != color)
-        document.getElementById("acsRisk").style.setProperty("border-color", color);
-    if (document.getElementById("acsRisk").style.getPropertyValue("background-color") != colorSecondary)
-        document.getElementById("acsRisk").style.setProperty("background-color", colorSecondary);
-    if (document.getElementById("acsRiskPText").innerHTML != l)
-        document.getElementById("acsRiskPText").innerHTML = l;
 
-    if (document.getElementById("acsSmallRiskImg").src != path)
-        document.getElementById("acsSmallRiskImg").src = path;
-    if (document.getElementById("acsSmallRiskImageWrapper").style.getPropertyValue("background-color") != colorTertiary)
-        document.getElementById("acsSmallRiskImageWrapper").style.setProperty("background-color", colorTertiary);
-    if (v == 0 || onlyMainClass){
+        // ???
+        if (previous_selections[3] != risk_cls_val){
+            document.getElementById("inputRiskClassSubtitle").value = riskClass.class[risk_cls_val].toUpperCase();
+            previous_selections[3] = risk_cls_val;
+        }
+
+        main_color = "var("+riskClass.color[risk_cls_val]+")";
+        bg_color = "var("+riskClass.colorSecondary[risk_cls_val]+")";
+        img_bg_color = "var("+riskClass.colorTertiary[risk_cls_val]+")";
+
+        image_path = riskClass.path[risk_cls_val];
+
+        level_txt = risk_cls_val;
+    }
+    
+    obj_class_subtitle_txt = document.getElementById("inputRiskClassSubtitle").value;
+
+    if (document.getElementById("acsRiskImg").src != image_path)
+        document.getElementById("acsRiskImg").src = image_path;
+    
+    if (document.getElementById("acsRiskTextTitle").innerHTML != obj_class_subtitle_txt)
+        document.getElementById("acsRiskTextTitle").innerHTML = obj_class_subtitle_txt;
+
+    if (document.getElementById("acsRisk").style.getPropertyValue("border-color") != main_color)
+        document.getElementById("acsRisk").style.setProperty("border-color", main_color);
+    if (document.getElementById("acsRisk").style.getPropertyValue("background-color") != bg_color)
+        document.getElementById("acsRisk").style.setProperty("background-color", bg_color);
+    if (document.getElementById("acsRiskImageWrapper").style.getPropertyValue("background-color") != img_bg_color)
+        document.getElementById("acsRiskImageWrapper").style.setProperty("background-color", img_bg_color);
+
+    if (document.getElementById("acsRiskPText").innerHTML != level_txt)
+        document.getElementById("acsRiskPText").innerHTML = level_txt;
+
+    // diamond elemets.
+    if (document.getElementById("acsSmallRiskImg").src != image_path)
+        document.getElementById("acsSmallRiskImg").src = image_path;
+    if (risk_cls_val == 0 || onlyShowObjectClass){// should disable in diamond?
         if (!document.getElementById("acsSmallRiskImageCont").classList.contains("disabled"))
             document.getElementById("acsSmallRiskImageCont").classList.add("disabled");
     }else{
         if (document.getElementById("acsSmallRiskImageCont").classList.contains("disabled"))
             document.getElementById("acsSmallRiskImageCont").classList.remove("disabled");
     }
-    
-    if (!onlyMainClass && v != 0){
-        if (document.getElementById("right-quad").style.getPropertyValue("background-color") != colorSecondary)
-            document.getElementById("right-quad").style.setProperty("background-color", colorSecondary);}
+
+    if (document.getElementById("acsSmallRiskImageWrapper").style.getPropertyValue("background-color") != img_bg_color)
+        document.getElementById("acsSmallRiskImageWrapper").style.setProperty("background-color", img_bg_color);
+    if (!onlyShowObjectClass && risk_cls_val != 0){ // diamond background.
+        if (document.getElementById("right-quad").style.getPropertyValue("background-color") != bg_color)
+            document.getElementById("right-quad").style.setProperty("background-color", bg_color);}
     else{
         if (document.getElementById("right-quad").style.getPropertyValue("background-color") != "transparent")
             document.getElementById("right-quad").style.setProperty("background-color", "transparent");}
 }
 
 function updateOpionalOptions(){
+    // Handles the extra options
+
+    // whether to grid or stack the obj, disruption, and risk classes
     if (document.getElementById("gridCheckbox").checked == true &&
         document.getElementById("acsObjDisRisk").style.getPropertyValue("grid-template-columns") != "auto auto"){
             if (document.getElementById("acsObjDisRisk").style.getPropertyValue("grid-template-columns") == ""){
@@ -405,12 +526,17 @@ function updateOpionalOptions(){
     
 }
 
+
 function updateUI(){
+    // Update the UI.
     updateInput();
 }
 
+// Update the UI every 100ms.
 setInterval(updateUI, 100);
 
+
+// ???
 var display = {
     setWidth: function(width){
         if (width < 0)
@@ -420,14 +546,15 @@ var display = {
 }
 
 function setWidth(width){
+    // set the width of the acs bar depending on parameter. if negative, get width from acsBarWidthInput.
     if (width < 0)
         width = document.getElementById("acsBarWidthInput").value
     width = width + "px";
     document.getElementById("acsbar").style.width = width;
-    console.log("hi")
 }
 
 function hexToRgbA(hex, alpha){
+    // Convert HEX to RGBA.
     var c;
     if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
         c= hex.substring(1).split('');
@@ -440,7 +567,30 @@ function hexToRgbA(hex, alpha){
     throw new Error('Bad Hex');
 }
 
+async function imageToDataURL(url) {
+    const response = await fetch(url);
+    const blob = await response.blob();
+
+    return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(blob);
+    });
+}
+
+function changeImage(input, imgID){
+    if (typeof input === "string"){
+        data = imageToDataURL(input)
+        if (document.getElementById(imgID).src != data){
+            document.getElementById(imgID).src = data
+        }
+        return
+    }
+    readImage(input, imgID)
+}
+
 function readImage(input, imgID) {
+    // Read image uploaded to <input> and set it to the src of a <img>.
     const reader = new FileReader();
     reader.addEventListener('load', (event) => {
       if (document.getElementById(imgID).src != event.target.result){
@@ -448,35 +598,100 @@ function readImage(input, imgID) {
     });
     if (input.files.length > 0)
         reader.readAsDataURL(input.files[0]);
-  }
-
-function readObjectImage(input, imgID, secImgID, bigImg) {
-    let v = parseInt(document.getElementById("inputPrimaryObjectClass").value);
-    let v2 = parseInt(document.getElementById("inputSecondaryObjectClass").value);
-    if (v == -1 && v2 == -1 && imgID == "acsObjectImg") {
-        readImage(input, "acsSecondaryObjectImg");
-    }
-    else if (imgID != ""){
-        readImage(input, imgID);
-    }
-    if (v2 == -1 && imgID == 'acsSmallObjectImg'){
-        readImage(input, 'acsSmallObjectSecondaryImg');
-    }
-    if (secImgID != "")
-        readImage(input, secImgID);
-    if (bigImg != "")
-        readImage(input, bigImg);
 }
 
-function updateCustomImages(){
-    readObjectImage(document.getElementById("inputSecondaryObjectClassImage"), 'acsSmallObjectImg', 'acsObjectImg', 'acsBigObjectImg');
-    readObjectImage(document.getElementById("inputPrimaryObjectClassImage"), 'acsObjectImg', 'acsSmallObjectImg', 'acsBigObjectImg');
+function changeObjectImage(input, imgID, secImgID, bigImg) {
+    // Handles setting uploaded Object Class image to the various <img> elements.
+    let obj_clss_val = parseInt(document.getElementById("inputPrimaryObjectClass").value);
+    let sec_obj_clss_val = parseInt(document.getElementById("inputSecondaryObjectClass").value);
+
+    // If both object classes are custom, and your changing the obj class image, change the seconday obj class image instead.
+    // Eg. If you choose Primary=Esoteric, Sec=Thaumial, Esoteric will go into seconday image, and thaumial into primary.
+    if (obj_clss_val == -1 && sec_obj_clss_val == -1 && imgID == "acsObjectImg") {
+        changeImage(input, "acsSecondaryObjectImg");
+    }
+    // If the seconday obj class is custom, and you changing the diamond obj class image, changing the diamond seconday image element instead.
+    else if (sec_obj_clss_val == -1 && imgID == 'acsSmallObjectImg'){
+        changeImage(input, 'acsSmallObjectSecondaryImg');
+    }
+    // Otherwise change obj class image.
+    else if (imgID != ""){
+        changeImage(input, imgID);
+    }
+
+    // Change the secondary obj class image.
+    if (secImgID != "")
+        changeImage(input, secImgID);
+
+    // Change the diamond obj class image when theres no disruption or risk class.
+    if (bigImg != "")
+        changeImage(input, bigImg);
+}
+
+function updateCustomImages(is_file){
+    // Update all the images.
+    if (is_file){
+        changeObjectImage(document.getElementById("inputSecondaryObjectClassImage"), 'acsSmallObjectImg', 'acsObjectImg', 'acsBigObjectImg');
+    }
+    else{
+        changeObjectImage(document.getElementById("inputSecondaryObjectClassImageURL").value, 'acsSmallObjectImg', 'acsObjectImg', 'acsBigObjectImg');
+    }
+    changeObjectImage(document.getElementById("inputPrimaryObjectClassImage"), 'acsObjectImg', 'acsSmallObjectImg', 'acsBigObjectImg');
 }
 
 function removeInfoBox(id){
+    // Remove info box and add it to the "do not show up again list".
     if (!document.getElementById(id).classList.contains("hidden")){
         document.getElementById(id).classList.add("hidden");
+
+        // the "do not show up again list":
         firstTimes.push(id);
         localStorage.setItem('firstTimes', JSON.stringify(firstTimes));
     }
+}
+
+function copyText(id) {
+    // Copy text of given element id.
+    // Get the text from the paragraph.
+    let text = document.getElementById(id).innerText;
+
+    // Use Clipboard API to copy text.
+    navigator.clipboard.writeText(text)
+        .then(() => {
+            alert("Text copied!");
+        })
+        .catch(err => {
+            console.error("Failed to copy text: ", err);
+        });
+}
+
+function getSecondaryClassURL(){
+    let sec_obj_cls_val = parseInt(document.getElementById("inputSecondaryObjectClass").value)
+    if (sec_obj_cls_val == 0) return ""
+    if (sec_obj_cls_val == -1){
+        return "<br>|secondary-icon= " + document.getElementById("inputSecondaryObjectClassImageURL").value
+    }
+    return "<br>|secondary-icon= " + objSecondaryClass.url[sec_obj_cls_val]
+}
+
+function getPrimaryClassText(){
+    let obj_cls_val = parseInt(document.getElementById("inputPrimaryObjectClass").value)
+    if (obj_cls_val != -1){
+        return objClass.class[obj_cls_val]
+    }
+    else return document.getElementById("inputPrimaryObjectClassSubtitle").value.toLowerCase()
+}
+
+function generateWikiSyntax(){
+    let output = ("[[include :scp-wiki:component:anomaly-class-bar-source" +
+    "<br>|item-number= " + document.getElementById("inputItemTitle").value +
+    "<br>|clearance= " + document.getElementById("inputAccessLevel").value +
+    "<br>|container-class= " + getPrimaryClassText() +
+    "<br>|secondary-class= " + document.getElementById("inputSecondaryObjectClassSubtitle").value.toLowerCase() +
+    getSecondaryClassURL() +
+    "<br>|disruption-class= " + disruptionClass.class[parseInt(document.getElementById("inputDisruptionClass").value)].toLowerCase() +
+    "<br>|risk-class= " + riskClass.class[parseInt(document.getElementById("inputRiskClass").value)].toLowerCase() +
+    "<br>]]")
+
+    document.getElementById("outputSyntaxText").innerHTML = output
 }

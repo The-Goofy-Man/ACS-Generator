@@ -53,7 +53,7 @@ body{
 }
 
 #resizeInfoBox {
-    left: calc(80vw - 41px);
+    left: max(715px, calc(80vw - 41px));
     top: 645px;
 }
 
@@ -121,8 +121,6 @@ nav a:hover{
 
 .sectionDiv {
 }
-
-
 
 .settingDiv {
     display: inline-grid;
@@ -254,6 +252,7 @@ nav a:hover{
 }
 #acsDiamondImg{
     width: 115px;
+    z-index: 1;
 }
 #acsObjectTextCont{
     height: 100%;
@@ -303,7 +302,6 @@ nav a:hover{
 }
 #acsSecondaryObjectImg{
     width: 100%;
-    filter: invert(100%);
     left: 3px;
 }
 #acsObjectImageWrapper{
@@ -391,6 +389,7 @@ nav a:hover{
 .acsSmallImageCont{
     position: absolute;
     width: 33%;
+    z-index: 2;
 }
 
 .acsSmallImageBGWrapper{
@@ -431,6 +430,34 @@ nav a:hover{
     width: 82.6%;
     top: 8.7%;
     left :8.7%;
+}
+
+/* Generation buttons */
+
+.generateBtn {
+    padding: 5px 10px 5px 10px;
+    margin: 5px 10px 0 10px;
+    width: 130px;
+}
+
+.codeBlock{
+    padding: 5px 10px 5px 10px;
+    margin: 5px 10px 5px 10px;
+    max-width: 500px;
+    background-color: rgb(230, 230, 230);
+    border-radius: 5px;
+    border: 1px solid rgb(182, 182, 182);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
+}
+
+.codeBlockCopy {
+
+}
+
+.codeBlock p {
+    word-wrap: break-word; /* For older browsers */
+    overflow-wrap: break-word; /* Modern standard */
 }
 
 /* Notice Box */
@@ -478,4 +505,14 @@ nav a:hover{
 
 .hidden {
     display: none;
+}
+
+/* OTHER */
+
+.comment {
+    font-size: 0.8em;
+}
+
+.warning {
+    color: red;
 }

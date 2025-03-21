@@ -64,6 +64,15 @@ var objClass = {
         "images/containment-classes/esoteric-icon.svg",
         "images/containment-classes/neutralized-icon.svg",
         "images/containment-classes/explained-icon.svg"
+    ],
+    url: [
+        "https://scp-wiki.wdfiles.com/local--files/component%3Aanomaly-class-bar/pending-icon.svg",
+        "https://scp-wiki.wdfiles.com/local--files/component%3Aanomaly-class-bar/safe-icon.svg",
+        "https://scp-wiki.wdfiles.com/local--files/component%3Aanomaly-class-bar/euclid-icon.svg",
+        "https://scp-wiki.wdfiles.com/local--files/component%3Aanomaly-class-bar/keter-icon.svg",
+        "https://scp-wiki.wdfiles.com/local--files/component%3Aanomaly-class-bar/esoteric-icon.svg",
+        "https://scp-wiki.wdfiles.com/local--files/component%3Aanomaly-class-bar/neutralized-icon.svg",
+        "https://scp-wiki.wdfiles.com/local--files/component%3Aanomaly-class-bar/explained-icon.svg"
     ]
 }
 
@@ -91,6 +100,18 @@ var objSecondaryClass = {
         "images/secondary-classes/tiamat-icon.svg",
         "images/secondary-classes/ticonderoga-icon.svg",
         "images/secondary-classes/uncontained-icon.svg"
+    ],
+    url: [
+        "",
+        "https://scp-wiki.wikidot.com/local--files/component:anomaly-class-bar/thaumiel-icon.svg",
+        "https://scp-wiki.wikidot.com/local--files/component:anomaly-class-bar/apollyon-icon.svg",
+        "https://scp-wiki.wikidot.com/local--files/component:anomaly-class-bar/archon-icon.svg",
+        "https://scp-wiki.wdfiles.com/local--files/component%3Aanomaly-class-bar/cernunnos-icon.svg",
+        "https://scp-wiki.wdfiles.com/local--files/component%3Aanomaly-class-bar/decommissioned-icon.svg",
+        "https://scp-wiki.wikidot.com/local--files/component:anomaly-class-bar/hiemal-icon.svg",
+        "https://scp-wiki.wikidot.com/local--files/component:anomaly-class-bar/tiamat-icon.svg",
+        "https://scp-wiki.wikidot.com/local--files/component:anomaly-class-bar/ticonderoga-icon.svg",
+        "https://scp-wiki.wikidot.com/local--files/component:anomaly-class-bar/uncontained-icon.svg"
     ]
 }
 
