@@ -302,7 +302,6 @@ nav a:hover{
 }
 #acsSecondaryObjectImg{
     width: 100%;
-    filter: invert(100%);
     left: 3px;
 }
 #acsObjectImageWrapper{
@@ -390,6 +389,7 @@ nav a:hover{
 .acsSmallImageCont{
     position: absolute;
     width: 33%;
+    z-index: 2;
 }
 
 .acsSmallImageBGWrapper{
@@ -452,7 +452,7 @@ nav a:hover{
 }
 
 .codeBlockCopy {
-    
+
 }
 
 .codeBlock p {
@@ -505,4 +505,14 @@ nav a:hover{
 
 .hidden {
     display: none;
+}
+
+/* OTHER */
+
+.comment {
+    font-size: 0.8em;
+}
+
+.warning {
+    color: red;
 }

@@ -211,7 +211,7 @@ function updateOnjectClass(){
     }
     // custom obj class w/ preset 2nd obj class.
     else if (document.getElementById("acsObjectImg").src != image_path && obj_class_val == -1 && sec_obj_class_val != -1){
-        document.getElementById("acsObjectImg").src = image_path;
+        console.log(image_path.toString())
         changeObjectImage(document.getElementById("inputPrimaryObjectClassImage"), 'acsSmallObjectImg', 'acsSecondaryObjectImg', '');
         if (sec_obj_class_val == 0)
             changeObjectImage(document.getElementById("inputPrimaryObjectClassImage"), 'acsObjectImg', '', '');
@@ -222,8 +222,10 @@ function updateOnjectClass(){
     // enable color inversion.
     if (document.getElementById("acsSecondaryObjectImg").src != image_path_secondary && obj_class_val != -1){
         document.getElementById("acsSecondaryObjectImg").src = image_path_secondary;
-        document.getElementById("acsSecondaryObjectImg").style.filter = "invert(100%)";
     }
+    if (document.getElementById("invertCheckbox").checked)
+        document.getElementById("acsSecondaryObjectImg").style.filter = "invert(100%)";
+    else document.getElementById("acsSecondaryObjectImg").style.filter = "";
 
     // set object class image background colors.
     if (document.getElementById("acsObjectImageWrapper").style.getPropertyValue("background-color") != img_bg_color)
@@ -565,8 +567,29 @@ function hexToRgbA(hex, alpha){
     throw new Error('Bad Hex');
 }
 
+async function imageToDataURL(url) {
+    const response = await fetch(url);
+    const blob = await response.blob();
 
-function changeImage(input, imgID) {
+    return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(blob);
+    });
+}
+
+function changeImage(input, imgID){
+    if (typeof input === "string"){
+        data = imageToDataURL(input)
+        if (document.getElementById(imgID).src != data){
+            document.getElementById(imgID).src = data
+        }
+        return
+    }
+    readImage(input, imgID)
+}
+
+function readImage(input, imgID) {
     // Read image uploaded to <input> and set it to the src of a <img>.
     const reader = new FileReader();
     reader.addEventListener('load', (event) => {
@@ -594,7 +617,6 @@ function changeObjectImage(input, imgID, secImgID, bigImg) {
     // Otherwise change obj class image.
     else if (imgID != ""){
         changeImage(input, imgID);
-        console.log(input)
     }
 
     // Change the secondary obj class image.
@@ -606,9 +628,14 @@ function changeObjectImage(input, imgID, secImgID, bigImg) {
         changeImage(input, bigImg);
 }
 
-function updateCustomImages(){
+function updateCustomImages(is_file){
     // Update all the images.
-    changeObjectImage(document.getElementById("inputSecondaryObjectClassImage"), 'acsSmallObjectImg', 'acsObjectImg', 'acsBigObjectImg');
+    if (is_file){
+        changeObjectImage(document.getElementById("inputSecondaryObjectClassImage"), 'acsSmallObjectImg', 'acsObjectImg', 'acsBigObjectImg');
+    }
+    else{
+        changeObjectImage(document.getElementById("inputSecondaryObjectClassImageURL").value, 'acsSmallObjectImg', 'acsObjectImg', 'acsBigObjectImg');
+    }
     changeObjectImage(document.getElementById("inputPrimaryObjectClassImage"), 'acsObjectImg', 'acsSmallObjectImg', 'acsBigObjectImg');
 }
 
@@ -638,13 +665,30 @@ function copyText(id) {
         });
 }
 
+function getSecondaryClassURL(){
+    let sec_obj_cls_val = parseInt(document.getElementById("inputSecondaryObjectClass").value)
+    if (sec_obj_cls_val == 0) return ""
+    if (sec_obj_cls_val == -1){
+        return "<br>|secondary-icon= " + document.getElementById("inputSecondaryObjectClassImageURL").value
+    }
+    return "<br>|secondary-icon= " + objSecondaryClass.url[sec_obj_cls_val]
+}
+
+function getPrimaryClassText(){
+    let obj_cls_val = parseInt(document.getElementById("inputPrimaryObjectClass").value)
+    if (obj_cls_val != -1){
+        return objClass.class[obj_cls_val]
+    }
+    else return document.getElementById("inputPrimaryObjectClassSubtitle").value.toLowerCase()
+}
+
 function generateWikiSyntax(){
     let output = ("[[include :scp-wiki:component:anomaly-class-bar-source" +
     "<br>|item-number= " + document.getElementById("inputItemTitle").value +
     "<br>|clearance= " + document.getElementById("inputAccessLevel").value +
-    "<br>|container-class= " + objClass.class[parseInt(document.getElementById("inputPrimaryObjectClass").value)].toLowerCase() +
+    "<br>|container-class= " + getPrimaryClassText() +
     "<br>|secondary-class= " + document.getElementById("inputSecondaryObjectClassSubtitle").value.toLowerCase() +
-    "<br>|secondary-icon= " + "" +
+    getSecondaryClassURL() +
     "<br>|disruption-class= " + disruptionClass.class[parseInt(document.getElementById("inputDisruptionClass").value)].toLowerCase() +
     "<br>|risk-class= " + riskClass.class[parseInt(document.getElementById("inputRiskClass").value)].toLowerCase() +
     "<br>]]")
