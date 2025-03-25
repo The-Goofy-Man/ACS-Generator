@@ -215,17 +215,18 @@ function updateOnjectClass(){
         changeObjectImage(document.getElementById("inputPrimaryObjectClassImage"), 'acsSmallObjectImg', 'acsSecondaryObjectImg', '');
         if (sec_obj_class_val == 0)
             changeObjectImage(document.getElementById("inputPrimaryObjectClassImage"), 'acsObjectImg', '', '');
-        // disable color inversion.
-        document.getElementById("acsSecondaryObjectImg").style.filter = "";
     }
 
     // enable color inversion.
     if (document.getElementById("acsSecondaryObjectImg").src != image_path_secondary && obj_class_val != -1){
         document.getElementById("acsSecondaryObjectImg").src = image_path_secondary;
     }
-    if (document.getElementById("invertCheckbox").checked)
-        document.getElementById("acsSecondaryObjectImg").style.filter = "invert(100%)";
-    else document.getElementById("acsSecondaryObjectImg").style.filter = "";
+    if (document.getElementById("invertCheckbox").checked){
+        if (!document.getElementById("acsSecondaryObjectImg").classList.contains("invert")){
+        document.getElementById("acsSecondaryObjectImg").classList.add("invert")}}
+    else if (document.getElementById("acsSecondaryObjectImg").classList.contains("invert")){
+            document.getElementById("acsSecondaryObjectImg").classList.remove("invert")
+    }
 
     // set object class image background colors.
     if (document.getElementById("acsObjectImageWrapper").style.getPropertyValue("background-color") != img_bg_color)
@@ -666,6 +667,7 @@ function copyText(id) {
 }
 
 function getSecondaryClassURL(){
+    // if url exists return it plus icon syntax. else nothing.
     let sec_obj_cls_val = parseInt(document.getElementById("inputSecondaryObjectClass").value)
     if (sec_obj_cls_val == 0) return ""
     if (sec_obj_cls_val == -1){
@@ -675,14 +677,16 @@ function getSecondaryClassURL(){
 }
 
 function getPrimaryClassText(){
+    // return container class.
     let obj_cls_val = parseInt(document.getElementById("inputPrimaryObjectClass").value)
     if (obj_cls_val != -1){
-        return objClass.class[obj_cls_val]
+        return objClass.class[obj_cls_val].toLowerCase()
     }
     else return document.getElementById("inputPrimaryObjectClassSubtitle").value.toLowerCase()
 }
 
 function generateWikiSyntax(){
+    // Generate wiki syntax codeblock.
     let output = ("[[include :scp-wiki:component:anomaly-class-bar-source" +
     "<br>|item-number= " + document.getElementById("inputItemTitle").value +
     "<br>|clearance= " + document.getElementById("inputAccessLevel").value +
@@ -694,4 +698,62 @@ function generateWikiSyntax(){
     "<br>]]")
 
     document.getElementById("outputSyntaxText").innerHTML = output
+}
+
+// Theme stuff
+
+var theme = localStorage.getItem("theme");
+if (theme != null) {
+    document.documentElement.style.setProperty('--theme', theme);
+    if (theme == "dark") document.getElementById("themeToggle").checked = true;
+}
+
+var tabs = document.getElementsByClassName("default-tab");
+if (tabs.length != 0){
+    for (let i = 0; i < tabs.length; i++){
+        tabs[i].click();
+    }
+}
+
+function toggleTheme() {
+    if (document.getElementById("themeToggle").checked == true)
+        goDark()
+    else
+        goLight()
+    
+}
+
+function goDark(){
+    document.documentElement.style.setProperty('--theme', 'dark');
+    localStorage.setItem("theme", "dark");
+    document.documentElement.style.setProperty('--black', '#fff');
+
+    if (document.getElementById("invertRingsCheckbox").checked){
+        document.documentElement.style.setProperty('--ringblack', '#fff');
+        document.documentElement.style.setProperty('--white', '#000');
+    }
+
+    if (document.getElementById("invertBordersCheckbox").checked)
+        document.documentElement.style.setProperty('--borderblack', '#fff');
+
+    if (document.getElementById("invertDiamondCheckbox").checked)
+        document.getElementById("acsDiamondImg").classList.add("invert")
+}
+
+function goLight(){
+    document.documentElement.style.setProperty('--theme', 'light');
+    localStorage.setItem("theme", "dark");
+
+    document.documentElement.style.setProperty('--black', '#000');
+
+    if (document.getElementById("invertRingsCheckbox").checked){
+        document.documentElement.style.setProperty('--ringblack', '#000');
+        document.documentElement.style.setProperty('--white', '#fff');
+    }
+
+    if (document.getElementById("invertBordersCheckbox").checked)
+        document.documentElement.style.setProperty('--borderblack', '#000');
+
+    if (document.getElementById("invertDiamondCheckbox").checked)
+        document.getElementById("acsDiamondImg").classList.remove("invert")
 }

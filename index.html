@@ -24,7 +24,7 @@
         <div id="titleAreaPattern">
             <div id="tileArea">
                 <h1>SCP Anomaly Classification Sysem Generator</h1>
-                <h3>[SCP] ACS Generator v0.1.0</h3>
+                <h3>[SCP] ACS Generator v0.1.1</h3>
             </div>
         </div>
         <nav class="fw600">
@@ -42,162 +42,175 @@
     </div>
 
     <div id="generator">
-        <div class="sectionDiv">
-            <h2>Item Title</h2>
+        <div class="sectionDiv" id="inputUISection">
+            <div class="UIsectionDiv" id="titleUIsectionDiv">
+                <h2>Item Title</h2>
 
-            <div class="settingDiv">
-                <h3>Title</h3>
-                <p><i>Example: 173-J</i></p>
-                <input type="text" placeholder="0000" value="0000" id="inputItemTitle">
+                <div class="settingDiv">
+                    <h3>Title</h3>
+                    <p><i>Example: 173-J</i></p>
+                    <input type="text" placeholder="0000" value="0000" id="inputItemTitle">
 
-                <h3>Subtitle</h3>
-                <p><i>Example: ITEM#:</i></p>
-                <input type="text" placeholder="ITEM#:" value="ITEM#:" id="inputItemSubtitle">
-            </div>
+                    <h3>Subtitle</h3>
+                    <p><i>Example: ITEM#:</i></p>
+                    <input type="text" placeholder="ITEM#:" value="ITEM#:" id="inputItemSubtitle">
+                </div>
 
-            <div class="settingDiv">
-                <h3>Clearance Level <a href="https://scp-wiki.wikidot.com/anomaly-classification-system-guide#clearance-lvl" title="Clearance Level Explanation" target="_blank" class="textdeconone"><i class="fa fa-question-circle-o"></i></a></h3>
-                <select id="inputAccessLevel">
-                    <option value="1">1 - Unrestricted</option>
-                    <option value="2">2 - Restricted</option>
-                    <option value="3">3 - Confidential</option>
-                    <option value="4">4 - Secret</option>
-                    <option value="5">5 - Top Secret</option>
-                    <option value="6">6 - Cosmic Top Secret</option>
-                    <option value="0">0 - Official Use</option>
-                    <option value="-1">Custom</option>
-                </select>
-                <div id="accessLevelCustom" class="disabled">
-                    <h4>Title</h4>
-                    <p><i>Example: LEVEL4</i></p>
-                    <input type="text" placeholder="LEVEL4" id="inputAccessLevelTitle">
-
-                    <h4>Subtitle</h4>
-                    <p><i>Example: SECRET</i></p>
-                    <input type="text" placeholder="SECRET" id="inputAccessLevelSubtitle">
-
-                    <h4>Number of Lines</h4>
-                    <p><i>Example: 4</i></p>
-                    <input type="number" placeholder="4" id="inputAccessLevelLines">
-                    
-                    <h4>Appearance of Lines</h4>
-                    <select id="inputAccessLevelLineAppearance">
-                        <option value="color">Colour</option>
-                        <!--<option value="image">Background Image [WIP]</option>-->
+                <div class="settingDiv">
+                    <h3>Clearance Level <a href="https://scp-wiki.wikidot.com/anomaly-classification-system-guide#clearance-lvl" title="Clearance Level Explanation" target="_blank" class="textdeconone"><i class="fa fa-question-circle-o"></i></a></h3>
+                    <select id="inputAccessLevel">
+                        <option value="1">1 - Unrestricted</option>
+                        <option value="2">2 - Restricted</option>
+                        <option value="3">3 - Confidential</option>
+                        <option value="4">4 - Secret</option>
+                        <option value="5">5 - Top Secret</option>
+                        <option value="6">6 - Cosmic Top Secret</option>
+                        <option value="0">0 - Official Use</option>
+                        <option value="-1">Custom</option>
                     </select>
+                    <div id="accessLevelCustom" class="disabled">
+                        <h4>Title</h4>
+                        <p><i>Example: LEVEL4</i></p>
+                        <input type="text" placeholder="LEVEL4" id="inputAccessLevelTitle">
 
-                    <div id="inputAccessLevelLineColorCont" class="disabled">
-                        <input type="color" value="#de752c" id="inputAccessLevelLineColor">
+                        <h4>Subtitle</h4>
+                        <p><i>Example: SECRET</i></p>
+                        <input type="text" placeholder="SECRET" id="inputAccessLevelSubtitle">
+
+                        <h4>Number of Lines</h4>
+                        <p><i>Example: 4</i></p>
+                        <input type="number" placeholder="4" id="inputAccessLevelLines">
+                        
+                        <h4>Appearance of Lines</h4>
+                        <select id="inputAccessLevelLineAppearance">
+                            <option value="color">Colour</option>
+                            <!--<option value="image">Background Image [WIP]</option>-->
+                        </select>
+
+                        <div id="inputAccessLevelLineColorCont" class="disabled">
+                            <input type="color" value="#de752c" id="inputAccessLevelLineColor">
+                        </div>
+                        <div id="inputAccessLevelLineBGImageCont" class="disabled">
+                            <p>[WIP] <i>Images only (jpg, svg, png, etc)</i></p>
+                            <input type="file" accept="image/*" id="inputAccessLevelLineBGImage">
+                        </div>
                     </div>
-                    <div id="inputAccessLevelLineBGImageCont" class="disabled">
-                        <p>[WIP] <i>Images only (jpg, svg, png, etc)</i></p>
-                        <input type="file" accept="image/*" id="inputAccessLevelLineBGImage">
+                </div>
+            </div>
+            
+            <div class="UIsectionDivWrapper">
+                <div class="UIsectionDiv">
+                    <h2>Item Classification</h2>
+
+                    <div class="settingDiv">
+                        <h3>Object Class</h3>
+                        <h4>Primary</h4>
+                        <p><i>Title</i></p>
+                        <input type="text" placeholder="CONTAINMENT CLASS:" value="CONTAINMENT CLASS:" id="inputPrimaryObjectClassTitle">
+                        <p><i>Theme</i></p>
+                        <select id="inputPrimaryObjectClass">
+                            <option value="1">Safe</option>
+                            <option value="2">Euclid</option>
+                            <option value="3">Keter</option>
+                            <option value="4">Esoteric</option>
+                            <option value="5">Neutralized</option>
+                            <option value="6">Explained</option>
+                            <option value="0">Pending</option>
+                            <option value="-1">Custom [WIP]</option>
+                        </select>
+                        <input type="text" placeholder="SAFE" value="SAFE" id="inputPrimaryObjectClassSubtitle">
+
+                        <div id="inputPrimaryObjectClassCustomCont" class="disabled">
+                            <p><i>Color</i></p>
+                            <input type="color" value="#73a170" id="inputPrimaryObjectClassColor">
+                            <p><i>Images only (jpg, svg, or png)</i></p>
+                            <input type="file" onchange="updateCustomImages(true)" accept="image/png, image/jpeg, image/svg" id="inputPrimaryObjectClassImage">
+                        </div>
+
+                        <h4>Secondary <a href="https://scp-wiki.wikidot.com/anomaly-classification-system-guide#secondary-class" title="Secondary Classes" target="_blank" class="textdeconone"><i class="fa fa-question-circle-o"></i></a></h4>
+                        <p><i>Theme</i></p>
+                        <input type="text" placeholder="SECONDARY CLASS:" value="SECONDARY CLASS:" id="inputSecondaryObjectClassTitle">
+                        <p><i>Theme</i></p>
+                        <select id="inputSecondaryObjectClass">
+                            <option value="0">None</option>
+                            <option value="1">Thaumial</option>
+                            <option value="2">Apollyon</option>
+                            <option value="3">Archon</option>
+                            <option value="4">Cernunnos</option>
+                            <option value="5">Decommissioned</option>
+                            <option value="6">Hiemal</option>
+                            <option value="7">Tiamat</option>
+                            <option value="8">Ticonderoga</option>
+                            <option value="9">Uncontained</option>
+                            <option value="-1">Custom [WIP]</option>
+                        </select>
+                        <input type="text" placeholder="THAUMIAL" value="NONE" id="inputSecondaryObjectClassSubtitle">
+
+                        <div id="inputSecondaryObjectClassCustomCont" class="disabled">
+                            <p><i>Images only (jpeg, svg, or png)</i></p>
+                            <input type="file" onchange="updateCustomImages(true)" accept="image/png, image/jpeg, image/svg" id="inputSecondaryObjectClassImage">
+                            <p><i>Image URL</i><br><i class="comment warning">Unsupported by Image Download</i></p>
+                            <input type="text" placeholder="https://image.url" onchange="updateCustomImages(false)" id="inputSecondaryObjectClassImageURL">
+                        </div>
+                    </div>
+
+                    <div class="settingDiv">
+                        <h3>Disruption Class <a href="https://scp-wiki.wikidot.com/anomaly-classification-system-guide#disruption-class" title="Disruption Class Explanation" target="_blank" class="textdeconone"><i class="fa fa-question-circle-o"></i></a></h3>
+                        <p><i>Title</i></p>
+                        <input type="text" placeholder="DISRUPTION CLASS:" value="DISRUPTION CLASS:" id="inputDisruptionClassTitle">
+                        <p><i>Theme</i></p>
+                        <select id="inputDisruptionClass">
+                            <option value="1">Dark</option>
+                            <option value="2">Vlam</option>
+                            <option value="3">Keneq</option>
+                            <option value="4">Ekhi</option>
+                            <option value="5">Amida</option>
+                            <option value="0">None</option>
+                            <!--<option value="-1">Custom [WIP]</option>-->
+                        </select>
+                        <input type="text" placeholder="DARK" value="DARK" id="inputDisruptionClassSubtitle">
+
+                        <div id="inputDisruptionClassCustomCont" class="disabled">
+                            <p>[WIP] <i>Example: Dark</i></p>
+                            <input type="text" placeholder="Dark" id="inputDisruptionClassCustom">
+                        </div>
+
+                        <h3>Risk Class <a href="https://scp-wiki.wikidot.com/anomaly-classification-system-guide#risk-class" title="Risk Class Explanation" target="_blank" class="textdeconone"><i class="fa fa-question-circle-o"></i></a></h3>
+                        <p><i>Title</i></p>
+                        <input type="text" placeholder="RISK CLASS:" value="RISK CLASS:" id="inputRiskClassTitle">
+                        <p><i>Theme</i></p>
+                        <select id="inputRiskClass">
+                            <option value="1">Notice</option>
+                            <option value="2">Caution</option>
+                            <option value="3">Warning</option>
+                            <option value="4">Danger</option>
+                            <option value="5">Critical</option>
+                            <option value="0">None</option>
+                            <!--<option value="-1">Custom [WIP]</option>-->
+                        </select>
+                        <input type="text" placeholder="NOTICE" value="NOTICE" id="inputRiskClassSubtitle">
+
+                        <div id="inputRiskClassCustomCont" class="disabled">
+                            <p>[WIP] <i>Example: Notice</i></p>
+                            <input type="text" placeholder="Notice" id="inputRiskClassCustom">
+                        </div>
+                    </div>
+                    <div class="settingDiv">
+                        <h3>Extra Options</h3>
+                        <p><input type="checkbox" id="gridCheckbox" value="grid" checked="true"><label for="gridCheckbox">Grid Style</label><br><i class="comment">Disable to get a smaller<br>width</i></p>
+                        <p><label>Width of bar (pixels):</label><br><input type="number" id="acsBarWidthInput" name="width" min="0" max="5000" value=""><button id="acsBarWidthSubmit" onclick="setWidth(-1)">Set</button></p>
+                        <p><input type="checkbox" id="invertCheckbox" value="invert" checked="true"><label for="invertCheckbox">Invert Obj Image</label><br><i class="comment">Visible when you have a<br>2nd Obj Class</i></p>
+                        <p>
+                            <label class="switch">
+                                <input id="themeToggle" type="checkbox" onclick="toggleTheme()">
+                                <span class="slider round"></span>
+                            </label> Dark theme<br>
+                            <input type="checkbox" id="invertDiamondCheckbox" value="invert" checked="true"><label for="invertDiamondCheckbox" class="comment">Affect Diamond</label><br>
+                            <input type="checkbox" id="invertRingsCheckbox" value="invert" checked="true"><label for="invertRingsCheckbox" class="comment">Affect Rings</label><br>
+                            <input type="checkbox" id="invertBordersCheckbox" value="invert" checked="true"><label for="invertBordersCheckbox" class="comment">Affect Dividers</label><br>
+                        </p>
                     </div>
                 </div>
-            </div>
-        </div>
-        
-        <div class="sectionDiv">
-            <h2>Item Classification</h2>
-
-            <div class="settingDiv">
-                <h3>Object Class</h3>
-                <h4>Primary</h4>
-                <p><i>Title</i></p>
-                <input type="text" placeholder="CONTAINMENT CLASS:" value="CONTAINMENT CLASS:" id="inputPrimaryObjectClassTitle">
-                <p><i>Theme</i></p>
-                <select id="inputPrimaryObjectClass">
-                    <option value="1">Safe</option>
-                    <option value="2">Euclid</option>
-                    <option value="3">Keter</option>
-                    <option value="4">Esoteric</option>
-                    <option value="5">Neutralized</option>
-                    <option value="6">Explained</option>
-                    <option value="0">Pending</option>
-                    <option value="-1">Custom [WIP]</option>
-                </select>
-                <input type="text" placeholder="SAFE" value="SAFE" id="inputPrimaryObjectClassSubtitle">
-
-                <div id="inputPrimaryObjectClassCustomCont" class="disabled">
-                    <p><i>Color</i></p>
-                    <input type="color" value="#73a170" id="inputPrimaryObjectClassColor">
-                    <p><i>Images only (jpg, svg, or png)</i></p>
-                    <input type="file" onchange="updateCustomImages(true)" accept="image/png, image/jpeg, image/svg" id="inputPrimaryObjectClassImage">
-                </div>
-
-                <h4>Secondary <a href="https://scp-wiki.wikidot.com/anomaly-classification-system-guide#secondary-class" title="Secondary Classes" target="_blank" class="textdeconone"><i class="fa fa-question-circle-o"></i></a></h4>
-                <p><i>Theme</i></p>
-                <input type="text" placeholder="SECONDARY CLASS:" value="SECONDARY CLASS:" id="inputSecondaryObjectClassTitle">
-                <p><i>Theme</i></p>
-                <select id="inputSecondaryObjectClass">
-                    <option value="0">None</option>
-                    <option value="1">Thaumial</option>
-                    <option value="2">Apollyon</option>
-                    <option value="3">Archon</option>
-                    <option value="4">Cernunnos</option>
-                    <option value="5">Decommissioned</option>
-                    <option value="6">Hiemal</option>
-                    <option value="7">Tiamat</option>
-                    <option value="8">Ticonderoga</option>
-                    <option value="9">Uncontained</option>
-                    <option value="-1">Custom [WIP]</option>
-                </select>
-                <input type="text" placeholder="THAUMIAL" value="NONE" id="inputSecondaryObjectClassSubtitle">
-
-                <div id="inputSecondaryObjectClassCustomCont" class="disabled">
-                    <p><i>Images only (jpeg, svg, or png)</i></p>
-                    <input type="file" onchange="updateCustomImages(true)" accept="image/png, image/jpeg, image/svg" id="inputSecondaryObjectClassImage">
-                    <p><i>Image URL</i><br><i class="comment warning">Unsupported by Image Download</i></p>
-                    <input type="text" placeholder="https://image.url" onchange="updateCustomImages(false)" id="inputSecondaryObjectClassImageURL">
-                </div>
-            </div>
-
-            <div class="settingDiv">
-                <h3>Disruption Class <a href="https://scp-wiki.wikidot.com/anomaly-classification-system-guide#disruption-class" title="Disruption Class Explanation" target="_blank" class="textdeconone"><i class="fa fa-question-circle-o"></i></a></h3>
-                <p><i>Title</i></p>
-                <input type="text" placeholder="DISRUPTION CLASS:" value="DISRUPTION CLASS:" id="inputDisruptionClassTitle">
-                <p><i>Theme</i></p>
-                <select id="inputDisruptionClass">
-                    <option value="1">Dark</option>
-                    <option value="2">Vlam</option>
-                    <option value="3">Keneq</option>
-                    <option value="4">Ekhi</option>
-                    <option value="5">Amida</option>
-                    <option value="0">None</option>
-                    <!--<option value="-1">Custom [WIP]</option>-->
-                </select>
-                <input type="text" placeholder="DARK" value="DARK" id="inputDisruptionClassSubtitle">
-
-                <div id="inputDisruptionClassCustomCont" class="disabled">
-                    <p>[WIP] <i>Example: Dark</i></p>
-                    <input type="text" placeholder="Dark" id="inputDisruptionClassCustom">
-                </div>
-
-                <h3>Risk Class <a href="https://scp-wiki.wikidot.com/anomaly-classification-system-guide#risk-class" title="Risk Class Explanation" target="_blank" class="textdeconone"><i class="fa fa-question-circle-o"></i></a></h3>
-                <p><i>Title</i></p>
-                <input type="text" placeholder="RISK CLASS:" value="RISK CLASS:" id="inputRiskClassTitle">
-                <p><i>Theme</i></p>
-                <select id="inputRiskClass">
-                    <option value="1">Notice</option>
-                    <option value="2">Caution</option>
-                    <option value="3">Warning</option>
-                    <option value="4">Danger</option>
-                    <option value="5">Critical</option>
-                    <option value="0">None</option>
-                    <!--<option value="-1">Custom [WIP]</option>-->
-                </select>
-                <input type="text" placeholder="NOTICE" value="NOTICE" id="inputRiskClassSubtitle">
-
-                <div id="inputRiskClassCustomCont" class="disabled">
-                    <p>[WIP] <i>Example: Notice</i></p>
-                    <input type="text" placeholder="Notice" id="inputRiskClassCustom">
-                </div>
-            </div>
-            <div class="settingDiv">
-                <h3>Extra Options</h3>
-                <p><input type="checkbox" id="gridCheckbox" value="grid" checked="true"><label for="gridCheckbox">Grid Style</label><br><i class="comment">Disable to get a smaller<br>width</i></p>
-                <p><label>Width of bar (pixels):</label><br><input type="number" id="acsBarWidthInput" name="width" min="0" max="5000" value=""><button id="acsBarWidthSubmit" onclick="setWidth(-1)">Set</button></p>
-                <p><input type="checkbox" id="invertCheckbox" value="invert" checked="true"><label for="invertCheckbox">Invert Obj Image</label><br><i class="comment">Visible when you have a<br>2nd Obj Class</i></p>
             </div>
         </div>
 
@@ -270,7 +283,7 @@
                                         
                                         <div id="acsSecondaryDisImageWrapper" class="acsSecondImgWrapper ">
                                             <div id="acsSecondaryDisImageBG" class="bgblack acsSecondImgBG">
-                                                <p id="acsDisPText" class="colorwhite acsSecondImgText fw600">1</p>
+                                                <p id="acsDisPText" class="acsSecondImgText fw600">1</p>
                                             </div>
                                         </div>
                                     </div>
@@ -288,7 +301,7 @@
                                         
                                         <div id="acsSecondaryRiskImageWrapper" class="acsSecondImgWrapper ">
                                             <div id="acsSecondaryRiskImageBG" class="bgblack acsSecondImgBG">
-                                                <p id="acsRiskPText" class="colorwhite fw600 acsSecondImgText ">1</p>
+                                                <p id="acsRiskPText" class="fw600 acsSecondImgText ">1</p>
                                             </div>
                                         </div>
                                     </div>
@@ -359,24 +372,32 @@
         
         <div class="sectionDiv" id="changelogSectionDiv">
             <h2>Changelog</h2>
-            <h4>0.1.0 - 21/03/2025</h4>
-            <ul class="changelogList">
-                <li>added wiki syntax text generator.</li>
-                <li>added ability to invert image color of primary obj class if secondary one is present.</li>
-                <li>fixed bug "secondary class image overiding primary class icon in diamond #14".</li>
-            </ul>
-            <h4>0.0.8.5 - 15/10/2024</h4>
-            <ul class="changelogList">
-                <li>added help link for secondary classes.</li>
-                <li>fixed resize tutorial box not having a min postition like the ACS Bar.</li>
-                <li>fixed spelling mistakes.</li>
-                <li>temp fix for distruption and risk class title new line issue in downloaded image.</li>
-            </ul>
-            <h4>0.0.8.4 - 26/08/2024</h4>
-            <ul class="changelogList">
-                <li>added changelog.</li>
-                <li>fixed secondary theme text input not changing the secondary class on the ACS Bar.</li>
-            </ul>
+            <div class="y-scroll" id="changelogSectionContent">
+                <h4>0.1.1 - 25/03/2025</h4>
+                <ul class="changelogList">
+                    <li>added dark mode.</li>
+                    <li>fixed danger diamond circle boarders being too thick.</li>
+                    <li>fixed preset containment class not being all lower case when generating wiki syntax.</li>
+                </ul>
+                <h4>0.1.0 - 21/03/2025</h4>
+                <ul class="changelogList">
+                    <li>added wiki syntax text generator.</li>
+                    <li>added ability to invert image color of primary obj class if secondary one is present.</li>
+                    <li>fixed bug "secondary class image overiding primary class icon in diamond #14".</li>
+                </ul>
+                <h4>0.0.8.5 - 15/10/2024</h4>
+                <ul class="changelogList">
+                    <li>added help link for secondary classes.</li>
+                    <li>fixed resize tutorial box not having a min postition like the ACS Bar.</li>
+                    <li>fixed spelling mistakes.</li>
+                    <li>temp fix for distruption and risk class title new line issue in downloaded image.</li>
+                </ul>
+                <h4>0.0.8.4 - 26/08/2024</h4>
+                <ul class="changelogList">
+                    <li>added changelog.</li>
+                    <li>fixed secondary theme text input not changing the secondary class on the ACS Bar.</li>
+                </ul>
+            </div>
         </div>
     </div>
 </body>
