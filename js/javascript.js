@@ -742,7 +742,7 @@ function goDark(){
 
 function goLight(){
     document.documentElement.style.setProperty('--theme', 'light');
-    localStorage.setItem("theme", "dark");
+    localStorage.setItem("theme", "light");
 
     document.documentElement.style.setProperty('--black', '#000');
 

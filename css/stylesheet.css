@@ -148,6 +148,12 @@ nav a:hover{
     display: inline-grid;
 }
 
+#introTextSection {
+    margin: 30px auto 20px auto;
+    max-width: 700px;
+    text-align: center;
+}
+
 #acsbar {
     padding: 10px;
     width: 80%;

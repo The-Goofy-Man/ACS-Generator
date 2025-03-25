@@ -1,9 +1,12 @@
-# SCP-ACS-Gen
- A live version of this can be found on [fridey.net](http://fridey.net/acs-generator/)
- 
- Anomaly Classification Sysem Generator by [F4Fridey](https://github.com/F4Fridey/ACS-Generator)
+# SCP ACS Generator
 
-[Discord Server](https://discord.gg/XpGfub6VyR)
+Anomaly Classification System Generator by [F4Fridey](https://github.com/F4Fridey/ACS-Generator)
+
+A live version of this can be found on [fridey.net/acs-generator](http://fridey.net/acs-generator/)
+
+Join the [Discord Server](https://discord.gg/XpGfub6VyR) and say hi!
+
+Report bugs and issue to the bug tracker [here](https://github.com/F4Fridey/ACS-Generator/issues)
 
 ---
 
