@@ -508,6 +508,11 @@ function updateOpionalOptions(){
         document.getElementById("acsObjDisRisk").style.getPropertyValue("grid-template-columns") != "auto auto"){
             if (document.getElementById("acsObjDisRisk").style.getPropertyValue("grid-template-columns") == ""){
                 document.getElementById("acsObjDisRisk").style.setProperty("grid-template-columns", "auto auto");}
+            toggleThickBorder("acsSmallObjectImageWrapper", false);
+            toggleThickBorder("acsSmallRiskImageWrapper", false);
+            toggleThickBorder("acsSmallDisImageWrapper", false);
+            toggleThickBorder("acsSmallObjectSecondaryImageWrapper", false);
+            toggleThickBorder("acsBigObjectImageWrapper", false);
             document.getElementById("acsDiamondImg").style.setProperty("width", "");
             if (!document.getElementById("acsbar").classList.contains("min715")){
                 document.getElementById("acsbar").classList.remove("min560");
@@ -518,6 +523,11 @@ function updateOpionalOptions(){
         document.getElementById("acsObjDisRisk").style.getPropertyValue("grid-template-columns") != ""){
             if (document.getElementById("acsObjDisRisk").style.getPropertyValue("grid-template-columns") == "auto auto"){
                 document.getElementById("acsObjDisRisk").style.setProperty("grid-template-columns", "");}
+            toggleThickBorder("acsSmallObjectImageWrapper", true);
+            toggleThickBorder("acsSmallRiskImageWrapper", true);
+            toggleThickBorder("acsSmallDisImageWrapper", true);
+            toggleThickBorder("acsSmallObjectSecondaryImageWrapper", true);
+            toggleThickBorder("acsBigObjectImageWrapper", true);
             document.getElementById("acsDiamondImg").style.setProperty("width", "235px");
             if (!document.getElementById("acsbar").classList.contains("min560")){
                 document.getElementById("acsbar").classList.remove("min715");
@@ -527,6 +537,17 @@ function updateOpionalOptions(){
     
 }
 
+function toggleThickBorder(imgWrapper, thick){
+    let addclass = "thinborder";
+    let remclass = "thickborder";
+    if (thick) {
+        addclass = "thickborder";
+        remclass = "thinborder";}
+    if (document.getElementById(imgWrapper).classList.contains(remclass)){
+        document.getElementById(imgWrapper).classList.remove(remclass);
+        document.getElementById(imgWrapper).classList.add(addclass);
+    }
+}
 
 function updateUI(){
     // Update the UI.

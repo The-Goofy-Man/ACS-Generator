@@ -437,7 +437,14 @@ nav a:hover{
 
 .acsSmallImageWrapper{
     display: flex;
-    border: 0.1875rem solid var(--black);
+}
+
+.thinborder{
+    border: 0.1875rem solid var(--ringblack);
+}
+
+.thickborder{
+    border: 6px solid var(--ringblack);
 }
 
 .acsSmallImg{
