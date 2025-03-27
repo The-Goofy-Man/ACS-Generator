@@ -361,6 +361,28 @@ function updteDisrupionClass(){
     if (dis_cls_val == -1){// custom disruption class. WIP
         if (document.getElementById("inputDisruptionClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputDisruptionClassCustomCont").classList.remove("disabled");
+
+        main_color = "black black black "+document.getElementById("inputDisruptionClassColor").value+"";
+        bg_color = ""+hexToRgbA(document.getElementById("inputDisruptionClassColor").value, .25)+"";
+        img_bg_color = ""+document.getElementById("inputDisruptionClassColor").value+"";
+
+        level_txt = document.getElementById("inputDisruptionClassLevel").value;
+
+        if (level_txt == ""){
+            if (!document.getElementById("acsSecondaryDisImageBG").classList.contains("hidden")){
+                document.getElementById("acsSecondaryDisImageBG").classList.add("hidden")
+            }
+            if (!document.getElementById("acsDisImageBGWrapper").classList.contains("leftBorderRadius")){
+                document.getElementById("acsDisImageBGWrapper").classList.add("leftBorderRadius")
+            }
+        }else{
+            if (document.getElementById("acsSecondaryDisImageBG").classList.contains("hidden")){
+                document.getElementById("acsSecondaryDisImageBG").classList.remove("hidden")
+            }
+            if (document.getElementById("acsDisImageBGWrapper").classList.contains("leftBorderRadius")){
+                document.getElementById("acsDisImageBGWrapper").classList.remove("leftBorderRadius")
+            }
+        }
     }
     else {// preset dis class.
         // hide custom.
@@ -384,7 +406,7 @@ function updteDisrupionClass(){
 
     obj_class_subtitle_txt = document.getElementById("inputDisruptionClassSubtitle").value;
 
-    if (document.getElementById("acsDisImg").src != image_path)
+    if (document.getElementById("acsDisImg").src != image_path && dis_cls_val != -1)
         document.getElementById("acsDisImg").src = image_path;
 
     if (document.getElementById("acsDisrupionTextTitle").innerHTML != obj_class_subtitle_txt)
@@ -401,7 +423,7 @@ function updteDisrupionClass(){
         document.getElementById("acsDisPText").innerHTML = level_txt;
 
     // in diamond.
-    if (document.getElementById("acsSmallDisImg").src != image_path)
+    if (document.getElementById("acsSmallDisImg").src != image_path && dis_cls_val != -1)
         document.getElementById("acsSmallDisImg").src = image_path;
 
     if (dis_cls_val == 0 || onlyShowObjectClass){// should disable in diamond?
@@ -440,6 +462,28 @@ function updteRiskClass(){
         // show customization elements
         if (document.getElementById("inputRiskClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputRiskClassCustomCont").classList.remove("disabled");
+
+        main_color = "black black black "+document.getElementById("inputRiskClassColor").value+"";
+        bg_color = ""+hexToRgbA(document.getElementById("inputRiskClassColor").value, .25)+"";
+        img_bg_color = ""+document.getElementById("inputRiskClassColor").value+"";
+
+        level_txt = document.getElementById("inputRiskClassLevel").value;
+
+        if (level_txt == ""){
+            if (!document.getElementById("acsSecondaryRiskImageBG").classList.contains("hidden")){
+                document.getElementById("acsSecondaryRiskImageBG").classList.add("hidden")
+            }
+            if (!document.getElementById("acsRiskImageBGWrapper").classList.contains("leftBorderRadius")){
+                document.getElementById("acsRiskImageBGWrapper").classList.add("leftBorderRadius")
+            }
+        }else{
+            if (document.getElementById("acsSecondaryRiskImageBG").classList.contains("hidden")){
+                document.getElementById("acsSecondaryRiskImageBG").classList.remove("hidden")
+            }
+            if (document.getElementById("acsRiskImageBGWrapper").classList.contains("leftBorderRadius")){
+                document.getElementById("acsRiskImageBGWrapper").classList.remove("leftBorderRadius")
+            }
+        }
     }
     else {
         // hide customization elements
@@ -463,7 +507,7 @@ function updteRiskClass(){
     
     obj_class_subtitle_txt = document.getElementById("inputRiskClassSubtitle").value;
 
-    if (document.getElementById("acsRiskImg").src != image_path)
+    if (document.getElementById("acsRiskImg").src != image_path && risk_cls_val != -1)
         document.getElementById("acsRiskImg").src = image_path;
     
     if (document.getElementById("acsRiskTextTitle").innerHTML != obj_class_subtitle_txt)
@@ -480,7 +524,7 @@ function updteRiskClass(){
         document.getElementById("acsRiskPText").innerHTML = level_txt;
 
     // diamond elemets.
-    if (document.getElementById("acsSmallRiskImg").src != image_path)
+    if (document.getElementById("acsSmallRiskImg").src != image_path && risk_cls_val != -1)
         document.getElementById("acsSmallRiskImg").src = image_path;
     if (risk_cls_val == 0 || onlyShowObjectClass){// should disable in diamond?
         if (!document.getElementById("acsSmallRiskImageCont").classList.contains("disabled"))
@@ -624,6 +668,7 @@ function readImage(input, imgID) {
 
 function changeObjectImage(input, imgID, secImgID, bigImg) {
     // Handles setting uploaded Object Class image to the various <img> elements.
+
     let obj_clss_val = parseInt(document.getElementById("inputPrimaryObjectClass").value);
     let sec_obj_clss_val = parseInt(document.getElementById("inputSecondaryObjectClass").value);
 
@@ -650,6 +695,17 @@ function changeObjectImage(input, imgID, secImgID, bigImg) {
         changeImage(input, bigImg);
 }
 
+function changeDisRiskImage(input, imgID, secImgID){
+    // Handles setting uploaded Disruption Class image to the various <img> elements.
+
+    if (imgID != ""){
+        changeImage(input, imgID);
+    }
+    // Change the secondary obj class image.
+    if (secImgID != "")
+        changeImage(input, secImgID);
+}
+
 function updateCustomImages(is_file){
     // Update all the images.
     if (is_file){
@@ -659,6 +715,8 @@ function updateCustomImages(is_file){
         changeObjectImage(document.getElementById("inputSecondaryObjectClassImageURL").value, 'acsSmallObjectImg', 'acsObjectImg', 'acsBigObjectImg');
     }
     changeObjectImage(document.getElementById("inputPrimaryObjectClassImage"), 'acsObjectImg', 'acsSmallObjectImg', 'acsBigObjectImg');
+    changeDisRiskImage(document.getElementById("inputDisruptionClassImage"), "acsDisImg", "acsSmallDisImg")
+    changeDisRiskImage(document.getElementById("inputRiskClassImage"), "acsRiskImg", "acsSmallRiskImg")
 }
 
 function removeInfoBox(id){
@@ -749,9 +807,11 @@ function goDark(){
     localStorage.setItem("theme", "dark");
     document.documentElement.style.setProperty('--black', '#fff');
 
+    document.getElementById("invertCheckbox").checked = false;
+
     if (document.getElementById("invertRingsCheckbox").checked){
         document.documentElement.style.setProperty('--ringblack', '#fff');
-        document.documentElement.style.setProperty('--white', '#000');
+        document.documentElement.style.setProperty('--textWhite', '#000');
     }
 
     if (document.getElementById("invertBordersCheckbox").checked)
@@ -767,9 +827,11 @@ function goLight(){
 
     document.documentElement.style.setProperty('--black', '#000');
 
+    document.getElementById("invertCheckbox").checked = true;
+
     if (document.getElementById("invertRingsCheckbox").checked){
         document.documentElement.style.setProperty('--ringblack', '#000');
-        document.documentElement.style.setProperty('--white', '#fff');
+        document.documentElement.style.setProperty('--textWhite', '#fff');
     }
 
     if (document.getElementById("invertBordersCheckbox").checked)

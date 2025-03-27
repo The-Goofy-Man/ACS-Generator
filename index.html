@@ -24,7 +24,7 @@
         <div id="titleAreaPattern">
             <div id="tileArea">
                 <h1>SCP Anomaly Classification System Bar Generator</h1>
-                <h3>[SCP] ACS Bar Generator v0.1.1</h3>
+                <h3>[SCP] ACS Bar Generator v0.2.0</h3>
             </div>
         </div>
         <nav class="fw600">
@@ -129,7 +129,7 @@
 
                         <div id="inputPrimaryObjectClassCustomCont" class="disabled">
                             <p><i>Color</i></p>
-                            <input type="color" value="#73a170" id="inputPrimaryObjectClassColor">
+                            <input type="color" value="#59a06d" id="inputPrimaryObjectClassColor">
                             <p><i>Images only (jpg, svg, or png)</i></p>
                             <input type="file" onchange="updateCustomImages(true)" accept="image/png, image/jpeg, image/svg" id="inputPrimaryObjectClassImage">
                         </div>
@@ -140,7 +140,7 @@
                         <p><i>Theme</i></p>
                         <select id="inputSecondaryObjectClass">
                             <option value="0">None</option>
-                            <option value="1">Thaumial</option>
+                            <option value="1">Thaumiel</option>
                             <option value="2">Apollyon</option>
                             <option value="3">Archon</option>
                             <option value="4">Cernunnos</option>
@@ -151,7 +151,7 @@
                             <option value="9">Uncontained</option>
                             <option value="-1">Custom [WIP]</option>
                         </select>
-                        <input type="text" placeholder="THAUMIAL" value="NONE" id="inputSecondaryObjectClassSubtitle">
+                        <input type="text" placeholder="THAUMIEL" value="NONE" id="inputSecondaryObjectClassSubtitle">
 
                         <div id="inputSecondaryObjectClassCustomCont" class="disabled">
                             <p><i>Images only (jpeg, svg, or png)</i></p>
@@ -173,13 +173,17 @@
                             <option value="4">Ekhi</option>
                             <option value="5">Amida</option>
                             <option value="0">None</option>
-                            <!--<option value="-1">Custom [WIP]</option>-->
+                            <option value="-1">Custom [WIP]</option>
                         </select>
                         <input type="text" placeholder="DARK" value="DARK" id="inputDisruptionClassSubtitle">
 
                         <div id="inputDisruptionClassCustomCont" class="disabled">
-                            <p>[WIP] <i>Example: Dark</i></p>
-                            <input type="text" placeholder="Dark" id="inputDisruptionClassCustom">
+                            <p><i>Color</i></p>
+                            <input type="color" value="#59a06d" id="inputDisruptionClassColor">
+                            <p><i>Images only (jpg, svg, or png)</i></p>
+                            <input type="file" onchange="updateCustomImages(true)" accept="image/png, image/jpeg, image/svg" id="inputDisruptionClassImage">
+                            <p><i>Level</i></p>
+                            <input type="text" placeholder="1" value="1" id="inputDisruptionClassLevel">
                         </div>
 
                         <h3>Risk Class <a href="https://scp-wiki.wikidot.com/anomaly-classification-system-guide#risk-class" title="Risk Class Explanation" target="_blank" class="textdeconone"><i class="fa fa-question-circle-o"></i></a></h3>
@@ -193,13 +197,17 @@
                             <option value="4">Danger</option>
                             <option value="5">Critical</option>
                             <option value="0">None</option>
-                            <!--<option value="-1">Custom [WIP]</option>-->
+                            <option value="-1">Custom [WIP]</option>
                         </select>
                         <input type="text" placeholder="NOTICE" value="NOTICE" id="inputRiskClassSubtitle">
 
                         <div id="inputRiskClassCustomCont" class="disabled">
-                            <p>[WIP] <i>Example: Notice</i></p>
-                            <input type="text" placeholder="Notice" id="inputRiskClassCustom">
+                            <p><i>Color</i></p>
+                            <input type="color" value="#59a06d" id="inputRiskClassColor">
+                            <p><i>Images only (jpg, svg, or png)</i></p>
+                            <input type="file" onchange="updateCustomImages(true)" accept="image/png, image/jpeg, image/svg" id="inputRiskClassImage">
+                            <p><i>Level</i></p>
+                            <input type="text" placeholder="1" value="1" id="inputRiskClassLevel">
                         </div>
                     </div>
                     <div class="settingDiv">
@@ -266,12 +274,12 @@
                             <div id="acsObjectImageCont" class="acsImageCont">
                                 <div id="acsObjectImageBGWrapper" class="acsImageBGWrapper">
                                     <div id="acsObjectImageWrapper" class="acsImageWrapper fullcircle">
-                                        <img id="acsObjectImg" class="acsImg" src="images/containment-classes/safe-icon.svg">
+                                        <img id="acsObjectImg" class="acsImg circleMask" src="images/containment-classes/safe-icon.svg">
                                     </div>
                                     
-                                    <div id="acsSecondaryObjectImageWrapper" class="acsSecondImgWrapper disabled">
+                                    <div id="acsSecondaryObjectImageWrapper" class="acsSecondImgWrapper disabled leftBorderRadius">
                                         <div id="acsSecondaryObjectImageBG" class="bgblack acsSecondImgBG">
-                                            <img id="acsSecondaryObjectImg" class="acsSecondImg" src="images/containment-classes/safe-icon.svg">
+                                            <img id="acsSecondaryObjectImg" class="acsSecondImg circleMask" src="images/containment-classes/safe-icon.svg">
                                         </div>
                                     </div>
                                 </div>
@@ -285,10 +293,10 @@
                                 <div id="acsDisImageCont" class="acsImageCont">
                                     <div id="acsDisImageBGWrapper" class="acsImageBGWrapper bgblack">
                                         <div id="acsDisImageWrapper" class="acsImageWrapper fullcircle acsDisRiskImageWrapper">
-                                            <img id="acsDisImg" class="acsImg" src="images/containment-classes/safe-icon.svg">
+                                            <img id="acsDisImg" class="acsImg circleMask" src="images/containment-classes/safe-icon.svg">
                                         </div>
                                         
-                                        <div id="acsSecondaryDisImageWrapper" class="acsSecondImgWrapper ">
+                                        <div id="acsSecondaryDisImageWrapper" class="acsSecondImgWrapper leftBorderRadius">
                                             <div id="acsSecondaryDisImageBG" class="bgblack acsSecondImgBG">
                                                 <p id="acsDisPText" class="acsSecondImgText fw600">1</p>
                                             </div>
@@ -303,10 +311,10 @@
                                 <div id="acsRiskImageCont" class="acsImageCont">
                                     <div id="acsRiskImageBGWrapper" class="acsImageBGWrapper bgblack">
                                         <div id="acsRiskImageWrapper" class="acsImageWrapper fullcircle acsDisRiskImageWrapper">
-                                            <img id="acsRiskImg" class="acsImg" src="images/containment-classes/safe-icon.svg">
+                                            <img id="acsRiskImg" class="acsImg circleMask" src="images/containment-classes/safe-icon.svg">
                                         </div>
                                         
-                                        <div id="acsSecondaryRiskImageWrapper" class="acsSecondImgWrapper ">
+                                        <div id="acsSecondaryRiskImageWrapper" class="acsSecondImgWrapper leftBorderRadius">
                                             <div id="acsSecondaryRiskImageBG" class="bgblack acsSecondImgBG">
                                                 <p id="acsRiskPText" class="fw600 acsSecondImgText ">1</p>
                                             </div>
@@ -327,35 +335,35 @@
                         <div id="acsSmallObjectImageCont" class="acsSmallImageCont">
                             <div id="acsSmallObjectImageBGWrapper" class="acsSmallImageBGWrapper">
                                 <div id="acsSmallObjectImageWrapper" class="acsSmallImageWrapper fullcircle thinborder">
-                                    <img id="acsSmallObjectImg" class="acsSmallImg" src="images/containment-classes/safe-icon.svg">
+                                    <img id="acsSmallObjectImg" class="acsSmallImg circleMask" src="images/containment-classes/safe-icon.svg">
                                 </div>
                             </div>
                         </div>
                         <div id="acsSmallRiskImageCont" class="acsSmallImageCont">
                             <div id="acsSmallRiskImageBGWrapper" class="acsSmallImageBGWrapper">
                                 <div id="acsSmallRiskImageWrapper" class="acsSmallImageWrapper fullcircle thinborder">
-                                    <img id="acsSmallRiskImg" class="acsSmallImg" src="images/containment-classes/safe-icon.svg">
+                                    <img id="acsSmallRiskImg" class="acsSmallImg circleMask" src="images/containment-classes/safe-icon.svg">
                                 </div>
                             </div>
                         </div>
                         <div id="acsSmallDisImageCont" class="acsSmallImageCont">
                             <div id="acsSmallDisImageBGWrapper" class="acsSmallImageBGWrapper">
                                 <div id="acsSmallDisImageWrapper" class="acsSmallImageWrapper fullcircle thinborder">
-                                    <img id="acsSmallDisImg" class="acsSmallImg" src="images/containment-classes/safe-icon.svg">
+                                    <img id="acsSmallDisImg" class="acsSmallImg circleMask" src="images/containment-classes/safe-icon.svg">
                                 </div>
                             </div>
                         </div>
                         <div id="acsSmallObjectSecondaryImageCont" class="acsSmallImageCont">
                             <div id="acsSmallObjectSecondaryImageBGWrapper" class="acsSmallImageBGWrapper">
                                 <div id="acsSmallObjectSecondaryImageWrapper" class="acsSmallImageWrapper fullcircle thinborder">
-                                    <img id="acsSmallObjectSecondaryImg" class="acsSmallImg" src="images/containment-classes/safe-icon.svg">
+                                    <img id="acsSmallObjectSecondaryImg" class="acsSmallImg circleMask" src="images/containment-classes/safe-icon.svg">
                                 </div>
                             </div>
                         </div>
                         <div id="acsBigObjectImageCont" class="acsSmallImageCont disabled">
                             <div id="acsBigObjectImageBGWrapper" class="acsSmallImageBGWrapper">
                                 <div id="acsBigObjectImageWrapper" class="acsSmallImageWrapper fullcircle thinborder">
-                                    <img id="acsBigObjectImg" class="acsSmallImg" src="images/containment-classes/safe-icon.svg">
+                                    <img id="acsBigObjectImg" class="acsSmallImg circleMask" src="images/containment-classes/safe-icon.svg">
                                 </div>
                             </div>
                         </div>
@@ -380,11 +388,14 @@
         <div class="sectionDiv" id="changelogSectionDiv">
             <h2>Changelog</h2>
             <div class="y-scroll" id="changelogSectionContent">
-                <h4>0.1.1 - 25/03/2025</h4>
+                <h4>0.2.0 - 27/03/2025</h4>
                 <ul class="changelogList">
                     <li>added dark mode.</li>
+                    <li>added customization options for risk and disruption classes.</li>
+                    <li>fixed custom images don't fit within the circular border.</li>
                     <li>fixed danger diamond circle boarders being too thick when in grid style.</li>
                     <li>fixed preset containment class not being all lower case when generating wiki syntax.</li>
+                    <li>fixed spelling mistakes.</li>
                 </ul>
                 <h4>0.1.0 - 21/03/2025</h4>
                 <ul class="changelogList">
