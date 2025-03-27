@@ -215,17 +215,18 @@ function updateOnjectClass(){
         changeObjectImage(document.getElementById("inputPrimaryObjectClassImage"), 'acsSmallObjectImg', 'acsSecondaryObjectImg', '');
         if (sec_obj_class_val == 0)
             changeObjectImage(document.getElementById("inputPrimaryObjectClassImage"), 'acsObjectImg', '', '');
-        // disable color inversion.
-        document.getElementById("acsSecondaryObjectImg").style.filter = "";
     }
 
     // enable color inversion.
     if (document.getElementById("acsSecondaryObjectImg").src != image_path_secondary && obj_class_val != -1){
         document.getElementById("acsSecondaryObjectImg").src = image_path_secondary;
     }
-    if (document.getElementById("invertCheckbox").checked)
-        document.getElementById("acsSecondaryObjectImg").style.filter = "invert(100%)";
-    else document.getElementById("acsSecondaryObjectImg").style.filter = "";
+    if (document.getElementById("invertCheckbox").checked){
+        if (!document.getElementById("acsSecondaryObjectImg").classList.contains("invert")){
+        document.getElementById("acsSecondaryObjectImg").classList.add("invert")}}
+    else if (document.getElementById("acsSecondaryObjectImg").classList.contains("invert")){
+            document.getElementById("acsSecondaryObjectImg").classList.remove("invert")
+    }
 
     // set object class image background colors.
     if (document.getElementById("acsObjectImageWrapper").style.getPropertyValue("background-color") != img_bg_color)
@@ -360,6 +361,28 @@ function updteDisrupionClass(){
     if (dis_cls_val == -1){// custom disruption class. WIP
         if (document.getElementById("inputDisruptionClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputDisruptionClassCustomCont").classList.remove("disabled");
+
+        main_color = "black black black "+document.getElementById("inputDisruptionClassColor").value+"";
+        bg_color = ""+hexToRgbA(document.getElementById("inputDisruptionClassColor").value, .25)+"";
+        img_bg_color = ""+document.getElementById("inputDisruptionClassColor").value+"";
+
+        level_txt = document.getElementById("inputDisruptionClassLevel").value;
+
+        if (level_txt == ""){
+            if (!document.getElementById("acsSecondaryDisImageBG").classList.contains("hidden")){
+                document.getElementById("acsSecondaryDisImageBG").classList.add("hidden")
+            }
+            if (!document.getElementById("acsDisImageBGWrapper").classList.contains("leftBorderRadius")){
+                document.getElementById("acsDisImageBGWrapper").classList.add("leftBorderRadius")
+            }
+        }else{
+            if (document.getElementById("acsSecondaryDisImageBG").classList.contains("hidden")){
+                document.getElementById("acsSecondaryDisImageBG").classList.remove("hidden")
+            }
+            if (document.getElementById("acsDisImageBGWrapper").classList.contains("leftBorderRadius")){
+                document.getElementById("acsDisImageBGWrapper").classList.remove("leftBorderRadius")
+            }
+        }
     }
     else {// preset dis class.
         // hide custom.
@@ -383,7 +406,7 @@ function updteDisrupionClass(){
 
     obj_class_subtitle_txt = document.getElementById("inputDisruptionClassSubtitle").value;
 
-    if (document.getElementById("acsDisImg").src != image_path)
+    if (document.getElementById("acsDisImg").src != image_path && dis_cls_val != -1)
         document.getElementById("acsDisImg").src = image_path;
 
     if (document.getElementById("acsDisrupionTextTitle").innerHTML != obj_class_subtitle_txt)
@@ -400,7 +423,7 @@ function updteDisrupionClass(){
         document.getElementById("acsDisPText").innerHTML = level_txt;
 
     // in diamond.
-    if (document.getElementById("acsSmallDisImg").src != image_path)
+    if (document.getElementById("acsSmallDisImg").src != image_path && dis_cls_val != -1)
         document.getElementById("acsSmallDisImg").src = image_path;
 
     if (dis_cls_val == 0 || onlyShowObjectClass){// should disable in diamond?
@@ -439,6 +462,28 @@ function updteRiskClass(){
         // show customization elements
         if (document.getElementById("inputRiskClassCustomCont").classList.contains("disabled"))
             document.getElementById("inputRiskClassCustomCont").classList.remove("disabled");
+
+        main_color = "black black black "+document.getElementById("inputRiskClassColor").value+"";
+        bg_color = ""+hexToRgbA(document.getElementById("inputRiskClassColor").value, .25)+"";
+        img_bg_color = ""+document.getElementById("inputRiskClassColor").value+"";
+
+        level_txt = document.getElementById("inputRiskClassLevel").value;
+
+        if (level_txt == ""){
+            if (!document.getElementById("acsSecondaryRiskImageBG").classList.contains("hidden")){
+                document.getElementById("acsSecondaryRiskImageBG").classList.add("hidden")
+            }
+            if (!document.getElementById("acsRiskImageBGWrapper").classList.contains("leftBorderRadius")){
+                document.getElementById("acsRiskImageBGWrapper").classList.add("leftBorderRadius")
+            }
+        }else{
+            if (document.getElementById("acsSecondaryRiskImageBG").classList.contains("hidden")){
+                document.getElementById("acsSecondaryRiskImageBG").classList.remove("hidden")
+            }
+            if (document.getElementById("acsRiskImageBGWrapper").classList.contains("leftBorderRadius")){
+                document.getElementById("acsRiskImageBGWrapper").classList.remove("leftBorderRadius")
+            }
+        }
     }
     else {
         // hide customization elements
@@ -462,7 +507,7 @@ function updteRiskClass(){
     
     obj_class_subtitle_txt = document.getElementById("inputRiskClassSubtitle").value;
 
-    if (document.getElementById("acsRiskImg").src != image_path)
+    if (document.getElementById("acsRiskImg").src != image_path && risk_cls_val != -1)
         document.getElementById("acsRiskImg").src = image_path;
     
     if (document.getElementById("acsRiskTextTitle").innerHTML != obj_class_subtitle_txt)
@@ -479,7 +524,7 @@ function updteRiskClass(){
         document.getElementById("acsRiskPText").innerHTML = level_txt;
 
     // diamond elemets.
-    if (document.getElementById("acsSmallRiskImg").src != image_path)
+    if (document.getElementById("acsSmallRiskImg").src != image_path && risk_cls_val != -1)
         document.getElementById("acsSmallRiskImg").src = image_path;
     if (risk_cls_val == 0 || onlyShowObjectClass){// should disable in diamond?
         if (!document.getElementById("acsSmallRiskImageCont").classList.contains("disabled"))
@@ -507,6 +552,11 @@ function updateOpionalOptions(){
         document.getElementById("acsObjDisRisk").style.getPropertyValue("grid-template-columns") != "auto auto"){
             if (document.getElementById("acsObjDisRisk").style.getPropertyValue("grid-template-columns") == ""){
                 document.getElementById("acsObjDisRisk").style.setProperty("grid-template-columns", "auto auto");}
+            toggleThickBorder("acsSmallObjectImageWrapper", false);
+            toggleThickBorder("acsSmallRiskImageWrapper", false);
+            toggleThickBorder("acsSmallDisImageWrapper", false);
+            toggleThickBorder("acsSmallObjectSecondaryImageWrapper", false);
+            toggleThickBorder("acsBigObjectImageWrapper", false);
             document.getElementById("acsDiamondImg").style.setProperty("width", "");
             if (!document.getElementById("acsbar").classList.contains("min715")){
                 document.getElementById("acsbar").classList.remove("min560");
@@ -517,6 +567,11 @@ function updateOpionalOptions(){
         document.getElementById("acsObjDisRisk").style.getPropertyValue("grid-template-columns") != ""){
             if (document.getElementById("acsObjDisRisk").style.getPropertyValue("grid-template-columns") == "auto auto"){
                 document.getElementById("acsObjDisRisk").style.setProperty("grid-template-columns", "");}
+            toggleThickBorder("acsSmallObjectImageWrapper", true);
+            toggleThickBorder("acsSmallRiskImageWrapper", true);
+            toggleThickBorder("acsSmallDisImageWrapper", true);
+            toggleThickBorder("acsSmallObjectSecondaryImageWrapper", true);
+            toggleThickBorder("acsBigObjectImageWrapper", true);
             document.getElementById("acsDiamondImg").style.setProperty("width", "235px");
             if (!document.getElementById("acsbar").classList.contains("min560")){
                 document.getElementById("acsbar").classList.remove("min715");
@@ -526,6 +581,17 @@ function updateOpionalOptions(){
     
 }
 
+function toggleThickBorder(imgWrapper, thick){
+    let addclass = "thinborder";
+    let remclass = "thickborder";
+    if (thick) {
+        addclass = "thickborder";
+        remclass = "thinborder";}
+    if (document.getElementById(imgWrapper).classList.contains(remclass)){
+        document.getElementById(imgWrapper).classList.remove(remclass);
+        document.getElementById(imgWrapper).classList.add(addclass);
+    }
+}
 
 function updateUI(){
     // Update the UI.
@@ -602,6 +668,7 @@ function readImage(input, imgID) {
 
 function changeObjectImage(input, imgID, secImgID, bigImg) {
     // Handles setting uploaded Object Class image to the various <img> elements.
+
     let obj_clss_val = parseInt(document.getElementById("inputPrimaryObjectClass").value);
     let sec_obj_clss_val = parseInt(document.getElementById("inputSecondaryObjectClass").value);
 
@@ -628,6 +695,17 @@ function changeObjectImage(input, imgID, secImgID, bigImg) {
         changeImage(input, bigImg);
 }
 
+function changeDisRiskImage(input, imgID, secImgID){
+    // Handles setting uploaded Disruption Class image to the various <img> elements.
+
+    if (imgID != ""){
+        changeImage(input, imgID);
+    }
+    // Change the secondary obj class image.
+    if (secImgID != "")
+        changeImage(input, secImgID);
+}
+
 function updateCustomImages(is_file){
     // Update all the images.
     if (is_file){
@@ -637,6 +715,8 @@ function updateCustomImages(is_file){
         changeObjectImage(document.getElementById("inputSecondaryObjectClassImageURL").value, 'acsSmallObjectImg', 'acsObjectImg', 'acsBigObjectImg');
     }
     changeObjectImage(document.getElementById("inputPrimaryObjectClassImage"), 'acsObjectImg', 'acsSmallObjectImg', 'acsBigObjectImg');
+    changeDisRiskImage(document.getElementById("inputDisruptionClassImage"), "acsDisImg", "acsSmallDisImg")
+    changeDisRiskImage(document.getElementById("inputRiskClassImage"), "acsRiskImg", "acsSmallRiskImg")
 }
 
 function removeInfoBox(id){
@@ -666,6 +746,7 @@ function copyText(id) {
 }
 
 function getSecondaryClassURL(){
+    // if url exists return it plus icon syntax. else nothing.
     let sec_obj_cls_val = parseInt(document.getElementById("inputSecondaryObjectClass").value)
     if (sec_obj_cls_val == 0) return ""
     if (sec_obj_cls_val == -1){
@@ -675,14 +756,16 @@ function getSecondaryClassURL(){
 }
 
 function getPrimaryClassText(){
+    // return container class.
     let obj_cls_val = parseInt(document.getElementById("inputPrimaryObjectClass").value)
     if (obj_cls_val != -1){
-        return objClass.class[obj_cls_val]
+        return objClass.class[obj_cls_val].toLowerCase()
     }
     else return document.getElementById("inputPrimaryObjectClassSubtitle").value.toLowerCase()
 }
 
 function generateWikiSyntax(){
+    // Generate wiki syntax codeblock.
     let output = ("[[include :scp-wiki:component:anomaly-class-bar-source" +
     "<br>|item-number= " + document.getElementById("inputItemTitle").value +
     "<br>|clearance= " + document.getElementById("inputAccessLevel").value +
@@ -694,4 +777,66 @@ function generateWikiSyntax(){
     "<br>]]")
 
     document.getElementById("outputSyntaxText").innerHTML = output
+}
+
+// Theme stuff
+
+var theme = localStorage.getItem("theme");
+if (theme != null) {
+    document.documentElement.style.setProperty('--theme', theme);
+    if (theme == "dark") document.getElementById("themeToggle").checked = true;
+}
+
+var tabs = document.getElementsByClassName("default-tab");
+if (tabs.length != 0){
+    for (let i = 0; i < tabs.length; i++){
+        tabs[i].click();
+    }
+}
+
+function toggleTheme() {
+    if (document.getElementById("themeToggle").checked == true)
+        goDark()
+    else
+        goLight()
+    
+}
+
+function goDark(){
+    document.documentElement.style.setProperty('--theme', 'dark');
+    localStorage.setItem("theme", "dark");
+    document.documentElement.style.setProperty('--black', '#fff');
+
+    document.getElementById("invertCheckbox").checked = false;
+
+    if (document.getElementById("invertRingsCheckbox").checked){
+        document.documentElement.style.setProperty('--ringblack', '#fff');
+        document.documentElement.style.setProperty('--textWhite', '#000');
+    }
+
+    if (document.getElementById("invertBordersCheckbox").checked)
+        document.documentElement.style.setProperty('--borderblack', '#fff');
+
+    if (document.getElementById("invertDiamondCheckbox").checked)
+        document.getElementById("acsDiamondImg").classList.add("invert")
+}
+
+function goLight(){
+    document.documentElement.style.setProperty('--theme', 'light');
+    localStorage.setItem("theme", "light");
+
+    document.documentElement.style.setProperty('--black', '#000');
+
+    document.getElementById("invertCheckbox").checked = true;
+
+    if (document.getElementById("invertRingsCheckbox").checked){
+        document.documentElement.style.setProperty('--ringblack', '#000');
+        document.documentElement.style.setProperty('--textWhite', '#fff');
+    }
+
+    if (document.getElementById("invertBordersCheckbox").checked)
+        document.documentElement.style.setProperty('--borderblack', '#000');
+
+    if (document.getElementById("invertDiamondCheckbox").checked)
+        document.getElementById("acsDiamondImg").classList.remove("invert")
 }

@@ -9,22 +9,48 @@
     --lightorange: rgba(222, 117, 44,0.25);
     --red: #a61739;
     --lightred: rgba(166, 23, 57,0.25);
-    --black: #000000;
-    --lightblack: rgba(0, 0, 0,0.15);
+    --black: #000; /*dark mode*/
+    --ringblack: #000; /*dark mode*/
+    --borderblack: #000; /*dark mode*/
+    --lightblack: rgba(0, 0, 0,0.15); /*dark mode*/
     --cosmicred: #ff0000;
     --white: white;
+    --textWhite: white;
 
     --swatch-primary: 133,0,5;
     --swatch-primary-darkest: 108,2,12;
     --top-primary-darkest: 255,255,255,.05;
 
     --gradient-header: linear-gradient(to top,rgb(100,46,44)0%,rgb(12,12,12)90%,rgb(12,12,12)100%);
+
+    --theme: light;
+
+    color-scheme: var(--theme);
 }
 
 body{
     margin: 0;
-    
     font-family: sans-serif;
+
+    /*dark mode*/
+    /*
+    background-color: #000000;
+    color: white;
+    */
+}
+
+@media (prefers-color-scheme: dark) {
+    body.adaptive {
+        color: white;
+    }
+    html.adaptive {
+        background-color: var(--dark-theme);
+    }
+  }
+
+/*dark mode*/
+.invert{
+    filter: invert(100%);
 }
 
 .infoBox {
@@ -119,17 +145,20 @@ nav a:hover{
     background-color: #37373a;
 }
 
-.sectionDiv {
-}
-
 .settingDiv {
     display: inline-grid;
+}
+
+#introTextSection {
+    margin: 30px auto 20px auto;
+    max-width: 700px;
+    text-align: center;
 }
 
 #acsbar {
     padding: 10px;
     width: 80%;
-    border: 1px solid black;
+    border: 1px solid var(--black);
     font-family: 'Inter', sans-serif;
     position: relative;
 }
@@ -138,7 +167,7 @@ nav a:hover{
     width: 10px;
     height: calc(100% - 10px);
     right: -4px;
-    border-right: 1px solid black;
+    border-right: 1px solid var(--black);
     cursor: e-resize;
 }
 
@@ -153,10 +182,6 @@ nav a:hover{
 
 .min560{
     min-width: 560px;
-}
-
-.colorwhite{
-    color: white;
 }
 .width100 {
     width: 100%;
@@ -209,6 +234,19 @@ nav a:hover{
     font-size: .75em;
 }
 
+/* #inputUISection h2{
+    text-align: center;
+}
+
+#titleUIsectionDiv{
+    display: grid;
+    justify-content: center;
+}
+
+.UIsectionDivWrapper{
+    display: flex;
+    justify-content: center;
+} */
 
 #acsTop{
     grid-template-columns: max-content auto max-content;
@@ -228,7 +266,7 @@ nav a:hover{
 #acsMiddle {
     height: 8px;
     margin-bottom: 5px;
-    background-color: var(--black);
+    background-color: var(--borderblack);
 }
 
 
@@ -263,13 +301,13 @@ nav a:hover{
     float: right;
 }
 .acsImageWrapper{
-    border: 5px solid black;
+    border: 5px solid var(--ringblack);;
 }
 .fullcircle{
     border-radius: 50%;
 }
 .bgblack{
-    background-color: black;
+    background-color: var(--ringblack);
 }
 .acsImg{
     height: 100%;
@@ -286,10 +324,14 @@ nav a:hover{
     width: 100%;
     top: 0;
     left: -50%;
-    border-bottom-left-radius: 50%;
-    border-top-left-radius: 50%;
     overflow: hidden;
 }
+
+.leftBorderRadius{
+    border-bottom-left-radius: 50%;
+    border-top-left-radius: 50%;
+}
+
 .acsSecondImgBG{
     width: 50%;
     height: 100%;
@@ -309,7 +351,7 @@ nav a:hover{
     height: 85px;
 }
 .borderright{
-    border-right: 8px solid var(--black);
+    border-right: 8px solid var(--borderblack);
 }
 #acsDisRisk{
     gap: 5px;
@@ -333,6 +375,7 @@ nav a:hover{
 }
 .acsSecondImgText{
     margin-left: 50%;
+    color: var(--textWhite);
 }
 #acsDisImageWrapper{background-color: green;}
 
@@ -399,8 +442,17 @@ nav a:hover{
 
 .acsSmallImageWrapper{
     display: flex;
-    border: 5px solid black;
 }
+
+.thinborder{
+    border: 0.1875rem solid var(--ringblack);
+}
+
+.thickborder{
+    border: 6px solid var(--ringblack);
+}
+
+
 
 .acsSmallImg{
     width: 100%;
@@ -426,11 +478,84 @@ nav a:hover{
     left: 33.5%;
 }
 
+#acsSmallObjectSecondaryImageWrapper{
+    background-color: white;
+}
+
 #acsBigObjectImageCont{
     width: 82.6%;
     top: 8.7%;
     left :8.7%;
 }
+
+/* Dark theme switch*/
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 32px;
+    height: 18px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 10px;
+    width: 10px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #444;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 5px black;
+  }
+
+  input:checked:focus + .slider {
+    box-shadow: 0 0 5px white;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(14px);
+    -ms-transform: translateX(14px);
+    transform: translateX(14px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 18px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
 
 /* Generation buttons */
 
@@ -449,15 +574,22 @@ nav a:hover{
     border: 1px solid rgb(182, 182, 182);
     font-family: 'Courier New', Courier, monospace;
     font-size: 0.9em;
-}
-
-.codeBlockCopy {
-
+    color: #000000;
 }
 
 .codeBlock p {
     word-wrap: break-word; /* For older browsers */
     overflow-wrap: break-word; /* Modern standard */
+}
+
+/*Change log*/
+
+.y-scroll{
+    overflow-y: scroll;
+}
+
+#changelogSectionContent{
+    height: 300px;
 }
 
 /* Notice Box */
@@ -515,4 +647,8 @@ nav a:hover{
 
 .warning {
     color: red;
+}
+
+.circleMask{
+    clip-path: circle(50% at center);
 }
