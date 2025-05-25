@@ -1,8 +1,9 @@
 # SCP ACS Generator
 
-Anomaly Classification System Generator by [F4Fridey](https://github.com/F4Fridey/ACS-Generator)
+Anomaly Classification System Generator by [F4Fridey](https://github.com/F4Fridey/ACS-Generator) [Louden Preble](https://github.com/The-Goofy-Man)
 
-A live version of this can be found on [fridey.net/acs-generator](http://fridey.net/acs-generator/)
+A live version of this can be found on [fridey.net/acs-generator](http://fridey.net/acs-generator/) or [here]()
+[//]: # (i didnt wanna add this link :| )
 
 Join the [Discord Server](https://discord.gg/XpGfub6VyR) and say hi!
 
